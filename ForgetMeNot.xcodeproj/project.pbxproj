@@ -187,6 +187,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ForgetMeNot_Prefix.pch;
 				INFOPLIST_FILE = "ForgetMeNot-Info.plist";
+				OTHER_CFLAGS = "-DDEBUG";
 				PRODUCT_NAME = ForgetMeNot;
 			};
 			name = Debug;
@@ -202,6 +203,85 @@
 				PRODUCT_NAME = ForgetMeNot;
 			};
 			name = Release;
+		};
+		3A9638410F8DB8ED00FB643F /* Adhoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.0;
+			};
+			name = Adhoc;
+		};
+		3A9638420F8DB8ED00FB643F /* Adhoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ForgetMeNot_Prefix.pch;
+				INFOPLIST_FILE = "ForgetMeNot-Info.plist";
+				PRODUCT_NAME = ForgetMeNot;
+			};
+			name = Adhoc;
+		};
+		3A9638430F8DB8F300FB643F /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.0;
+			};
+			name = Distribution;
+		};
+		3A9638440F8DB8F300FB643F /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ForgetMeNot_Prefix.pch;
+				INFOPLIST_FILE = "ForgetMeNot-Info.plist";
+				PRODUCT_NAME = ForgetMeNot;
+			};
+			name = Distribution;
+		};
+		3A96385B0F8DB9F500FB643F /* Debug Anthony Mittaz */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.0;
+			};
+			name = "Debug Anthony Mittaz";
+		};
+		3A96385C0F8DB9F500FB643F /* Debug Anthony Mittaz */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ForgetMeNot_Prefix.pch;
+				INFOPLIST_FILE = "ForgetMeNot-Info.plist";
+				OTHER_CFLAGS = "-DDEBUG";
+				PRODUCT_NAME = ForgetMeNot;
+			};
+			name = "Debug Anthony Mittaz";
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -237,7 +317,10 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
+				3A96385C0F8DB9F500FB643F /* Debug Anthony Mittaz */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				3A9638420F8DB8ED00FB643F /* Adhoc */,
+				3A9638440F8DB8F300FB643F /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -246,7 +329,10 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
+				3A96385B0F8DB9F500FB643F /* Debug Anthony Mittaz */,
 				C01FCF5008A954540054247B /* Release */,
+				3A9638410F8DB8ED00FB643F /* Adhoc */,
+				3A9638430F8DB8F300FB643F /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
