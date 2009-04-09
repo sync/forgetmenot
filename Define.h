@@ -7,6 +7,7 @@
  *
  */
 
+// Table View
 #define ROW_HEIGHT 70.0
 
 // Networking

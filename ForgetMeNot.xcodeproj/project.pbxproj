@@ -33,6 +33,9 @@
 		3A9639540F8DBE1E00FB643F /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A96394C0F8DBE1E00FB643F /* SBJsonBase.m */; };
 		3A9639550F8DBE1E00FB643F /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A96394E0F8DBE1E00FB643F /* NSString+SBJSON.m */; };
 		3A9639560F8DBE1E00FB643F /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9639500F8DBE1E00FB643F /* NSObject+SBJSON.m */; };
+		3A9639640F8DBEC100FB643F /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A96395F0F8DBEC100FB643F /* BaseViewController.m */; };
+		3A9639650F8DBEC100FB643F /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9639610F8DBEC100FB643F /* BaseTableViewController.m */; };
+		3A9639660F8DBEC100FB643F /* BaseFetchedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9639630F8DBEC100FB643F /* BaseFetchedTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +81,12 @@
 		3A96394E0F8DBE1E00FB643F /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
 		3A96394F0F8DBE1E00FB643F /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		3A9639500F8DBE1E00FB643F /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		3A96395E0F8DBEC100FB643F /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		3A96395F0F8DBEC100FB643F /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		3A9639600F8DBEC100FB643F /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
+		3A9639610F8DBEC100FB643F /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
+		3A9639620F8DBEC100FB643F /* BaseFetchedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseFetchedTableViewController.h; sourceTree = "<group>"; };
+		3A9639630F8DBEC100FB643F /* BaseFetchedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseFetchedTableViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ForgetMeNot-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ForgetMeNot-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,11 +116,12 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1D3623240D0F684500981E51 /* ForgetMeNotAppDelegate.h */,
+				1D3623250D0F684500981E51 /* ForgetMeNotAppDelegate.m */,
+				3A96395B0F8DBEAE00FB643F /* Base Controllers */,
 				3A9639410F8DBE0D00FB643F /* JSON */,
 				3A9639390F8DBD6400FB643F /* Reachibility */,
 				3A9639240F8DBD0D00FB643F /* Utilities */,
-				1D3623240D0F684500981E51 /* ForgetMeNotAppDelegate.h */,
-				1D3623250D0F684500981E51 /* ForgetMeNotAppDelegate.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -218,6 +228,19 @@
 			name = JSON;
 			sourceTree = "<group>";
 		};
+		3A96395B0F8DBEAE00FB643F /* Base Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3A96395E0F8DBEC100FB643F /* BaseViewController.h */,
+				3A96395F0F8DBEC100FB643F /* BaseViewController.m */,
+				3A9639600F8DBEC100FB643F /* BaseTableViewController.h */,
+				3A9639610F8DBEC100FB643F /* BaseTableViewController.m */,
+				3A9639620F8DBEC100FB643F /* BaseFetchedTableViewController.h */,
+				3A9639630F8DBEC100FB643F /* BaseFetchedTableViewController.m */,
+			);
+			name = "Base Controllers";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -291,6 +314,9 @@
 				3A9639540F8DBE1E00FB643F /* SBJsonBase.m in Sources */,
 				3A9639550F8DBE1E00FB643F /* NSString+SBJSON.m in Sources */,
 				3A9639560F8DBE1E00FB643F /* NSObject+SBJSON.m in Sources */,
+				3A9639640F8DBEC100FB643F /* BaseViewController.m in Sources */,
+				3A9639650F8DBEC100FB643F /* BaseTableViewController.m in Sources */,
+				3A9639660F8DBEC100FB643F /* BaseFetchedTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
