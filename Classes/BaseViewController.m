@@ -1,6 +1,6 @@
 //
 //  BaseViewController.m
-//  Latitude
+//  ForgetMeNot
 //
 //  Created by Anthony Mittaz on 6/02/09.
 //  Copyright 2009 Anthony Mittaz. All rights reserved.
@@ -39,6 +39,9 @@
 	[super viewDidLoad];
 	
 	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:120.0/255.0 green:120.0/255.0 blue:120.0/255.0 alpha:1.0];
+	self.navigationController.toolbar.tintColor = [UIColor colorWithRed:120.0/255.0 green:120.0/255.0 blue:120.0/255.0 alpha:1.0];
+	
+	[self.navigationController setToolbarHidden:FALSE animated:FALSE];
 	
 	[self loadAppDelegate];
 }

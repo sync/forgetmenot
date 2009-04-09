@@ -1,6 +1,6 @@
 //
 //  BaseViewController.h
-//  Latitude
+//  ForgetMeNot
 //
 //  Created by Anthony Mittaz on 6/02/09.
 //  Copyright 2009 Anthony Mittaz. All rights reserved.
