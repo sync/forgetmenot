@@ -223,11 +223,6 @@
 }
 
 
-- (void)applicationWillTerminate:(UIApplication *)application {
-	// Save data if appropriate
-}
-
-
 #pragma mark -
 #pragma mark Memory management
 

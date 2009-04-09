@@ -125,7 +125,7 @@
 - (void)loadAppDelegate
 {
 	if (!self.appDelegate) {
-		self.appDelegate = (LatitudeAppDelegate *)[[UIApplication sharedApplication]delegate];
+		self.appDelegate = (ForgetMeNotAppDelegate *)[[UIApplication sharedApplication]delegate];
 	}
 }
 

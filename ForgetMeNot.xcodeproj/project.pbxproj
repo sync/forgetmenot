@@ -400,7 +400,7 @@
 			};
 			name = Distribution;
 		};
-		3A96385B0F8DB9F500FB643F /* Debug Anthony Mittaz */ = {
+		3A9639CF0F8DC42900FB643F /* Debug Anthony Mittaz */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
@@ -414,10 +414,11 @@
 			};
 			name = "Debug Anthony Mittaz";
 		};
-		3A96385C0F8DB9F500FB643F /* Debug Anthony Mittaz */ = {
+		3A9639D00F8DC42900FB643F /* Debug Anthony Mittaz */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Anthony Mittaz";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -426,6 +427,7 @@
 				INFOPLIST_FILE = "ForgetMeNot-Info.plist";
 				OTHER_CFLAGS = "-DDEBUG";
 				PRODUCT_NAME = ForgetMeNot;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5CE69233-D670-4E12-AF0F-D67CDA7B262F";
 			};
 			name = "Debug Anthony Mittaz";
 		};
@@ -463,7 +465,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
-				3A96385C0F8DB9F500FB643F /* Debug Anthony Mittaz */,
+				3A9639D00F8DC42900FB643F /* Debug Anthony Mittaz */,
 				1D6058950D05DD3E006BFB54 /* Release */,
 				3A9638420F8DB8ED00FB643F /* Adhoc */,
 				3A9638440F8DB8F300FB643F /* Distribution */,
@@ -475,7 +477,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
-				3A96385B0F8DB9F500FB643F /* Debug Anthony Mittaz */,
+				3A9639CF0F8DC42900FB643F /* Debug Anthony Mittaz */,
 				C01FCF5008A954540054247B /* Release */,
 				3A9638410F8DB8ED00FB643F /* Adhoc */,
 				3A9638430F8DB8F300FB643F /* Distribution */,
