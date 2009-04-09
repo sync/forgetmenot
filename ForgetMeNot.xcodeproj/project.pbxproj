@@ -26,6 +26,7 @@
 		3A9639300F8DBD2600FB643F /* mk.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A96392A0F8DBD2600FB643F /* mk.m */; };
 		3A9639310F8DBD2600FB643F /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A96392C0F8DBD2600FB643F /* Base64.m */; };
 		3A9639320F8DBD2600FB643F /* NSHTTPCookieAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A96392E0F8DBD2600FB643F /* NSHTTPCookieAdditions.m */; };
+		3A96393E0F8DBD9600FB643F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A96393D0F8DBD9600FB643F /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,8 @@
 		3A96392C0F8DBD2600FB643F /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		3A96392D0F8DBD2600FB643F /* NSHTTPCookieAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSHTTPCookieAdditions.h; sourceTree = "<group>"; };
 		3A96392E0F8DBD2600FB643F /* NSHTTPCookieAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSHTTPCookieAdditions.m; sourceTree = "<group>"; };
+		3A96393C0F8DBD9600FB643F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		3A96393D0F8DBD9600FB643F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ForgetMeNot-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ForgetMeNot-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,6 +88,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3A9639390F8DBD6400FB643F /* Reachibility */,
 				3A9639240F8DBD0D00FB643F /* Utilities */,
 				1D3623240D0F684500981E51 /* ForgetMeNotAppDelegate.h */,
 				1D3623250D0F684500981E51 /* ForgetMeNotAppDelegate.m */,
@@ -165,6 +169,15 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
+		3A9639390F8DBD6400FB643F /* Reachibility */ = {
+			isa = PBXGroup;
+			children = (
+				3A96393C0F8DBD9600FB643F /* Reachability.h */,
+				3A96393D0F8DBD9600FB643F /* Reachability.m */,
+			);
+			name = Reachibility;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -231,6 +244,7 @@
 				3A9639300F8DBD2600FB643F /* mk.m in Sources */,
 				3A9639310F8DBD2600FB643F /* Base64.m in Sources */,
 				3A9639320F8DBD2600FB643F /* NSHTTPCookieAdditions.m in Sources */,
+				3A96393E0F8DBD9600FB643F /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
