@@ -22,6 +22,10 @@
 		3A9638740F8DBAD300FB643F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9638730F8DBAD300FB643F /* CoreData.framework */; };
 		3A9638760F8DBAD300FB643F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9638750F8DBAD300FB643F /* CoreLocation.framework */; };
 		3A9638780F8DBAD300FB643F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9638770F8DBAD300FB643F /* SystemConfiguration.framework */; };
+		3A96392F0F8DBD2600FB643F /* CoreDataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9639280F8DBD2600FB643F /* CoreDataUtils.m */; };
+		3A9639300F8DBD2600FB643F /* mk.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A96392A0F8DBD2600FB643F /* mk.m */; };
+		3A9639310F8DBD2600FB643F /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A96392C0F8DBD2600FB643F /* Base64.m */; };
+		3A9639320F8DBD2600FB643F /* NSHTTPCookieAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A96392E0F8DBD2600FB643F /* NSHTTPCookieAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +48,14 @@
 		3A9638750F8DBAD300FB643F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3A9638770F8DBAD300FB643F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3A9639140F8DBC6600FB643F /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
+		3A9639270F8DBD2600FB643F /* CoreDataUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataUtils.h; sourceTree = "<group>"; };
+		3A9639280F8DBD2600FB643F /* CoreDataUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataUtils.m; sourceTree = "<group>"; };
+		3A9639290F8DBD2600FB643F /* mk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mk.h; sourceTree = "<group>"; };
+		3A96392A0F8DBD2600FB643F /* mk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mk.m; sourceTree = "<group>"; };
+		3A96392B0F8DBD2600FB643F /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		3A96392C0F8DBD2600FB643F /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		3A96392D0F8DBD2600FB643F /* NSHTTPCookieAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSHTTPCookieAdditions.h; sourceTree = "<group>"; };
+		3A96392E0F8DBD2600FB643F /* NSHTTPCookieAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSHTTPCookieAdditions.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ForgetMeNot-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ForgetMeNot-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +85,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3A9639240F8DBD0D00FB643F /* Utilities */,
 				1D3623240D0F684500981E51 /* ForgetMeNotAppDelegate.h */,
 				1D3623250D0F684500981E51 /* ForgetMeNotAppDelegate.m */,
 			);
@@ -137,6 +150,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3A9639240F8DBD0D00FB643F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				3A9639270F8DBD2600FB643F /* CoreDataUtils.h */,
+				3A9639280F8DBD2600FB643F /* CoreDataUtils.m */,
+				3A9639290F8DBD2600FB643F /* mk.h */,
+				3A96392A0F8DBD2600FB643F /* mk.m */,
+				3A96392B0F8DBD2600FB643F /* Base64.h */,
+				3A96392C0F8DBD2600FB643F /* Base64.m */,
+				3A96392D0F8DBD2600FB643F /* NSHTTPCookieAdditions.h */,
+				3A96392E0F8DBD2600FB643F /* NSHTTPCookieAdditions.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -199,6 +227,10 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* ForgetMeNotAppDelegate.m in Sources */,
+				3A96392F0F8DBD2600FB643F /* CoreDataUtils.m in Sources */,
+				3A9639300F8DBD2600FB643F /* mk.m in Sources */,
+				3A9639310F8DBD2600FB643F /* Base64.m in Sources */,
+				3A9639320F8DBD2600FB643F /* NSHTTPCookieAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
