@@ -44,6 +44,8 @@
 		3A963AD20F93125300FB643F /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A963ACC0F93125300FB643F /* Group.m */; };
 		3A963AD30F93125300FB643F /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A963ACE0F93125300FB643F /* Person.m */; };
 		3A963AD40F93125300FB643F /* FactType.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A963AD00F93125300FB643F /* FactType.m */; };
+		3A963BD00F931C9D00FB643F /* GroupsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A963BCF0F931C9D00FB643F /* GroupsController.m */; };
+		3A963BD40F931E3800FB643F /* GroupsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A963BD30F931E3800FB643F /* GroupsController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +110,9 @@
 		3A963ACE0F93125300FB643F /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		3A963ACF0F93125300FB643F /* FactType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactType.h; sourceTree = "<group>"; };
 		3A963AD00F93125300FB643F /* FactType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FactType.m; sourceTree = "<group>"; };
+		3A963BCE0F931C9D00FB643F /* GroupsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupsController.h; sourceTree = "<group>"; };
+		3A963BCF0F931C9D00FB643F /* GroupsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupsController.m; sourceTree = "<group>"; };
+		3A963BD30F931E3800FB643F /* GroupsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupsController.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ForgetMeNot-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ForgetMeNot-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -186,6 +191,7 @@
 				3A9639E30F8DC7CA00FB643F /* ForgetMeNot.xcdatamodel */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				3A963A170F8DCA0A00FB643F /* FriendsController.xib */,
+				3A963BD30F931E3800FB643F /* GroupsController.xib */,
 				8D1107310486CEB800E47090 /* ForgetMeNot-Info.plist */,
 			);
 			name = Resources;
@@ -278,6 +284,8 @@
 		3A963A160F8DC9BF00FB643F /* Friends */ = {
 			isa = PBXGroup;
 			children = (
+				3A963BCE0F931C9D00FB643F /* GroupsController.h */,
+				3A963BCF0F931C9D00FB643F /* GroupsController.m */,
 				3A963A120F8DC9AA00FB643F /* FriendsController.h */,
 				3A963A130F8DC9AA00FB643F /* FriendsController.m */,
 			);
@@ -359,6 +367,7 @@
 				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
 				3A963A180F8DCA0A00FB643F /* FriendsController.xib in Resources */,
 				3A963A2F0F8DCABF00FB643F /* background.png in Resources */,
+				3A963BD40F931E3800FB643F /* GroupsController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,6 +400,7 @@
 				3A963AD20F93125300FB643F /* Group.m in Sources */,
 				3A963AD30F93125300FB643F /* Person.m in Sources */,
 				3A963AD40F93125300FB643F /* FactType.m in Sources */,
+				3A963BD00F931C9D00FB643F /* GroupsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

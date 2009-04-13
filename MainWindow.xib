@@ -38,7 +38,7 @@
 				<int key="NSvFlags">1316</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="IBUIImageView" id="24678123">
+					<object class="IBUIImageView" id="430932153">
 						<reference key="NSNextResponder" ref="380026005"/>
 						<int key="NSvFlags">1298</int>
 						<string key="NSFrameSize">{320, 480}</string>
@@ -83,7 +83,7 @@
 							<reference key="IBUINavigationBar"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="701001926"/>
-						<string key="IBUINibName">FriendsController</string>
+						<string key="IBUINibName">GroupsController</string>
 						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 					</object>
 				</object>
@@ -133,7 +133,7 @@
 						<reference key="object" ref="380026005"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="24678123"/>
+							<reference ref="430932153"/>
 						</object>
 						<reference key="parent" ref="5334962"/>
 					</object>
@@ -184,7 +184,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">16</int>
-						<reference key="object" ref="24678123"/>
+						<reference key="object" ref="430932153"/>
 						<reference key="parent" ref="380026005"/>
 					</object>
 				</object>
@@ -212,7 +212,7 @@
 					<string>UIApplication</string>
 					<string>UIResponder</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>FriendsController</string>
+					<string>GroupsController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSMutableDictionary">
@@ -299,11 +299,11 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">FriendsController</string>
+					<string key="className">GroupsController</string>
 					<string key="superclassName">BaseFetchedTableViewController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/FriendsController.h</string>
+						<string key="minorKey">Classes/GroupsController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

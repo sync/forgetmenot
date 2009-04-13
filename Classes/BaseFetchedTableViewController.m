@@ -17,8 +17,6 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-	
 	NSError *error;
 	if (![[self fetchedResultsController] performFetch:&error]) {
 		// Handle the error...
