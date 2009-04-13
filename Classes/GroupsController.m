@@ -9,6 +9,7 @@
 #import "GroupsController.h"
 #import "Group.h"
 #import "TitleCell.h"
+#import "OneRowEditController.h"
 
 @implementation GroupsController
 
@@ -28,6 +29,14 @@
 																		 action:@selector(addGroup:)];
 	self.navigationItem.rightBarButtonItem = item;
 	[item release];
+	
+	// Reload tableview when this notifiation fire
+	[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableview:) name:ShouldReloadGroupsController object:nil];
+}
+
+- (void)reloadTableview:(id)sender
+{
+	[self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,22 +56,15 @@
 
 - (IBAction)addGroup:(id)sender
 {
-	// Get Mangaged object context
-	NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
+	// Make sure the tableview is not currently in edit mode
+	[self setEditing:FALSE];
 	
-	// Create a new instance of the entity managed by the fetched results controller.
-	NSEntityDescription *entity = [[fetchedResultsController fetchRequest] entity];
-	Group *group = (Group *)[NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-	group.name = @"All";
-	
-	// Save the context.
-    NSError *error;
-    if (![context save:&error]) {
-		// Handle the error...
-    }
-	
-    [self.tableView reloadData];
+	// Present modal view controller, were you can enter the group name
+	OneRowEditController *controller = [[OneRowEditController alloc]initWithNibName:@"OneRowEditController" bundle:nil];
+	[self.navigationController presentModalViewController:controller animated:TRUE];
+	[controller release];
 }
+
 
 
 #pragma mark Table view methods

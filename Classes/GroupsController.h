@@ -13,6 +13,8 @@
 
 }
 
+- (void)reloadTableview:(id)sender;
+
 - (IBAction)addGroup:(id)sender;
 
 @end

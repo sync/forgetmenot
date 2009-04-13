@@ -13,3 +13,6 @@
 // Networking
 #define kNetworkReachabilityChangedNotification @"kNetworkReachabilityChangedNotification"
 #define ShouldCancelAllOperationsDataFetcher @"ShouldCancelAllOperationsDataFetcher"
+
+// Groups
+#define ShouldReloadGroupsController @"ShouldReloadGroupsController"

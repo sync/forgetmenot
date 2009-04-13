@@ -56,6 +56,12 @@
 		3A963C5F0F9328B700FB643F /* itemView.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A963C5B0F9328B700FB643F /* itemView.png */; };
 		3A963C600F9328B700FB643F /* itemView_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A963C5C0F9328B700FB643F /* itemView_pressed.png */; };
 		3A963C6B0F93292500FB643F /* TitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A963C6A0F93292500FB643F /* TitleCell.m */; };
+		3A963CFC0F93455E00FB643F /* OneRowEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A963CFB0F93455E00FB643F /* OneRowEditController.m */; };
+		3A963CFE0F93458800FB643F /* OneRowEditController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A963CFD0F93458800FB643F /* OneRowEditController.xib */; };
+		3A963D020F93462A00FB643F /* modalBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A963D010F93462A00FB643F /* modalBackground.png */; };
+		3A963D040F9346C000FB643F /* editingCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A963D030F9346C000FB643F /* editingCell.png */; };
+		3A963D060F93479600FB643F /* modalBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A963D050F93479600FB643F /* modalBorder.png */; };
+		3A963D400F934C9C00FB643F /* editingCellBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A963D3F0F934C9C00FB643F /* editingCellBackground.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +145,13 @@
 		3A963C5C0F9328B700FB643F /* itemView_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = itemView_pressed.png; sourceTree = "<group>"; };
 		3A963C690F93292500FB643F /* TitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleCell.h; sourceTree = "<group>"; };
 		3A963C6A0F93292500FB643F /* TitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleCell.m; sourceTree = "<group>"; };
+		3A963CFA0F93455E00FB643F /* OneRowEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneRowEditController.h; sourceTree = "<group>"; };
+		3A963CFB0F93455E00FB643F /* OneRowEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneRowEditController.m; sourceTree = "<group>"; };
+		3A963CFD0F93458800FB643F /* OneRowEditController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OneRowEditController.xib; sourceTree = "<group>"; };
+		3A963D010F93462A00FB643F /* modalBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modalBackground.png; sourceTree = "<group>"; };
+		3A963D030F9346C000FB643F /* editingCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editingCell.png; sourceTree = "<group>"; };
+		3A963D050F93479600FB643F /* modalBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modalBorder.png; sourceTree = "<group>"; };
+		3A963D3F0F934C9C00FB643F /* editingCellBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editingCellBackground.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ForgetMeNot-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ForgetMeNot-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -220,6 +233,7 @@
 				3A963A170F8DCA0A00FB643F /* FriendsController.xib */,
 				3A963BD30F931E3800FB643F /* GroupsController.xib */,
 				8D1107310486CEB800E47090 /* ForgetMeNot-Info.plist */,
+				3A963CFD0F93458800FB643F /* OneRowEditController.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -303,6 +317,7 @@
 		3A963A150F8DC9B600FB643F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3A963CF90F9344AE00FB643F /* Modal */,
 				3A963A160F8DC9BF00FB643F /* Friends */,
 			);
 			name = Controllers;
@@ -322,6 +337,7 @@
 		3A963A2B0F8DCAAD00FB643F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3A963D000F93461D00FB643F /* Modal */,
 				3A963C580F9328A400FB643F /* cells */,
 				3A963A2E0F8DCABF00FB643F /* background.png */,
 			);
@@ -371,6 +387,26 @@
 				3A963C5C0F9328B700FB643F /* itemView_pressed.png */,
 			);
 			name = cells;
+			sourceTree = "<group>";
+		};
+		3A963CF90F9344AE00FB643F /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				3A963CFA0F93455E00FB643F /* OneRowEditController.h */,
+				3A963CFB0F93455E00FB643F /* OneRowEditController.m */,
+			);
+			name = Modal;
+			sourceTree = "<group>";
+		};
+		3A963D000F93461D00FB643F /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				3A963D3F0F934C9C00FB643F /* editingCellBackground.png */,
+				3A963D050F93479600FB643F /* modalBorder.png */,
+				3A963D030F9346C000FB643F /* editingCell.png */,
+				3A963D010F93462A00FB643F /* modalBackground.png */,
+			);
+			name = Modal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,6 +466,11 @@
 				3A963C5E0F9328B700FB643F /* accessoryLight.png in Resources */,
 				3A963C5F0F9328B700FB643F /* itemView.png in Resources */,
 				3A963C600F9328B700FB643F /* itemView_pressed.png in Resources */,
+				3A963CFE0F93458800FB643F /* OneRowEditController.xib in Resources */,
+				3A963D020F93462A00FB643F /* modalBackground.png in Resources */,
+				3A963D040F9346C000FB643F /* editingCell.png in Resources */,
+				3A963D060F93479600FB643F /* modalBorder.png in Resources */,
+				3A963D400F934C9C00FB643F /* editingCellBackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +510,7 @@
 				3A963C520F93273200FB643F /* BackgroundViewWithImage.m in Sources */,
 				3A963C530F93273200FB643F /* AccessoryViewWithImage.m in Sources */,
 				3A963C6B0F93292500FB643F /* TitleCell.m in Sources */,
+				3A963CFC0F93455E00FB643F /* OneRowEditController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
