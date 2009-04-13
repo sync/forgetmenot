@@ -30,6 +30,6 @@
 @dynamic longitude;
 @dynamic id;
 @dynamic fact;
-@dynamic group_id;
+@dynamic group;
 
 @end

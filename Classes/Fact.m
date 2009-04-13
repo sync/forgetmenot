@@ -16,7 +16,7 @@
 @dynamic online_id;
 @dynamic fact;
 @dynamic id;
-@dynamic person_id;
-@dynamic fact_type_id;
+@dynamic person;
+@dynamic fact_type;
 
 @end

@@ -20,15 +20,15 @@
 @property (retain) NSNumber * online_id;
 @property (retain) NSString * id;
 @property (retain) NSString * color;
-@property (retain) NSSet* person_id;
+@property (retain) NSSet* person;
 
 @end
 
 @interface Group (CoreDataGeneratedAccessors)
-- (void)addPerson_idObject:(Person *)value;
-- (void)removePerson_idObject:(Person *)value;
-- (void)addPerson_id:(NSSet *)value;
-- (void)removePerson_id:(NSSet *)value;
+- (void)addPersonObject:(Person *)value;
+- (void)removePersonObject:(Person *)value;
+- (void)addPerson:(NSSet *)value;
+- (void)removePerson:(NSSet *)value;
 
 @end
 

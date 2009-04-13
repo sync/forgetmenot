@@ -18,6 +18,6 @@
 @dynamic online_id;
 @dynamic id;
 @dynamic color;
-@dynamic person_id;
+@dynamic person;
 
 @end

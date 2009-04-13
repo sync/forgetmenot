@@ -32,7 +32,7 @@
 @property (retain) NSNumber * longitude;
 @property (retain) NSString * id;
 @property (retain) NSSet* fact;
-@property (retain) NSSet* group_id;
+@property (retain) NSSet* group;
 
 @end
 
@@ -42,10 +42,10 @@
 - (void)addFact:(NSSet *)value;
 - (void)removeFact:(NSSet *)value;
 
-- (void)addGroup_idObject:(Group *)value;
-- (void)removeGroup_idObject:(Group *)value;
-- (void)addGroup_id:(NSSet *)value;
-- (void)removeGroup_id:(NSSet *)value;
+- (void)addGroupObject:(Group *)value;
+- (void)removeGroupObject:(Group *)value;
+- (void)addGroup:(NSSet *)value;
+- (void)removeGroup:(NSSet *)value;
 
 @end
 

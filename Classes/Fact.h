@@ -18,8 +18,8 @@
 @property (retain) NSNumber * online_id;
 @property (retain) NSString * fact;
 @property (retain) NSString * id;
-@property (retain) Person * person_id;
-@property (retain) FactType * fact_type_id;
+@property (retain) Person * person;
+@property (retain) FactType * fact_type;
 
 @end
 
