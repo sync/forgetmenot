@@ -22,6 +22,9 @@
 @property (retain) NSString * color;
 @property (retain) NSSet* person;
 
+- (NSString *) getId;
+- (NSString *) getObjectIdString;
+
 @end
 
 @interface Group (CoreDataGeneratedAccessors)

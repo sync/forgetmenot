@@ -34,6 +34,9 @@
 @property (retain) NSSet* fact;
 @property (retain) NSSet* group;
 
+- (NSString *) getId;
+- (NSString *) getObjectIdString;
+
 @end
 
 @interface Person (CoreDataGeneratedAccessors)

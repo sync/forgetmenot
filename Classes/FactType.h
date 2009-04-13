@@ -22,6 +22,9 @@
 @property (retain) NSString * id;
 @property (retain) NSSet* fact;
 
+- (NSString *) getId;
+- (NSString *) getObjectIdString;
+
 @end
 
 @interface FactType (CoreDataGeneratedAccessors)

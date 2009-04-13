@@ -21,6 +21,9 @@
 @property (retain) Person * person;
 @property (retain) FactType * fact_type;
 
+- (NSString *) getId;
+- (NSString *) getObjectIdString;
+
 @end
 
 
