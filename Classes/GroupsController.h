@@ -13,4 +13,6 @@
 
 }
 
+- (IBAction)addGroup:(id)sender;
+
 @end

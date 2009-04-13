@@ -7,16 +7,27 @@
 //
 
 #import "GroupsController.h"
-
+#import "Group.h"
+#import "TitleCell.h"
 
 @implementation GroupsController
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	// Table View row height
+	self.tableView.rowHeight = ROW_HEIGHT;
 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	// Let user delete row
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+	
+	// Let user add row
+	UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+																		 target:self 
+																		 action:@selector(addGroup:)];
+	self.navigationItem.rightBarButtonItem = item;
+	[item release];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,21 +43,44 @@
 	[super viewDidUnload];
 }
 
+#pragma mark Add Group
+
+- (IBAction)addGroup:(id)sender
+{
+	// Get Mangaged object context
+	NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
+	
+	// Create a new instance of the entity managed by the fetched results controller.
+	NSEntityDescription *entity = [[fetchedResultsController fetchRequest] entity];
+	Group *group = (Group *)[NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+	group.name = @"All";
+	
+	// Save the context.
+    NSError *error;
+    if (![context save:&error]) {
+		// Handle the error...
+    }
+	
+    [self.tableView reloadData];
+}
+
 
 #pragma mark Table view methods
-
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    TitleCell *cell = (TitleCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[TitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
     // Set up the cell...
+	Group *group = (Group *)[fetchedResultsController objectAtIndexPath:indexPath];
+	
+	cell.cellView.title = group.name;
 	
     return cell;
 }
@@ -60,28 +94,31 @@
 }
 
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
 
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        // Delete the managed object for the given index path
+		NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
+		[context deleteObject:[fetchedResultsController objectAtIndexPath:indexPath]];
+		
+		// Save the context.
+		NSError *error;
+		if (![context save:&error]) {
+			// Handle the error...
+		}
+		
+		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
     }   
 }
-*/
 
 - (NSFetchedResultsController *)fetchedResultsController {
     
