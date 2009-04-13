@@ -3,7 +3,7 @@
 //  ForgetMeNot
 //
 //  Created by Anthony Mittaz on 13/04/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 Anthony Mittaz. All rights reserved.
 //
 
 #import "Fact.h"
@@ -19,6 +19,23 @@
 @dynamic person;
 @dynamic fact_type;
 
+#pragma mark -
+#pragma mark Retrieve a person from it's id
+
++ (Fact *)factWidthID:(NSString *)fact_id forContext:(NSManagedObjectContext *)context
+{
+	NSString *key = @"id";
+	
+	NSString *template = [NSString stringWithFormat: @"%@_with_%@",[self description],key];
+    
+	return (Fact *)[context
+					  fetchUniqueObjectWithTemplate: template
+					  parameters: mkdict({key,fact_id})];
+}
+
+#pragma mark -
+#pragma mark Give you the person id
+
 - (NSString *)getId
 {
 	[self willAccessValueForKey:@"id"];
@@ -28,6 +45,9 @@
 	
 	return [self primitiveValueForKey:@"id"];
 }
+
+#pragma mark -
+#pragma mark Generate the person id
 
 - (NSString *)getObjectIdString
 {

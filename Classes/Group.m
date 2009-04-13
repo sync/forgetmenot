@@ -3,7 +3,7 @@
 //  ForgetMeNot
 //
 //  Created by Anthony Mittaz on 13/04/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 Anthony Mittaz. All rights reserved.
 //
 
 #import "Group.h"
@@ -20,6 +20,23 @@
 @dynamic color;
 @dynamic person;
 
+#pragma mark -
+#pragma mark Retrieve a person from it's id
+
++ (Group *)groupWidthID:(NSString *)group_id forContext:(NSManagedObjectContext *)context
+{
+	NSString *key = @"id";
+	
+	NSString *template = [NSString stringWithFormat: @"%@_with_%@",[self description],key];
+    
+	return (Group *)[context
+					  fetchUniqueObjectWithTemplate: template
+					  parameters: mkdict({key,group_id})];
+}
+
+#pragma mark -
+#pragma mark Give you the person id
+
 - (NSString *)getId
 {
 	[self willAccessValueForKey:@"id"];
@@ -29,6 +46,9 @@
 	
 	return [self primitiveValueForKey:@"id"];
 }
+
+#pragma mark -
+#pragma mark Generate the person id
 
 - (NSString *)getObjectIdString
 {

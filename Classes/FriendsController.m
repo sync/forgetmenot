@@ -3,7 +3,7 @@
 //  ForgetMeNot
 //
 //  Created by Anthony Mittaz on 9/04/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 Anthony Mittaz. All rights reserved.
 //
 
 #import "FriendsController.h"

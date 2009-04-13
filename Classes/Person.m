@@ -3,7 +3,7 @@
 //  ForgetMeNot
 //
 //  Created by Anthony Mittaz on 13/04/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 Anthony Mittaz. All rights reserved.
 //
 
 #import "Person.h"
@@ -32,6 +32,34 @@
 @dynamic fact;
 @dynamic group;
 
+#pragma mark -
+#pragma mark Retrieve a person from it's id
+
++ (Person *)personWidthID:(NSString *)person_id forContext:(NSManagedObjectContext *)context
+{
+	NSString *key = @"id";
+	
+	NSString *template = [NSString stringWithFormat: @"%@_with_%@",[self description],key];
+    
+	return (Person *)[context
+					  fetchUniqueObjectWithTemplate: template
+					  parameters: mkdict({key,person_id})];
+}
+
++ (Person *)personWidthRecordID:(NSNumber *)recordID forContext:(NSManagedObjectContext *)context
+{
+	NSString *key = @"recordID";
+	
+	NSString *template = [NSString stringWithFormat: @"%@_with_%@",[self description],key];
+    
+	return (Person *)[context
+					  fetchUniqueObjectWithTemplate: template
+					  parameters: mkdict({key,recordID})];
+}
+
+#pragma mark -
+#pragma mark Give you the person id
+
 - (NSString *)getId
 {
 	[self willAccessValueForKey:@"id"];
@@ -41,6 +69,9 @@
 	
 	return [self primitiveValueForKey:@"id"];
 }
+
+#pragma mark -
+#pragma mark Generate the person id
 
 - (NSString *)getObjectIdString
 {
