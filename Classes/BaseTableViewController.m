@@ -13,11 +13,14 @@
 
 @synthesize appDelegate=_appDelegate;
 
-- (void)viewDidLoad {
+- (void)viewDidLoad 
+{
 	[super viewDidLoad];
 	
 	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:120.0/255.0 green:120.0/255.0 blue:120.0/255.0 alpha:1.0];
 	self.navigationController.toolbar.tintColor = [UIColor colorWithRed:120.0/255.0 green:120.0/255.0 blue:120.0/255.0 alpha:1.0];
+	
+	[self createToolbarItems];
 	
 	[self.navigationController setToolbarHidden:FALSE animated:FALSE];
 	
@@ -26,9 +29,33 @@
 	self.tableView.backgroundColor = [UIColor clearColor];
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload 
+{
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
+}
+
+- (void)createToolbarItems
+{	
+//	// create a special tab bar item with a custom image and title
+//	UIBarButtonItem *settingsItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toolbar_settings.png"]
+//																 style:UIBarButtonItemStylePlain
+//																target:self
+//																action:@selector(showSettings:)];
+	
+	UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+																		 target:self 
+																		 action:@selector(addGroup:)];
+	
+	
+	NSArray *items = [NSArray arrayWithObjects:item, nil];
+	[self.navigationController.toolbar setItems:items animated:NO];
+	[item release];
+}
+
+- (IBAction)showSettings:(id)sender
+{
+	
 }
 
 

@@ -20,4 +20,8 @@
 
 - (void)restoreLevelWithSelectionArray:(NSArray *)selectionArray;
 
+- (void)createToolbarItems;
+
+- (IBAction)showSettings:(id)sender;
+
 @end
