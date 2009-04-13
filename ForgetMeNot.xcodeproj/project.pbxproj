@@ -40,6 +40,10 @@
 		3A963A140F8DC9AA00FB643F /* FriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A963A130F8DC9AA00FB643F /* FriendsController.m */; };
 		3A963A180F8DCA0A00FB643F /* FriendsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A963A170F8DCA0A00FB643F /* FriendsController.xib */; };
 		3A963A2F0F8DCABF00FB643F /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A963A2E0F8DCABF00FB643F /* background.png */; };
+		3A963ABD0F93118B00FB643F /* Fact.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A963AB60F93118B00FB643F /* Fact.m */; };
+		3A963ABE0F93118B00FB643F /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A963AB80F93118B00FB643F /* Group.m */; };
+		3A963ABF0F93118B00FB643F /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A963ABA0F93118B00FB643F /* Person.m */; };
+		3A963AC00F93118B00FB643F /* FactType.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A963ABC0F93118B00FB643F /* FactType.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +100,14 @@
 		3A963A130F8DC9AA00FB643F /* FriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsController.m; sourceTree = "<group>"; };
 		3A963A170F8DCA0A00FB643F /* FriendsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsController.xib; sourceTree = "<group>"; };
 		3A963A2E0F8DCABF00FB643F /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		3A963AB50F93118B00FB643F /* Fact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fact.h; sourceTree = "<group>"; };
+		3A963AB60F93118B00FB643F /* Fact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fact.m; sourceTree = "<group>"; };
+		3A963AB70F93118B00FB643F /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		3A963AB80F93118B00FB643F /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
+		3A963AB90F93118B00FB643F /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		3A963ABA0F93118B00FB643F /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		3A963ABB0F93118B00FB643F /* FactType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactType.h; sourceTree = "<group>"; };
+		3A963ABC0F93118B00FB643F /* FactType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FactType.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ForgetMeNot-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ForgetMeNot-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,6 +137,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3A963AB20F93117B00FB643F /* Model Class */,
 				3A96395B0F8DBEAE00FB643F /* Base Controllers */,
 				3A963A150F8DC9B600FB643F /* Controllers */,
 				1D3623240D0F684500981E51 /* ForgetMeNotAppDelegate.h */,
@@ -279,6 +292,21 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		3A963AB20F93117B00FB643F /* Model Class */ = {
+			isa = PBXGroup;
+			children = (
+				3A963AB50F93118B00FB643F /* Fact.h */,
+				3A963AB60F93118B00FB643F /* Fact.m */,
+				3A963AB70F93118B00FB643F /* Group.h */,
+				3A963AB80F93118B00FB643F /* Group.m */,
+				3A963AB90F93118B00FB643F /* Person.h */,
+				3A963ABA0F93118B00FB643F /* Person.m */,
+				3A963ABB0F93118B00FB643F /* FactType.h */,
+				3A963ABC0F93118B00FB643F /* FactType.m */,
+			);
+			name = "Model Class";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -359,6 +387,10 @@
 				3A9639660F8DBEC100FB643F /* BaseFetchedTableViewController.m in Sources */,
 				3A9639E40F8DC7CA00FB643F /* ForgetMeNot.xcdatamodel in Sources */,
 				3A963A140F8DC9AA00FB643F /* FriendsController.m in Sources */,
+				3A963ABD0F93118B00FB643F /* Fact.m in Sources */,
+				3A963ABE0F93118B00FB643F /* Group.m in Sources */,
+				3A963ABF0F93118B00FB643F /* Person.m in Sources */,
+				3A963AC00F93118B00FB643F /* FactType.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
