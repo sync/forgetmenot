@@ -21,7 +21,7 @@
 @property (retain) Person * person;
 @property (retain) FactType * fact_type;
 
-+ (Fact *)factWidthID:(NSString *)fact_id forContext:(NSManagedObjectContext *)context;
++ (Fact *)factWithID:(NSString *)fact_id forContext:(NSManagedObjectContext *)context;
 
 - (NSString *) getId;
 - (NSString *) getObjectIdString;

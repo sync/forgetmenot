@@ -8,6 +8,8 @@
 
 #import "FriendsController.h"
 #import "Group.h"
+#import "Person.h"
+#import "TitleImageCell.h"
 
 @implementation FriendsController
 
@@ -16,8 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	self.tableView.rowHeight = ROW_HEIGHT;
 }
 
 - (void)setupNavigationBar
@@ -25,7 +26,7 @@
 	// Let user add row
 	UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
 																		 target:self 
-																		 action:@selector(addGroup:)];
+																		 action:@selector(addPerson:)];
 	self.navigationItem.rightBarButtonItem = item;
 	[item release];
 	
@@ -69,12 +70,18 @@
     
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+   TitleImageCell *cell = (TitleImageCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[TitleImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
     // Set up the cell...
+	// Set up the cell...
+	Person *person = (Person *)[fetchedResultsController objectAtIndexPath:indexPath];
+	
+	cell.cellView.title = person.first_name;
+	
 	
     return cell;
 }
@@ -137,8 +144,11 @@
 	[fetchRequest setEntity:entity];
 	
 	// Filter by group name
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"group.id = %@", self.group.id]; 
-	[fetchRequest setPredicate:predicate]; 
+	// Only if group is not All
+	if (![self.group.name isEqualToString:@"All"]) {
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"group = %@", self.group]; 
+		[fetchRequest setPredicate:predicate]; 
+	}
 	
 	// Edit the sort key as appropriate.
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"first_name" ascending:YES];
@@ -159,6 +169,72 @@
 	
 	return fetchedResultsController;
 } 
+
+#pragma mark -
+#pragma mark People Picker
+
+- (IBAction)addPerson:(id)sender
+{ 
+	ABPeoplePickerNavigationController *picker = 
+	[[ABPeoplePickerNavigationController alloc] init]; 
+	picker.peoplePickerDelegate = self;
+	[self presentModalViewController:picker animated:YES]; 
+	[picker release]; 
+} 
+
+- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker 
+{ 
+	[self dismissModalViewControllerAnimated:YES]; 
+	//[self.appDelegate addTabBarOverlayInRect:CGRectMake(0.0, 422.0, 320.0, 9.0)];
+} 
+
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker 
+	  shouldContinueAfterSelectingPerson:(ABRecordRef)personRef 
+{ 
+	NSInteger recordID = ABRecordGetRecordID(personRef);
+	
+	NSString *firstName = (NSString *)ABRecordCopyValue(personRef, kABPersonFirstNameProperty); 
+	NSString *lastName = (NSString *)ABRecordCopyValue(personRef, kABPersonLastNameProperty);
+	
+	// Get Mangaged object context
+	NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
+	
+	Person *person = [Person personWithRecordID:[NSNumber numberWithInteger:recordID] forContext:context];
+	if (!person) {
+		// Create a new instance of the entity managed by the fetched results controller.
+		NSEntityDescription *entity = [[fetchedResultsController fetchRequest] entity];
+		person = (Person *)[NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+		person.recordID = [NSNumber numberWithInteger:recordID];
+	}
+	
+	// If appropriate, configure the new managed object.
+	person.first_name = firstName;
+	person.last_name = lastName;
+	
+	person.group = self.group;
+	
+	// Save the context.
+    NSError *error;
+    if (![context save:&error]) {
+		// Handle the error...
+    }
+	
+    [self.tableView reloadData];
+	
+	[firstName release];
+	[lastName release];
+	
+	[self dismissModalViewControllerAnimated:YES]; 
+	
+	return NO; 
+}
+
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person 
+								property:(ABPropertyID)property 
+							  identifier:(ABMultiValueIdentifier)identifier
+{
+	return NO;
+}
 
 
 - (void)dealloc {

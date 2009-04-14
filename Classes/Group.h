@@ -22,6 +22,11 @@
 @property (retain) NSString * color;
 @property (retain) NSSet* person;
 
++ (Group *)groupWithID:(NSString *)group_id forContext:(NSManagedObjectContext *)context;
+
+- (NSString *) getId;
+- (NSString *) getObjectIdString;
+
 @end
 
 @interface Group (CoreDataGeneratedAccessors)

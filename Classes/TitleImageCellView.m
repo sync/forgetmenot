@@ -86,8 +86,8 @@
 	
 	
 	// Border
-	CGRect imgRect = CGRectMake(12.0, (ROW_HEIGHT-58.4)/2, 58.4, 58.4);
-	[[UIImage imageNamed:@"image_border.png"]drawInRect:imgRect];
+	CGRect imgRect = CGRectMake(12.0, (ROW_HEIGHT-50.0)/2, 50.0, 50.0);
+	[[UIImage imageNamed:@"imageCell.png"]drawInRect:imgRect];
 	
 	// Text
 	// Save the context state 

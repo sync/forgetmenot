@@ -123,6 +123,9 @@
 	UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
 	
 	if (!cell.editing) {
+		// Make sure the tableview is not currently in edit mode
+		[self setEditing:FALSE];
+		
 		FriendsController *controller = [[FriendsController alloc] initWithNibName:@"FriendsController" bundle:nil];
 		controller.group = (Group *)group;
 		[self.navigationController pushViewController:controller animated:TRUE];

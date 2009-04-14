@@ -34,6 +34,12 @@
 @property (retain) NSSet* fact;
 @property (retain) Group * group;
 
++ (Person *)personWithID:(NSString *)person_id forContext:(NSManagedObjectContext *)context;
++ (Person *)personWithRecordID:(NSNumber *)recordID forContext:(NSManagedObjectContext *)context;
+
+- (NSString *) getId;
+- (NSString *) getObjectIdString;
+
 @end
 
 @interface Person (CoreDataGeneratedAccessors)

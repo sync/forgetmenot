@@ -8,13 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseFetchedTableViewController.h"
+#import <AddressBook/AddressBook.h> 
+#import <AddressBookUI/AddressBookUI.h>
 
 @class Group;
 
-@interface FriendsController : BaseFetchedTableViewController {
+@interface FriendsController : BaseFetchedTableViewController <ABPeoplePickerNavigationControllerDelegate>{
 	Group *_group;
 }
 
 @property (nonatomic, retain) Group *group;
+
+- (IBAction)addPerson:(id)sender;
 
 @end
