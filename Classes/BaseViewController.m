@@ -35,15 +35,28 @@
 }
 
 
-- (void)viewDidLoad {
+- (void)viewDidLoad 
+{
 	[super viewDidLoad];
+	
+	[self loadAppDelegate];
 	
 	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:120.0/255.0 green:120.0/255.0 blue:120.0/255.0 alpha:1.0];
 	self.navigationController.toolbar.tintColor = [UIColor colorWithRed:120.0/255.0 green:120.0/255.0 blue:120.0/255.0 alpha:1.0];
 	
-	[self.navigationController setToolbarHidden:FALSE animated:FALSE];
+	[self setupNavigationBar];
 	
-	[self loadAppDelegate];
+	[self setupToolbar];
+}
+
+- (void)setupNavigationBar
+{
+	// Nothing
+}
+
+- (void)setupToolbar
+{	
+	// Nothing
 }
 
 - (void)viewDidUnload {

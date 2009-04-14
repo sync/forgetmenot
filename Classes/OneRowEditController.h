@@ -13,10 +13,21 @@
 	UINavigationBar *_navigationBar;
 	
 	UITextField *_textField;
+	
+	NSString *_entityName;
+	NSString *_propertyName;
+	NSString *_notificationName;
+	
+	NSManagedObject *_object;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationBar *navigationBar;
 @property (nonatomic, retain) IBOutlet UITextField *textField;
+
+@property (nonatomic, copy) NSString *entityName;
+@property (nonatomic, copy) NSString *propertyName;
+@property (nonatomic, copy) NSString *notificationName;
+@property (nonatomic, retain) NSManagedObject *object;
 
 - (IBAction)cancelEditing:(id)sender;
 - (IBAction)doneEditing:(id)sender;

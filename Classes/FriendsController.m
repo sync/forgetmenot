@@ -18,6 +18,26 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)setupNavigationBar
+{
+	// Nothing yet
+}
+
+- (void)setupToolbar
+{	
+	[self.navigationController setToolbarHidden:FALSE animated:FALSE];
+	
+	// create a special tab bar item with a custom image and title
+	UIBarButtonItem *settingsItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toolbar_settings.png"]
+																	 style:UIBarButtonItemStylePlain
+																	target:self
+																	action:@selector(showSettings:)];
+	
+	NSArray *items = [NSArray arrayWithObjects:settingsItem, nil];
+	[self setToolbarItems:items animated:FALSE];
+	[settingsItem release];
+}
+
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];

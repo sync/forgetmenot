@@ -104,7 +104,7 @@
 					<object class="IBUITextField" id="1017256662">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 62}, {280, 31}}</string>
+						<string key="NSFrame">{{20, 62}, {286, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -123,9 +123,9 @@
 							<double key="NSSize">1.800000e+01</double>
 							<int key="NSfFlags">16</int>
 						</object>
-						<bool key="IBUIClearsOnBeginEditing">YES</bool>
 						<float key="IBUIMinimumFontSize">1.200000e+01</float>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits"/>
+						<int key="IBUIClearButtonMode">3</int>
 					</object>
 				</object>
 				<string key="NSFrameSize">{320, 460}</string>

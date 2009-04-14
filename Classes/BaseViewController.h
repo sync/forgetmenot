@@ -17,6 +17,10 @@
 
 - (void)loadAppDelegate;
 
+- (void)setupNavigationBar;
+
+- (void)setupToolbar;
+
 - (void)restoreLevelWithSelectionArray:(NSArray *)selectionArray;
 
 @end

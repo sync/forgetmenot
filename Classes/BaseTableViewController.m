@@ -17,16 +17,16 @@
 {
 	[super viewDidLoad];
 	
-	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:120.0/255.0 green:120.0/255.0 blue:120.0/255.0 alpha:1.0];
-	self.navigationController.toolbar.tintColor = [UIColor colorWithRed:120.0/255.0 green:120.0/255.0 blue:120.0/255.0 alpha:1.0];
-	
-	[self createToolbarItems];
-	
-	[self.navigationController setToolbarHidden:FALSE animated:FALSE];
-	
 	[self loadAppDelegate];
 	
 	self.tableView.backgroundColor = [UIColor clearColor];
+	
+	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:120.0/255.0 green:120.0/255.0 blue:120.0/255.0 alpha:1.0];
+	self.navigationController.toolbar.tintColor = [UIColor colorWithRed:120.0/255.0 green:120.0/255.0 blue:120.0/255.0 alpha:1.0];
+	
+	[self setupNavigationBar];
+	
+	[self setupToolbar];
 }
 
 - (void)viewDidUnload 
@@ -35,17 +35,14 @@
 	// e.g. self.myOutlet = nil;
 }
 
-- (void)createToolbarItems
+- (void)setupToolbar
 {	
-	// create a special tab bar item with a custom image and title
-	UIBarButtonItem *settingsItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toolbar_settings.png"]
-																 style:UIBarButtonItemStylePlain
-																target:self
-																action:@selector(showSettings:)];
-	
-	NSArray *items = [NSArray arrayWithObjects:settingsItem, nil];
-	[self setToolbarItems:items animated:FALSE];
-	[settingsItem release];
+	// Nothing
+}
+
+- (void)setupNavigationBar
+{
+	// Nothing
 }
 
 - (IBAction)showSettings:(id)sender

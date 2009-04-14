@@ -13,13 +13,20 @@
 
 @implementation GroupsController
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
 	// Table View row height
 	self.tableView.rowHeight = ROW_HEIGHT;
+	
+	self.tableView.allowsSelectionDuringEditing = TRUE;
+	
+	// Reload tableview when this notifiation fire
+	[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableview:) name:ShouldReloadGroupsController object:nil];
+}
 
+- (void)setupNavigationBar
+{
 	// Let user delete row
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 	
@@ -30,9 +37,25 @@
 	self.navigationItem.rightBarButtonItem = item;
 	[item release];
 	
-	// Reload tableview when this notifiation fire
-	[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableview:) name:ShouldReloadGroupsController object:nil];
+	self.navigationItem.title = @"Groups";
 }
+
+- (void)setupToolbar
+{	
+	[self.navigationController setToolbarHidden:FALSE animated:FALSE];
+	
+	// create a special tab bar item with a custom image and title
+	UIBarButtonItem *settingsItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toolbar_settings.png"]
+																	 style:UIBarButtonItemStylePlain
+																	target:self
+																	action:@selector(showSettings:)];
+	
+	NSArray *items = [NSArray arrayWithObjects:settingsItem, nil];
+	[self setToolbarItems:items animated:FALSE];
+	[settingsItem release];
+}
+
+
 
 - (void)reloadTableview:(id)sender
 {
@@ -61,6 +84,10 @@
 	
 	// Present modal view controller, were you can enter the group name
 	OneRowEditController *controller = [[OneRowEditController alloc]initWithNibName:@"OneRowEditController" bundle:nil];
+	controller.entityName = @"Group";
+	controller.propertyName = @"name";
+	controller.notificationName = ShouldReloadGroupsController;
+	controller.navigationItem.title = @"New Group";
 	[self.navigationController presentModalViewController:controller animated:TRUE];
 	[controller release];
 }
@@ -89,10 +116,26 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
-	// [self.navigationController pushViewController:anotherViewController];
-	// [anotherViewController release];
+   
+	NSManagedObject *group = [fetchedResultsController objectAtIndexPath:indexPath];
+	
+	UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+	
+	if (!cell.editing) {
+		// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
+		// [self.navigationController pushViewController:anotherViewController];
+		// [anotherViewController release];
+	} else {
+		// Rename modal view controller, were you can edit the group name
+		OneRowEditController *controller = [[OneRowEditController alloc]initWithNibName:@"OneRowEditController" bundle:nil];
+		controller.entityName = @"Group";
+		controller.propertyName = @"name";
+		controller.notificationName = ShouldReloadGroupsController;
+		controller.object = group;
+		controller.navigationItem.title = @"Edit Group";
+		[self.navigationController presentModalViewController:controller animated:TRUE];
+		[controller release];
+	}
 }
 
 

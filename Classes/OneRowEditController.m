@@ -7,12 +7,15 @@
 //
 
 #import "OneRowEditController.h"
-#import "Group.h"
 
 @implementation OneRowEditController
 
 @synthesize navigationBar=_navigationBar;
 @synthesize textField=_textField;
+@synthesize entityName=_entityName;
+@synthesize propertyName=_propertyName;
+@synthesize notificationName=_notificationName;
+@synthesize object=_object;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -28,14 +31,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	// Define the title
-	self.navigationBar.topItem.title = @"New Group";
-	
 	// Color of the navigation bar
 	self.navigationBar.tintColor = [UIColor colorWithRed:120.0/255.0 green:120.0/255.0 blue:120.0/255.0 alpha:1.0];
 	
 	// Add textfield placeholer
-	self.textField.placeholder = @"Group Name";
+	self.textField.placeholder = @"Enter Text";
+	
+	// Check if object was given
+	if (self.object) {
+		self.textField.text = [self.object valueForKey:self.propertyName];
+	}
+	
 	
 	 [self.textField becomeFirstResponder];
 }
@@ -52,10 +58,13 @@
 	// Get Mangaged object context
 	NSManagedObjectContext *context = self.appDelegate.managedObjectContext;
 	
-	// Create a new instance of the entity managed by the fetched results controller.
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Group" inManagedObjectContext:context];
-	Group *group = (Group *)[NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-	group.name = self.textField.text;
+	// Check if object was not given
+	if (!self.object) {
+		// Create a new instance of the entity managed by the fetched results controller.
+		NSEntityDescription *entity = [NSEntityDescription entityForName:self.entityName inManagedObjectContext:context];
+		self.object = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+	}
+	[self.object setValue:self.textField.text forKey:self.propertyName];
 	
 	// Save the context.
     NSError *error;
@@ -63,7 +72,7 @@
 		// Handle the error...
     }
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName:ShouldReloadGroupsController object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:self.notificationName object:nil];
 	
     [self dismissModalViewControllerAnimated:TRUE];
 }
@@ -98,6 +107,10 @@
 
 
 - (void)dealloc {
+	[_object release];
+	[_notificationName release];
+	[_propertyName release];
+	[_entityName release];
 	[_textField release];
 	[_navigationBar release];
 	

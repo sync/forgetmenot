@@ -10,7 +10,6 @@
 #import "BaseFetchedTableViewController.h"
 
 @interface GroupsController : BaseFetchedTableViewController {
-
 }
 
 - (void)reloadTableview:(id)sender;
