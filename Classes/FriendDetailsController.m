@@ -6,10 +6,14 @@
 //  Copyright 2009 Anthony Mittaz. All rights reserved.
 //
 
-#import "FriendDetails.h"
+#import "FriendDetailsController.h"
 
 
-@implementation FriendDetails
+@implementation FriendDetailsController
+
+@synthesize tableView=_tableView;
+@synthesize scrollView=_scrollView;
+@synthesize person=_person;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -21,18 +25,13 @@
 }
 */
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
 
-/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	self.navigationItem.title = @"Details";
 }
-*/
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -56,6 +55,10 @@
 
 
 - (void)dealloc {
+	[_person release];
+	[_scrollView release];
+	[_tableView release];
+	
     [super dealloc];
 }
 
