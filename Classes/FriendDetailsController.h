@@ -7,19 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
+#import "BaseFetchedViewController.h"
 
 @class Person;
 
-@interface FriendDetailsController : BaseViewController {
-	UITableView *_tableView;
+@interface FriendDetailsController : BaseFetchedViewController {
+	
 	UIScrollView *_scrollView;
 	
 	Person *_person;
 }
 
-@property (nonatomic, retain) UITableView *tableView;
-@property (nonatomic, retain) UIScrollView *scrollView;
+@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) Person *person;
 
 @end

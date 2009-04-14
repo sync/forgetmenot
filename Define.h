@@ -9,6 +9,7 @@
 
 // Table View
 #define ROW_HEIGHT 70.0
+#define BLACK_ROW_HEIGHT 40.0
 
 // Networking
 #define kNetworkReachabilityChangedNotification @"kNetworkReachabilityChangedNotification"
@@ -16,3 +17,7 @@
 
 // Groups
 #define ShouldReloadGroupsController @"ShouldReloadGroupsController"
+// Friends
+#define ShouldReloadFriendsController @"ShouldReloadFriendsController"
+// Friend
+#define ShouldReloadFriendController @"ShouldReloadFriendController"
