@@ -31,6 +31,9 @@
 		// BackgroundView
 		BackgroundViewWithImage *backgroundView = [BackgroundViewWithImage backgroundViewWithFrame:cellFrame andBackgroundImageName:@"itemView_black.png"];
 		self.backgroundView = backgroundView;
+		// Selected backgroundView
+		BackgroundViewWithImage *selectedBackgroundView = [BackgroundViewWithImage backgroundViewWithFrame:cellFrame andBackgroundImageName:@"itemView_black_selected.png"];
+		self.selectedBackgroundView = selectedBackgroundView;
 		// AccessoryView
 		AccessoryViewWithImage *accessoryView = [AccessoryViewWithImage accessoryViewWithFrame:CGRectMake(290.0, (ROW_HEIGHT-23)/2, 16.0, 23.0) 
 																					  andImage:@"accessoryLight.png"];

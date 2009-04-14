@@ -36,7 +36,7 @@
 	UIColor *bigColor = [UIColor colorWithRed:228.0/255.0 green:229.0/255.0 blue:233.0/255.0 alpha:1.0];
 	[bigColor set];
 	// Draw the text
-	[self.title drawInRect:CGRectMake(20.0, (BLACK_ROW_HEIGHT-24.0)/2, 260, 24.0) withFont:boldFont lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentLeft];
+	[self.title drawInRect:CGRectMake(10.0, (BLACK_ROW_HEIGHT-24.0)/2, 260, 24.0) withFont:boldFont lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentLeft];
 	CGContextRestoreGState(context);
 }
 
