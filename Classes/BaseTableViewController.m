@@ -37,20 +37,15 @@
 
 - (void)createToolbarItems
 {	
-//	// create a special tab bar item with a custom image and title
-//	UIBarButtonItem *settingsItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toolbar_settings.png"]
-//																 style:UIBarButtonItemStylePlain
-//																target:self
-//																action:@selector(showSettings:)];
+	// create a special tab bar item with a custom image and title
+	UIBarButtonItem *settingsItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toolbar_settings.png"]
+																 style:UIBarButtonItemStylePlain
+																target:self
+																action:@selector(showSettings:)];
 	
-	UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-																		 target:self 
-																		 action:@selector(addGroup:)];
-	
-	
-	NSArray *items = [NSArray arrayWithObjects:item, nil];
-	[self.navigationController.toolbar setItems:items animated:NO];
-	[item release];
+	NSArray *items = [NSArray arrayWithObjects:settingsItem, nil];
+	[self setToolbarItems:items animated:FALSE];
+	[settingsItem release];
 }
 
 - (IBAction)showSettings:(id)sender

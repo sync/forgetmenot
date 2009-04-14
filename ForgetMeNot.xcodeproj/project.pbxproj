@@ -13,6 +13,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
+		3A3B50120F943AE5004ECC37 /* toolbar_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A3B50110F943AE5004ECC37 /* toolbar_settings.png */; };
 		3A9638640F8DBA8800FB643F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9638630F8DBA8800FB643F /* QuartzCore.framework */; };
 		3A9638660F8DBA8E00FB643F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9638650F8DBA8E00FB643F /* MapKit.framework */; };
 		3A9638680F8DBA9800FB643F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9638670F8DBA9800FB643F /* CoreFoundation.framework */; };
@@ -62,7 +63,6 @@
 		3A963D040F9346C000FB643F /* editingCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A963D030F9346C000FB643F /* editingCell.png */; };
 		3A963D060F93479600FB643F /* modalBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A963D050F93479600FB643F /* modalBorder.png */; };
 		3A963D400F934C9C00FB643F /* editingCellBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A963D3F0F934C9C00FB643F /* editingCellBackground.png */; };
-		3A963EE80F93727500FB643F /* toolbar_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A963EE70F93727500FB643F /* toolbar_settings.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +75,7 @@
 		28A0AAE50D9B0CCF005BE974 /* ForgetMeNot_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetMeNot_Prefix.pch; sourceTree = "<group>"; };
 		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3A3B50110F943AE5004ECC37 /* toolbar_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_settings.png; sourceTree = "<group>"; };
 		3A9638630F8DBA8800FB643F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3A9638650F8DBA8E00FB643F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3A9638670F8DBA9800FB643F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -153,7 +154,6 @@
 		3A963D030F9346C000FB643F /* editingCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editingCell.png; sourceTree = "<group>"; };
 		3A963D050F93479600FB643F /* modalBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modalBorder.png; sourceTree = "<group>"; };
 		3A963D3F0F934C9C00FB643F /* editingCellBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editingCellBackground.png; sourceTree = "<group>"; };
-		3A963EE70F93727500FB643F /* toolbar_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_settings.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ForgetMeNot-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ForgetMeNot-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -339,7 +339,7 @@
 		3A963A2B0F8DCAAD00FB643F /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				3A963EE70F93727500FB643F /* toolbar_settings.png */,
+				3A3B50110F943AE5004ECC37 /* toolbar_settings.png */,
 				3A963D000F93461D00FB643F /* Modal */,
 				3A963C580F9328A400FB643F /* cells */,
 				3A963A2E0F8DCABF00FB643F /* background.png */,
@@ -474,7 +474,7 @@
 				3A963D040F9346C000FB643F /* editingCell.png in Resources */,
 				3A963D060F93479600FB643F /* modalBorder.png in Resources */,
 				3A963D400F934C9C00FB643F /* editingCellBackground.png in Resources */,
-				3A963EE80F93727500FB643F /* toolbar_settings.png in Resources */,
+				3A3B50120F943AE5004ECC37 /* toolbar_settings.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
