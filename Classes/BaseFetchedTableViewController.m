@@ -11,7 +11,6 @@
 
 @implementation BaseFetchedTableViewController
 
-@synthesize appDelegate=_appDelegate;
 @synthesize fetchedResultsController;
 
 - (void)viewDidLoad {
@@ -196,7 +195,6 @@
 
 - (void)dealloc {
 	[fetchedResultsController release];
-	[_appDelegate release];
 	
     [super dealloc];
 }

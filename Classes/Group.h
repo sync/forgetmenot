@@ -2,7 +2,7 @@
 //  Group.h
 //  ForgetMeNot
 //
-//  Created by Anthony Mittaz on 13/04/09.
+//  Created by Anthony Mittaz on 14/04/09.
 //  Copyright 2009 Anthony Mittaz. All rights reserved.
 //
 
@@ -21,11 +21,6 @@
 @property (retain) NSString * id;
 @property (retain) NSString * color;
 @property (retain) NSSet* person;
-
-+ (Group *)groupWidthID:(NSString *)group_id forContext:(NSManagedObjectContext *)context;
-
-- (NSString *) getId;
-- (NSString *) getObjectIdString;
 
 @end
 

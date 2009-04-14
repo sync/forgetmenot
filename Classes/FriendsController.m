@@ -7,9 +7,11 @@
 //
 
 #import "FriendsController.h"
-
+#import "Group.h"
 
 @implementation FriendsController
+
+@synthesize group=_group;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -19,8 +21,15 @@
 }
 
 - (void)setupNavigationBar
-{
-	// Nothing yet
+{	
+	// Let user add row
+	UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+																		 target:self 
+																		 action:@selector(addGroup:)];
+	self.navigationItem.rightBarButtonItem = item;
+	[item release];
+	
+	self.navigationItem.title = self.group.name;
 }
 
 - (void)setupToolbar
@@ -114,7 +123,7 @@
 
 - (NSFetchedResultsController *)fetchedResultsController {
     
-    if (fetchedResultsController != nil) {
+	if (fetchedResultsController != nil) {
         return fetchedResultsController;
     }
     
@@ -126,6 +135,10 @@
 	// Edit the entity name as appropriate.
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Person" inManagedObjectContext:self.appDelegate.managedObjectContext];
 	[fetchRequest setEntity:entity];
+	
+	// Filter by group name
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"group.id = %@", self.group.id]; 
+	[fetchRequest setPredicate:predicate]; 
 	
 	// Edit the sort key as appropriate.
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"first_name" ascending:YES];
@@ -149,6 +162,8 @@
 
 
 - (void)dealloc {
+	[_group release];
+	
     [super dealloc];
 }
 

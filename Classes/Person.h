@@ -2,7 +2,7 @@
 //  Person.h
 //  ForgetMeNot
 //
-//  Created by Anthony Mittaz on 13/04/09.
+//  Created by Anthony Mittaz on 14/04/09.
 //  Copyright 2009 Anthony Mittaz. All rights reserved.
 //
 
@@ -23,21 +23,16 @@
 @property (retain) NSString * country;
 @property (retain) NSNumber * latitude;
 @property (retain) NSString * image_url;
-@property (retain) NSString * post_code;
 @property (retain) NSNumber * recordID;
+@property (retain) NSString * post_code;
+@property (retain) NSDate * birthday;
 @property (retain) NSString * first_name;
 @property (retain) NSString * city;
-@property (retain) NSDate * birthday;
 @property (retain) NSDate * created_at;
 @property (retain) NSNumber * longitude;
 @property (retain) NSString * id;
 @property (retain) NSSet* fact;
-@property (retain) NSSet* group;
-
-+ (Person *)personWidthID:(NSString *)person_id forContext:(NSManagedObjectContext *)context;
-
-- (NSString *) getId;
-- (NSString *) getObjectIdString;
+@property (retain) Group * group;
 
 @end
 
@@ -46,11 +41,6 @@
 - (void)removeFactObject:(Fact *)value;
 - (void)addFact:(NSSet *)value;
 - (void)removeFact:(NSSet *)value;
-
-- (void)addGroupObject:(Group *)value;
-- (void)removeGroupObject:(Group *)value;
-- (void)addGroup:(NSSet *)value;
-- (void)removeGroup:(NSSet *)value;
 
 @end
 

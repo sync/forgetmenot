@@ -10,6 +10,7 @@
 #import "Group.h"
 #import "TitleCell.h"
 #import "OneRowEditController.h"
+#import "FriendsController.h"
 
 @implementation GroupsController
 
@@ -122,9 +123,10 @@
 	UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
 	
 	if (!cell.editing) {
-		// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
-		// [self.navigationController pushViewController:anotherViewController];
-		// [anotherViewController release];
+		FriendsController *controller = [[FriendsController alloc] initWithNibName:@"FriendsController" bundle:nil];
+		controller.group = (Group *)group;
+		[self.navigationController pushViewController:controller animated:TRUE];
+		[controller release];
 	} else {
 		// Rename modal view controller, were you can edit the group name
 		OneRowEditController *controller = [[OneRowEditController alloc]initWithNibName:@"OneRowEditController" bundle:nil];
@@ -173,7 +175,7 @@
 
 - (NSFetchedResultsController *)fetchedResultsController {
     
-    if (fetchedResultsController != nil) {
+   if (fetchedResultsController != nil) {
         return fetchedResultsController;
     }
     

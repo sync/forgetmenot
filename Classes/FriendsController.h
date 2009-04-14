@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "BaseFetchedTableViewController.h"
 
-@interface FriendsController : BaseFetchedTableViewController {
+@class Group;
 
+@interface FriendsController : BaseFetchedTableViewController {
+	Group *_group;
 }
+
+@property (nonatomic, retain) Group *group;
 
 @end
