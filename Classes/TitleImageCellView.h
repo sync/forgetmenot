@@ -11,9 +11,12 @@
 
 @interface TitleImageCellView : TitleCellView {
 	UIImage *_imagePreview;
+	NSString *_subtitle;
 }
 
 @property (nonatomic, retain) UIImage *imagePreview;
+@property (nonatomic, retain) NSString *subtitle;
+
 + (id)titleImageCellViewWithFrame:(CGRect)frame;
 
 @end

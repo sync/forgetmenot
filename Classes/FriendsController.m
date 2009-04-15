@@ -82,6 +82,7 @@
 	Person *person = (Person *)[fetchedResultsController objectAtIndexPath:indexPath];
 	
 	cell.cellView.title = person.first_name;
+	cell.cellView.subtitle = @"Kelvin Grove, QLD, Australia";
 	
 	
     return cell;

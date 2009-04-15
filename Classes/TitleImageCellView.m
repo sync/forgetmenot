@@ -11,6 +11,7 @@
 @implementation TitleImageCellView
 
 @synthesize imagePreview=_imagePreview;
+@synthesize subtitle=_subtitle;
 
 #pragma mark -
 #pragma mark Initialisation:
@@ -38,6 +39,17 @@
 	if (_imagePreview != imagePreview) {
 		[_imagePreview release];
 		_imagePreview = [imagePreview retain];
+		[self setNeedsDisplay];
+	}
+}
+
+#pragma mark -
+#pragma mark Set The location If Different And Redraw The String:
+
+- (void)setSubtitle:(NSString *)subtitle {
+	if (_subtitle != subtitle) {
+		[subtitle release];
+		_subtitle = [subtitle retain];
 		[self setNeedsDisplay];
 	}
 }
@@ -93,14 +105,20 @@
 	// Save the context state 
 	CGContextSaveGState(context);
 	// Define font and color
-	UIFont *boldFont = [UIFont boldSystemFontOfSize:12.0];
+	UIFont *boldFont = [UIFont boldSystemFontOfSize:14.0];
 	UIColor *bigColor = [UIColor colorWithRed:39.0/255.0 green:39.0/255.0 blue:39.0/255.0 alpha:1.0];
 	[bigColor set];
 	// Set shadow
 	CGContextSetShadowWithColor(context,  CGSizeMake(0.0, -1.0), 0.5, [[UIColor whiteColor]CGColor]);
-	// Draw the text
-	[self.title drawInRect:CGRectMake(80.0, (ROW_HEIGHT-20)/2, 210.0, 15.0) withFont:boldFont lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentLeft];
+	// Draw the title
+	[self.title drawInRect:CGRectMake(75.0, (ROW_HEIGHT-17.0 - 17.0)/2, 260.0, 17.0) withFont:boldFont lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentLeft];
+	// Set color
+	UIColor *subtitleColor = [UIColor colorWithRed:70.0/255.0 green:70.0/255.0 blue:70.0/255.0 alpha:1.0];
+	[subtitleColor set];
+	// Draw the subtitle
+	[self.subtitle drawInRect:CGRectMake(75.0, (ROW_HEIGHT-17.0 + 17.0)/2, 260.0, 17.0) withFont:boldFont lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentLeft];
 	CGContextRestoreGState(context);
+	
 }
 
 
@@ -108,6 +126,7 @@
 #pragma mark Dealloc:
 
 - (void)dealloc {
+	[_subtitle release];
 	[_imagePreview release];
 	
 	[super dealloc];
