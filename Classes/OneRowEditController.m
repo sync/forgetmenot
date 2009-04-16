@@ -34,6 +34,8 @@
 	// Color of the navigation bar
 	self.navigationBar.tintColor = [UIColor colorWithRed:120.0/255.0 green:120.0/255.0 blue:120.0/255.0 alpha:1.0];
 	
+	self.navigationBar.topItem.title = self.title;
+	
 	// Add textfield placeholer
 	self.textField.placeholder = @"Enter Text";
 	

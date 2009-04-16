@@ -9,16 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "BaseFetchedViewController.h"
 
+@class TitleImageCellView;
 @class Person;
 
-@interface FriendDetailsController : BaseFetchedViewController {
-	
+@interface FriendDetailsController : BaseFetchedViewController <UIScrollViewDelegate>{
+	TitleImageCellView *_personView;
 	UIScrollView *_scrollView;
 	
 	Person *_person;
 }
 
+@property (nonatomic, retain) IBOutlet TitleImageCellView *personView;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) Person *person;
+
+- (void)loadFactTypes;
 
 @end

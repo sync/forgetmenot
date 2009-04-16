@@ -51,12 +51,23 @@
 																	target:self
 																	action:@selector(showSettings:)];
 	
-	NSArray *items = [NSArray arrayWithObjects:settingsItem, nil];
+	// flex item used to separate the left groups items and right grouped items
+	UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+																			  target:nil
+																			  action:nil];
+	
+	// create a special tab bar item with a custom image and title
+	UIBarButtonItem *mapItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toolbar_map.png"]
+																style:UIBarButtonItemStylePlain
+															   target:self
+															   action:@selector(showMap:)];
+	
+	NSArray *items = [NSArray arrayWithObjects:settingsItem, flexItem, mapItem, nil];
 	[self setToolbarItems:items animated:FALSE];
 	[settingsItem release];
+	[flexItem release];
+	[mapItem release];
 }
-
-
 
 - (void)reloadTableview:(id)sender
 {
@@ -88,7 +99,7 @@
 	controller.entityName = @"Group";
 	controller.propertyName = @"name";
 	controller.notificationName = ShouldReloadGroupsController;
-	controller.navigationItem.title = @"New Group";
+	controller.title = @"New Group";
 	[self.navigationController presentModalViewController:controller animated:TRUE];
 	[controller release];
 }
@@ -137,7 +148,7 @@
 		controller.propertyName = @"name";
 		controller.notificationName = ShouldReloadGroupsController;
 		controller.object = group;
-		controller.navigationItem.title = @"Edit Group";
+		controller.title = @"Edit Group";
 		[self.navigationController presentModalViewController:controller animated:TRUE];
 		[controller release];
 	}

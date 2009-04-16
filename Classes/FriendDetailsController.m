@@ -8,11 +8,14 @@
 
 #import "FriendDetailsController.h"
 #import "Group.h"
+#import "Person.h"
 #import "TitleCellBlack.h"
 #import "OneRowEditController.h"
+#import "TitleImageCellView.h"
 
 @implementation FriendDetailsController
 
+@synthesize personView=_personView;
 @synthesize scrollView=_scrollView;
 @synthesize person=_person;
 
@@ -21,6 +24,9 @@
 	
 	// Table View row height
 	self.tableView.rowHeight = BLACK_ROW_HEIGHT;
+	
+	self.personView.title = self.person.first_name;
+	self.personView.subtitle =  @"Kelvin Grove, QLD, Australia";
 	
 	// Reload tableview when this notifiation fire
 	[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableview:) name:ShouldReloadGroupsController object:nil];
@@ -49,9 +55,27 @@
 																	target:self
 																	action:@selector(showSettings:)];
 	
-	NSArray *items = [NSArray arrayWithObjects:settingsItem, nil];
+	// flex item used to separate the left groups items and right grouped items
+	UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+																			  target:nil
+																			  action:nil];
+	
+	// create a special tab bar item with a custom image and title
+	UIBarButtonItem *mapItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toolbar_map.png"]
+																	 style:UIBarButtonItemStylePlain
+																	target:self
+																	action:@selector(showMap:)];
+	
+	NSArray *items = [NSArray arrayWithObjects:settingsItem, flexItem, mapItem, nil];
 	[self setToolbarItems:items animated:FALSE];
 	[settingsItem release];
+	[flexItem release];
+	[mapItem release];
+}
+
+- (void)loadFactTypes
+{
+	
 }
 
 
@@ -157,11 +181,14 @@
 	// Create the fetch request for the entity.
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	// Edit the entity name as appropriate.
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Group" inManagedObjectContext:self.appDelegate.managedObjectContext];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Fact" inManagedObjectContext:self.appDelegate.managedObjectContext];
 	[fetchRequest setEntity:entity];
 	
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"person = %@", self.person]; 
+	[fetchRequest setPredicate:predicate]; 
+	
 	// Edit the sort key as appropriate.
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"fact" ascending:YES];
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 	
 	[fetchRequest setSortDescriptors:sortDescriptors];
@@ -182,6 +209,7 @@
 
 
 - (void)dealloc {
+	[_personView release];
 	[_person release];
 	[_scrollView release];
 	

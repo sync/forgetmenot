@@ -23,4 +23,8 @@
 
 - (void)restoreLevelWithSelectionArray:(NSArray *)selectionArray;
 
+- (IBAction)showSettings:(id)sender;
+
+- (IBAction)showMap:(id)sender;
+
 @end

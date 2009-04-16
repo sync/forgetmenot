@@ -59,6 +59,16 @@
 	// Nothing
 }
 
+- (IBAction)showSettings:(id)sender
+{
+	
+}
+
+- (IBAction)showMap:(id)sender
+{
+	
+}
+
 - (void)viewDidUnload {
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
