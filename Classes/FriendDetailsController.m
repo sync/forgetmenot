@@ -10,7 +10,7 @@
 #import "Group.h"
 #import "Person.h"
 #import "TitleCellBlack.h"
-#import "OneRowEditController.h"
+#import "OneRowOneImageEditController.h"
 #import "TitleImageCellView.h"
 
 @implementation FriendDetailsController
@@ -29,7 +29,7 @@
 	self.personView.subtitle =  @"Kelvin Grove, QLD, Australia";
 	
 	// Reload tableview when this notifiation fire
-	[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableview:) name:ShouldReloadGroupsController object:nil];
+	[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableview:) name:ShouldReloadFriendController object:nil];
 }
 
 - (void)setupNavigationBar
@@ -38,7 +38,7 @@
 	// Let user add row
 	UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
 																		 target:self 
-																		 action:@selector(addGroup:)];
+																		 action:@selector(addNewFact:)];
 	self.navigationItem.rightBarButtonItem = item;
 	[item release];
 	
@@ -56,21 +56,51 @@
 																	action:@selector(showSettings:)];
 	
 	// flex item used to separate the left groups items and right grouped items
-	UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+	UIBarButtonItem *flexItemLeft = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+																			  target:nil
+																			  action:nil];
+	
+	UIBarButtonItem *newFactType = [[UIBarButtonItem alloc]initWithTitle:@"New Fact Type"
+																   style:UIBarButtonItemStyleBordered
+																  target:self 
+																  action:@selector(addNewFactType:)];
+	
+	
+	// flex item used to separate the left groups items and right grouped items
+	UIBarButtonItem *flexItemRight = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
 																			  target:nil
 																			  action:nil];
 	
 	// create a special tab bar item with a custom image and title
 	UIBarButtonItem *mapItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toolbar_map.png"]
-																	 style:UIBarButtonItemStylePlain
-																	target:self
-																	action:@selector(showMap:)];
+																style:UIBarButtonItemStylePlain
+															   target:self
+															   action:@selector(showMap:)];
 	
-	NSArray *items = [NSArray arrayWithObjects:settingsItem, flexItem, mapItem, nil];
+	
+	NSArray *items = [NSArray arrayWithObjects:settingsItem, flexItemLeft, newFactType, flexItemRight, mapItem, nil];
 	[self setToolbarItems:items animated:FALSE];
 	[settingsItem release];
-	[flexItem release];
+	[flexItemLeft release];
+	[newFactType release];
+	[flexItemRight release];
 	[mapItem release];
+}
+
+- (IBAction)addNewFactType:(id)sender
+{
+	// Make sure the tableview is not currently in edit mode
+	[self setEditing:FALSE];
+	
+	// Present modal view controller, were you can enter the group name
+	OneRowOneImageEditController *controller = [[OneRowOneImageEditController alloc]initWithNibName:@"OneRowOneImageEditController" bundle:nil];
+	controller.entityName = @"FactType";
+	controller.propertyName = @"name";
+	controller.imagePropertyName = @"image_name";
+	controller.notificationName = ShouldReloadFriendController;
+	controller.title = @"New Facty Type";
+	[self.navigationController presentModalViewController:controller animated:TRUE];
+	[controller release];
 }
 
 - (void)loadFactTypes
@@ -98,19 +128,19 @@
 	[super viewDidUnload];
 }
 
-#pragma mark Add Group
+#pragma mark Add Fact
 
-- (IBAction)addGroup:(id)sender
+- (IBAction)addNewFact:(id)sender
 {
 	// Make sure the tableview is not currently in edit mode
 	[self setEditing:FALSE];
 	
 	// Present modal view controller, were you can enter the group name
 	OneRowEditController *controller = [[OneRowEditController alloc]initWithNibName:@"OneRowEditController" bundle:nil];
-	controller.entityName = @"Group";
-	controller.propertyName = @"name";
-	controller.notificationName = ShouldReloadGroupsController;
-	controller.navigationItem.title = @"New Group";
+	controller.entityName = @"Fact";
+	controller.propertyName = @"fact";
+	controller.notificationName = ShouldReloadFriendController;
+	controller.title = @"New Fact";
 	[self.navigationController presentModalViewController:controller animated:TRUE];
 	[controller release];
 }

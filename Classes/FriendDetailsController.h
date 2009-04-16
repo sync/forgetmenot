@@ -24,5 +24,8 @@
 @property (nonatomic, retain) Person *person;
 
 - (void)loadFactTypes;
+- (IBAction)addNewFactType:(id)sender;
+
+- (IBAction)addNewFact:(id)sender;
 
 @end
