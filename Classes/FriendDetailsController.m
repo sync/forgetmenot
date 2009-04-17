@@ -275,10 +275,25 @@
 		[self.scrollView setContentOffset:CGPointMake(itemIndex * itemWidth, 0.0) animated:TRUE];
 	}
 	
-	NSInteger subviewsCount = [[self.scrollView subviews]count];
-	if (itemIndex >= 0 && itemIndex < subviewsCount) {
+	if (!self.factTypes) {
+		[self loadFactTypes];
+	}
+	
+	NSInteger factTypesCount = [self.factTypes count];
+	if (itemIndex >= 0 && itemIndex < factTypesCount) {
 		self.selectItemIndex = itemIndex;
 	}
+	
+	if (itemIndex < 0 && itemIndex < factTypesCount) {
+		self.selectItemIndex = 0;
+	}
+	
+	if (itemIndex > factTypesCount - 1) {
+		self.selectItemIndex = factTypesCount - 1;
+	}
+	
+	
+	DLog(@"itemIndex: %d", itemIndex);
 }
 
 
