@@ -25,6 +25,7 @@
 @synthesize personView=_personView;
 @synthesize scrollView=_scrollView;
 @synthesize person=_person;
+@synthesize selectItemIndex=_selectItemIndex;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -189,6 +190,29 @@
 	[controller release];
 }
 
+#pragma mark Scroll view delegate
+
+//- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+//{
+//	CGFloat itemWidth = ICON_WIDTH + ICON_SPACE;
+//	CGFloat itemLocation = (self.scrollView.contentOffset.x / itemWidth);
+//	NSInteger item =  round(itemLocation);
+//	
+//	DLog(@"itemLocation begin: %d", item);
+//}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+	CGFloat itemWidth = ICON_WIDTH + ICON_SPACE;
+	CGFloat itemLocation = (self.scrollView.contentOffset.x / itemWidth);
+	NSInteger itemIndex =  round(itemLocation);
+	
+	if (!decelerate) {	
+		DLog(@"itemLocation willDecelerate: %d", itemIndex);
+		[self.scrollView setContentOffset:CGPointMake(itemIndex * itemWidth, 0.0) animated:TRUE];
+		self.selectItemIndex = itemIndex;
+	}
+}
 
 
 #pragma mark Table view methods

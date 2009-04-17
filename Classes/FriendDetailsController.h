@@ -17,11 +17,13 @@
 	UIScrollView *_scrollView;
 	
 	Person *_person;
+	NSInteger _selectItemIndex;
 }
 
 @property (nonatomic, retain) IBOutlet TitleImageCellView *personView;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) Person *person;
+@property (nonatomic) NSInteger selectItemIndex;
 
 - (void)loadFactTypes;
 - (IBAction)addNewFactType:(id)sender;
