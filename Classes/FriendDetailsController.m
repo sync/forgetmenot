@@ -9,9 +9,16 @@
 #import "FriendDetailsController.h"
 #import "Group.h"
 #import "Person.h"
+#import "FactType.h"
 #import "TitleCellBlack.h"
 #import "OneRowOneImageEditController.h"
 #import "TitleImageCellView.h"
+
+#define TOP_BOTTOM_BORDER 2.0
+#define LEFT_RIGHT_BORDER 10.0
+#define ICON_WIDTH 50.0
+#define ICON_HEIGHT 30.0
+#define ICON_SPACE 12.5
 
 @implementation FriendDetailsController
 
@@ -27,6 +34,8 @@
 	
 	self.personView.title = self.person.first_name;
 	self.personView.subtitle =  @"Kelvin Grove, QLD, Australia";
+	
+	[self loadFactTypes];
 	
 	// Reload tableview when this notifiation fire
 	[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableview:) name:ShouldReloadFriendController object:nil];
@@ -105,13 +114,48 @@
 
 - (void)loadFactTypes
 {
+	for (UIImageView *icon in [self.scrollView subviews]) {
+		[icon removeFromSuperview];
+	}
 	
+	// Create the fetch request for the entity.
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	// Edit the entity name as appropriate.
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"FactType" inManagedObjectContext:self.appDelegate.managedObjectContext];
+	[fetchRequest setEntity:entity];
+	
+	// Edit the sort key as appropriate.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"priority" ascending:YES];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	
+	NSArray *factTypes = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:NULL];
+	// Foreach fact types add it to the scrollview
+	NSInteger count = [factTypes count];
+	if (count > 0) {
+		// Increase the scrollview width
+		CGFloat widthToIncrease = (count - 1) * ICON_WIDTH + (count - 1) * ICON_SPACE;
+		self.scrollView.contentSize = CGSizeMake(320.0 + widthToIncrease, self.scrollView.frame.size.height);
+		NSInteger index = 0;
+		for (FactType *fact in factTypes) {
+			UIImageView *icon = [[UIImageView alloc]initWithFrame:CGRectMake(LEFT_RIGHT_BORDER + (2 + index) * ICON_WIDTH + (2 + index) * ICON_SPACE, TOP_BOTTOM_BORDER, ICON_WIDTH, ICON_HEIGHT)];
+			icon.image = [UIImage imageNamed:fact.image_name];
+			[self.scrollView addSubview:icon];
+			index++;
+		}
+	}
+	
+	[fetchRequest release];
+	[sortDescriptor release];
+	[sortDescriptors release];
 }
 
 
 
 - (void)reloadTableview:(id)sender
 {
+	[self loadFactTypes];
 	[self.tableView reloadData];
 }
 

@@ -8,6 +8,7 @@
 
 #import "OneRowOneImageEditController.h"
 #import "TouchImageView.h"
+#import "OneImagePickerItem.h"
 
 @implementation OneRowOneImageEditController
 
@@ -37,10 +38,48 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	self.pickerView = [NSMutableArray arrayWithCapacity:0];
+	self.pickerViews = [NSMutableArray arrayWithCapacity:0];
+	
+	OneImagePickerItem *chatItem = [[OneImagePickerItem alloc] initWithFrame:CGRectZero];
+	chatItem.title = @"Chat";
+	chatItem.image = [UIImage imageNamed:@"chat_icon_black.png"];
+	chatItem.imageNameToSet = @"chat_icon.png";
+	[self.pickerViews addObject:chatItem];
+	[chatItem release];
+	
+	OneImagePickerItem *findItem = [[OneImagePickerItem alloc] initWithFrame:CGRectZero];
+	findItem.title = @"Find";
+	findItem.image = [UIImage imageNamed:@"find_icon_black.png"];
+	findItem.imageNameToSet = @"find_icon.png";
+	[self.pickerViews addObject:findItem];
+	[findItem release];
+	
+	OneImagePickerItem *linkItem = [[OneImagePickerItem alloc] initWithFrame:CGRectZero];
+	linkItem.title = @"Link";
+	linkItem.image = [UIImage imageNamed:@"link_icon_black.png"];
+	linkItem.imageNameToSet = @"link_icon.png";
+	[self.pickerViews addObject:linkItem];
+	[linkItem release];
+	
+	OneImagePickerItem *pinItem = [[OneImagePickerItem alloc] initWithFrame:CGRectZero];
+	pinItem.title = @"Pin";
+	pinItem.image = [UIImage imageNamed:@"pin_icon_black.png"];
+	pinItem.imageNameToSet = @"pin_icon.png";
+	[self.pickerViews addObject:pinItem];
+	[pinItem release];
+	
+	OneImagePickerItem *treeItem = [[OneImagePickerItem alloc] initWithFrame:CGRectZero];
+	treeItem.title = @"Tree";
+	treeItem.image = [UIImage imageNamed:@"tree_icon_black.png"];
+	treeItem.imageNameToSet = @"tree_icon.png";
+	[self.pickerViews addObject:treeItem];
+	[treeItem release];
 	
 	self.imageView.selector = @selector(showPicker:);
 	self.imageView.target = self;
+	
+	OneImagePickerItem *firstItem = [self.pickerViews objectAtIndex:0];
+	self.imageView.image = [UIImage imageNamed:firstItem.imageNameToSet];
 }
 
 - (IBAction)doneEditing:(id)sender
@@ -55,6 +94,9 @@
 		self.object = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
 	}
 	[self.object setValue:self.textField.text forKey:self.propertyName];
+	
+	OneImagePickerItem *selectedItem = [self.pickerViews objectAtIndex:[self.pickerView selectedRowInComponent:0]];
+	[self.object setValue:selectedItem.imageNameToSet forKey:self.imagePropertyName];
 	
 	// Save the context.
     NSError *error;
@@ -121,7 +163,7 @@
 	NSString *title;
 	if (component == 0)
 	{
-		title = @"color";
+		title = @"icon";
 	}
 	return title;
 }
@@ -129,15 +171,27 @@
 // tell the picker the width of each row for a given component (in our case we have one component)
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
 {
-	UIView *viewToUse = [self.pickerViews objectAtIndex:0];
+	OneImagePickerItem *viewToUse = [self.pickerViews objectAtIndex:0];
 	return viewToUse.bounds.size.width;
 }
 
 // tell the picker the height of each row for a given component (in our case we have one component)
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
 {
-	UIView *viewToUse = [self.pickerViews objectAtIndex:0];
+	OneImagePickerItem *viewToUse = [self.pickerViews objectAtIndex:0];
 	return viewToUse.bounds.size.height;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+	OneImagePickerItem *viewToUse = nil;
+	if (component == 0)
+	{
+		viewToUse = [self.pickerViews objectAtIndex:row];
+		NSString *imageName = viewToUse.imageNameToSet;
+		self.imageView.image = [UIImage imageNamed:imageName];
+		
+	}
 }
 
 /*
