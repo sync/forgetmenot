@@ -182,15 +182,6 @@
 	[sortDescriptors release];
 	
 	return fetchedResultsController;
-} 
-
-//help executing a method when a notification fire
-- (void)observeValueForKeyPath:(NSString *)keyPath
-					  ofObject:(id)object 
-						change:(NSDictionary *)change 
-					   context:(void *)context
-{
-	[self performSelector: (SEL)context withObject: change];
 }
 
 

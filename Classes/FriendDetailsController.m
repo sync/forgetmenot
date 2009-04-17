@@ -7,12 +7,13 @@
 //
 
 #import "FriendDetailsController.h"
-#import "Group.h"
+#import "Fact.h"
 #import "Person.h"
 #import "FactType.h"
 #import "TitleCellBlack.h"
 #import "OneRowOneImageEditController.h"
 #import "TitleImageCellView.h"
+#import "FactOneRowEditController.h"
 
 #define TOP_BOTTOM_BORDER 2.0
 #define LEFT_RIGHT_BORDER 10.0
@@ -26,9 +27,10 @@
 @synthesize scrollView=_scrollView;
 @synthesize person=_person;
 @synthesize selectItemIndex=_selectItemIndex;
+@synthesize factTypes=_factTypes;
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+	[super viewDidLoad];
 	
 	// Table View row height
 	self.tableView.rowHeight = BLACK_ROW_HEIGHT;
@@ -38,8 +40,61 @@
 	
 	[self loadFactTypes];
 	
+	self.selectItemIndex = 0;
+	
 	// Reload tableview when this notifiation fire
 	[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableview:) name:ShouldReloadFriendController object:nil];
+	
+	// Reload Tableview when index change
+	[self addObserver:self 
+		   forKeyPath:@"selectItemIndex"
+			  options:NSKeyValueObservingOptionNew
+			  context:@selector(selectedItemIndexChanged:)];
+}
+
+- (void)selectedItemIndexChanged:(id)sender
+{
+	//[[self fetchedResultsController]performFetch:nil];
+	
+	if (!self.factTypes) {
+		[self loadFactTypes];
+	}
+    
+    /*
+	 Set up the fetched results controller.
+	 */
+	// Create the fetch request for the entity.
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	// Edit the entity name as appropriate.
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Fact" inManagedObjectContext:self.appDelegate.managedObjectContext];
+	[fetchRequest setEntity:entity];
+	
+	FactType *factType = [self.factTypes objectAtIndex:self.selectItemIndex];
+	self.navigationItem.title = factType.name;
+	
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(person = %@) AND (fact_type = %@)", self.person, factType]; 
+	[fetchRequest setPredicate:predicate]; 
+	
+	// Edit the sort key as appropriate.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"fact" ascending:YES];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	
+	// Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+	NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.appDelegate.managedObjectContext sectionNameKeyPath:nil cacheName:@"Root"];
+    aFetchedResultsController.delegate = self;
+	self.fetchedResultsController = aFetchedResultsController;
+	
+	[aFetchedResultsController release];
+	[fetchRequest release];
+	[sortDescriptor release];
+	[sortDescriptors release];
+	
+	[self.fetchedResultsController performFetch:nil];
+	
+	[self.tableView reloadData];
 }
 
 - (void)setupNavigationBar
@@ -52,7 +107,8 @@
 	self.navigationItem.rightBarButtonItem = item;
 	[item release];
 	
-	self.navigationItem.title = @"Details";
+	FactType *factType = [self.factTypes objectAtIndex:self.selectItemIndex];
+	self.navigationItem.title = factType.name;
 }
 
 - (void)setupToolbar
@@ -131,15 +187,15 @@
 	
 	[fetchRequest setSortDescriptors:sortDescriptors];
 	
-	NSArray *factTypes = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:NULL];
+	self.factTypes = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:NULL];
 	// Foreach fact types add it to the scrollview
-	NSInteger count = [factTypes count];
+	NSInteger count = [self.factTypes count];
 	if (count > 0) {
 		// Increase the scrollview width
 		CGFloat widthToIncrease = (count - 1) * ICON_WIDTH + (count - 1) * ICON_SPACE;
 		self.scrollView.contentSize = CGSizeMake(320.0 + widthToIncrease, self.scrollView.frame.size.height);
 		NSInteger index = 0;
-		for (FactType *fact in factTypes) {
+		for (FactType *fact in self.factTypes) {
 			UIImageView *icon = [[UIImageView alloc]initWithFrame:CGRectMake(LEFT_RIGHT_BORDER + (2 + index) * ICON_WIDTH + (2 + index) * ICON_SPACE, TOP_BOTTOM_BORDER, ICON_WIDTH, ICON_HEIGHT)];
 			icon.image = [UIImage imageNamed:fact.image_name];
 			[self.scrollView addSubview:icon];
@@ -180,10 +236,17 @@
 	// Make sure the tableview is not currently in edit mode
 	[self setEditing:FALSE];
 	
+	if (!self.factTypes) {
+		[self loadFactTypes];
+	}
+	FactType *factType = [self.factTypes objectAtIndex:self.selectItemIndex];
+	
 	// Present modal view controller, were you can enter the group name
-	OneRowEditController *controller = [[OneRowEditController alloc]initWithNibName:@"OneRowEditController" bundle:nil];
+	FactOneRowEditController *controller = [[FactOneRowEditController alloc]initWithNibName:@"OneRowEditController" bundle:nil];
 	controller.entityName = @"Fact";
 	controller.propertyName = @"fact";
+	controller.person = self.person;
+	controller.factType = factType;
 	controller.notificationName = ShouldReloadFriendController;
 	controller.title = @"New Fact";
 	[self.navigationController presentModalViewController:controller animated:TRUE];
@@ -203,13 +266,17 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
+	
 	CGFloat itemWidth = ICON_WIDTH + ICON_SPACE;
 	CGFloat itemLocation = (self.scrollView.contentOffset.x / itemWidth);
 	NSInteger itemIndex =  round(itemLocation);
 	
-	if (!decelerate) {	
-		DLog(@"itemLocation willDecelerate: %d", itemIndex);
+	if (!decelerate) {
 		[self.scrollView setContentOffset:CGPointMake(itemIndex * itemWidth, 0.0) animated:TRUE];
+	}
+	
+	NSInteger subviewsCount = [[self.scrollView subviews]count];
+	if (itemIndex >= 0 && itemIndex < subviewsCount) {
 		self.selectItemIndex = itemIndex;
 	}
 }
@@ -228,9 +295,9 @@
     }
     
     // Set up the cell...
-	Group *group = (Group *)[fetchedResultsController objectAtIndexPath:indexPath];
+	Fact *fact = (Fact *)[fetchedResultsController objectAtIndexPath:indexPath];
 	
-	cell.cellView.title = group.name;
+	cell.cellView.title = fact.fact;
 	
     return cell;
 }
@@ -272,6 +339,10 @@
 	if (fetchedResultsController != nil) {
         return fetchedResultsController;
     }
+	
+	if (!self.factTypes) {
+		[self loadFactTypes];
+	}
     
     /*
 	 Set up the fetched results controller.
@@ -282,7 +353,9 @@
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Fact" inManagedObjectContext:self.appDelegate.managedObjectContext];
 	[fetchRequest setEntity:entity];
 	
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"person = %@", self.person]; 
+	FactType *factType = [self.factTypes objectAtIndex:self.selectItemIndex];
+	
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(person = %@) AND (fact_type = %@)", self.person, factType]; 
 	[fetchRequest setPredicate:predicate]; 
 	
 	// Edit the sort key as appropriate.
@@ -307,8 +380,10 @@
 
 
 - (void)dealloc {
+	[self removeObserver:self forKeyPath:@"selectItemIndex"];
 	[[NSNotificationCenter defaultCenter]removeObserver:self];
 	
+	[_factTypes release];
 	[_personView release];
 	[_person release];
 	[_scrollView release];
