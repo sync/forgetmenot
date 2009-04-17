@@ -229,6 +229,8 @@
 #pragma mark Memory management
 
 - (void)dealloc {
+	[[NSNotificationCenter defaultCenter]removeObserver:self];
+	
 	[navigationController release];
 	[window release];
 	[super dealloc];

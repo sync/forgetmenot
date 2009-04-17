@@ -19,10 +19,13 @@
 	NSString *_notificationName;
 	
 	NSManagedObject *_object;
+	
+	UIBarButtonItem *_doneButton;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationBar *navigationBar;
 @property (nonatomic, retain) IBOutlet UITextField *textField;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
 
 @property (nonatomic, copy) NSString *entityName;
 @property (nonatomic, copy) NSString *propertyName;

@@ -16,6 +16,7 @@
 @synthesize propertyName=_propertyName;
 @synthesize notificationName=_notificationName;
 @synthesize object=_object;
+@synthesize doneButton=_doneButton;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -44,8 +45,20 @@
 		self.textField.text = [self.object valueForKey:self.propertyName];
 	}
 	
+	[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
 	
-	 [self.textField becomeFirstResponder];
+	self.doneButton.enabled = FALSE;
+	
+	[self.textField becomeFirstResponder];
+}
+
+- (void)textDidChange:(id)sender
+{
+	if ([self.textField.text length] > 0) {
+		self.doneButton.enabled = TRUE;
+	} else {
+		self.doneButton.enabled = FALSE;
+	}
 }
 
 #pragma mark Button bar actions
@@ -109,6 +122,9 @@
 
 
 - (void)dealloc {
+	[[NSNotificationCenter defaultCenter]removeObserver:self];
+	
+	[_doneButton release];
 	[_object release];
 	[_notificationName release];
 	[_propertyName release];

@@ -162,6 +162,8 @@
 
 
 - (void)dealloc {
+	[[NSNotificationCenter defaultCenter]removeObserver:self];
+	
 	[_pickerViews release];
 	[_imageView release];
 	[_pickerView release];

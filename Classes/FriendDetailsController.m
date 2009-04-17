@@ -239,6 +239,8 @@
 
 
 - (void)dealloc {
+	[[NSNotificationCenter defaultCenter]removeObserver:self];
+	
 	[_personView release];
 	[_person release];
 	[_scrollView release];
