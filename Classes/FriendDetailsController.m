@@ -281,29 +281,56 @@
 	CGFloat itemLocation = (self.scrollView.contentOffset.x / itemWidth);
 	NSInteger itemIndex =  round(itemLocation);
 	
+	if (!self.factTypes) {
+		[self loadFactTypes];
+	}
+	
+	NSInteger factTypesCount = [self.factTypes count];
+	
+	if (itemIndex < 0 && itemIndex < factTypesCount) {
+		itemIndex = 0;
+	}
+	
+	if (itemIndex > factTypesCount - 1) {
+		itemIndex = factTypesCount - 1;
+	}
+	
 	if (!decelerate) {
 		[self.scrollView setContentOffset:CGPointMake(itemIndex * itemWidth, 0.0) animated:TRUE];
 	}
+	
+	if (self.selectItemIndex != itemIndex) {
+		self.selectItemIndex = itemIndex;
+	}
+	
+	DLog(@"itemIndex: %d", itemIndex);
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+	CGFloat itemWidth = ICON_WIDTH + ICON_SPACE;
+	CGFloat itemLocation = (self.scrollView.contentOffset.x / itemWidth);
+	NSInteger itemIndex =  round(itemLocation);
 	
 	if (!self.factTypes) {
 		[self loadFactTypes];
 	}
 	
 	NSInteger factTypesCount = [self.factTypes count];
-	if (itemIndex >= 0 && itemIndex < factTypesCount) {
-		self.selectItemIndex = itemIndex;
-	}
 	
 	if (itemIndex < 0 && itemIndex < factTypesCount) {
-		self.selectItemIndex = 0;
+		itemIndex = 0;
 	}
 	
 	if (itemIndex > factTypesCount - 1) {
-		self.selectItemIndex = factTypesCount - 1;
+		itemIndex = factTypesCount - 1;
 	}
 	
+	if (self.selectItemIndex != itemIndex) {
+		self.selectItemIndex = itemIndex;
+	}
 	
-	DLog(@"itemIndex: %d", itemIndex);
+	DLog(@"itemIndex did end: %d", itemIndex);
 }
 
 
