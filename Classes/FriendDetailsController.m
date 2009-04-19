@@ -325,8 +325,6 @@
 	if (self.selectItemIndex != itemIndex) {
 		self.selectItemIndex = itemIndex;
 	}
-	
-	DLog(@"itemIndex: %d", itemIndex);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -352,8 +350,6 @@
 	if (self.selectItemIndex != itemIndex) {
 		self.selectItemIndex = itemIndex;
 	}
-	
-	DLog(@"itemIndex did end: %d", itemIndex);
 }
 
 
