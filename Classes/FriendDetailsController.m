@@ -45,8 +45,8 @@
 	// Table View row height
 	self.tableView.rowHeight = BLACK_ROW_HEIGHT;
 	
-	self.personView.title = self.person.first_name;
-	self.personView.subtitle =  @"Kelvin Grove, QLD, Australia";
+	self.personView.title = self.person.fullName;
+	self.personView.subtitle = self.person.partialAddress;
 	
 	[self loadFactTypes];
 	
