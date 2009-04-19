@@ -14,6 +14,7 @@
 #import "OneRowOneImageEditController.h"
 #import "TitleImageCellView.h"
 #import "FactOneRowEditController.h"
+#import "OneRowEditController.h"
 
 #define TOP_BOTTOM_BORDER 2.0
 #define LEFT_RIGHT_BORDER 10.0
@@ -379,7 +380,26 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
+	NSManagedObject *fact = [fetchedResultsController objectAtIndexPath:indexPath];
 	
+	if (!self.factTypes) {
+		[self loadFactTypes];
+	}
+	FactType *factType = [self.factTypes objectAtIndex:self.selectItemIndex];
+	
+	// Present modal view controller
+	FactOneRowEditController *controller = [[FactOneRowEditController alloc]initWithNibName:@"OneRowEditController" bundle:nil];
+	controller.entityName = @"Fact";
+	controller.propertyName = @"fact";
+	controller.person = self.person;
+	controller.object = fact;
+	controller.factType = factType;
+	controller.notificationName = ShouldReloadFriendController;
+	controller.title = @"New Fact";
+	[self.navigationController presentModalViewController:controller animated:TRUE];
+	[controller release];	
+	
+	[self.tableView deselectRowAtIndexPath:indexPath animated:TRUE];
 }
 
 
