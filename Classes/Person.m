@@ -13,7 +13,8 @@
 
 @implementation Person 
 
-@dynamic address;
+@dynamic street;
+@dynamic state;
 @dynamic last_name;
 @dynamic modified_at;
 @dynamic middle_names;
@@ -21,6 +22,7 @@
 @dynamic country;
 @dynamic latitude;
 @dynamic image_url;
+@dynamic local_image_url;
 @dynamic recordID;
 @dynamic post_code;
 @dynamic birthday;
@@ -31,6 +33,10 @@
 @dynamic id;
 @dynamic fact;
 @dynamic group;
+
+@synthesize fullName;
+@synthesize fullAddress;
+@synthesize partialAddress;
 
 #pragma mark -
 #pragma mark Retrieve a person from it's id
@@ -90,6 +96,99 @@
 	}
 	
 	return objId;
+}
+
+#pragma mark -
+#pragma mark Full Name
+
+- (NSString *)fullName
+{
+	if (self.first_name && self.last_name) {
+		return [NSString stringWithFormat:@"%@ %@", self.first_name, self.last_name];
+	} else if (self.first_name) {
+		return	[NSString stringWithFormat:@"%@", self.first_name];
+	} else if (self.last_name) {
+		return	[NSString stringWithFormat:@"%@", self.last_name];
+	}
+	return @"n/a";
+}
+
+#pragma mark -
+#pragma mark Address
+
+- (NSString *)fullAddress
+{
+	if (!self.street && !self.state && !self.city && !self.post_code && !self.country) {
+		return @"n/a";
+	}
+	
+	NSString *street = self.street;
+	NSString *city = self.city;
+	NSString *state = self.state;
+	NSString *post_code = self.post_code;
+	NSString *country = self.country;
+	
+	if (!street) {
+		street = @"";
+	} else {
+		street = [NSString stringWithFormat:@"%@, ", street];
+	}
+	
+	if (!city) {
+		city = @"";
+	} else {
+		city = [NSString stringWithFormat:@"%@, ", city];
+	}
+	
+	if (!state) {
+		state = @"";
+	} else {
+		state = [NSString stringWithFormat:@"%@, ", state];
+	}
+	
+	if (!post_code) {
+		post_code = @"";
+	} else if (!country) {
+		post_code = [NSString stringWithFormat:@"%@", post_code];
+	} else {
+		post_code = [NSString stringWithFormat:@"%@, ", post_code];
+	}
+	
+	if (!country) {
+		country = @"";
+	}
+	return [NSString stringWithFormat:@"%@%@%@%@%@", street, city, state, post_code, country];
+}
+
+- (NSString *)partialAddress
+{
+	if (!self.state && !self.city && !self.country) {
+		return @"n/a";
+	}
+	
+	NSString *city = self.city;
+	NSString *state = self.state;
+	NSString *country = self.country;
+	
+	if (!city) {
+		city = @"";
+	} else {
+		city = [NSString stringWithFormat:@"%@, ", city];
+	}
+	
+	if (!state) {
+		state = @"";
+	} else if (!country) {
+		state = [NSString stringWithFormat:@"%@", state];
+	} else {
+		state = [NSString stringWithFormat:@"%@, ", state];
+	}
+	
+	if (!country) {
+		country = @"";
+	}
+	
+	return [NSString stringWithFormat:@"%@%@%@", state, city, country];
 }
 
 @end

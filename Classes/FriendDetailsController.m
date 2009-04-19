@@ -117,8 +117,14 @@
 	self.navigationItem.rightBarButtonItem = item;
 	[item release];
 	
-	FactType *factType = [self.factTypes objectAtIndex:self.selectItemIndex];
-	self.navigationItem.title = factType.name;
+	if ([self.factTypes count] > 0) {
+		FactType *factType = [self.factTypes objectAtIndex:self.selectItemIndex];
+		self.navigationItem.title = factType.name;
+	} else {
+		self.navigationItem.title = @"Details";
+	}
+	
+	
 }
 
 - (void)setupToolbar
@@ -405,9 +411,11 @@
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Fact" inManagedObjectContext:self.appDelegate.managedObjectContext];
 	[fetchRequest setEntity:entity];
 	
-	FactType *factType = [self.factTypes objectAtIndex:self.selectItemIndex];
-	
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(person = %@) AND (fact_type = %@)", self.person, factType]; 
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(person = %@)", self.person];
+	if ([self.factTypes count] > 0) {
+		FactType *factType = [self.factTypes objectAtIndex:self.selectItemIndex];
+		predicate = [NSPredicate predicateWithFormat:@"(person = %@) AND (fact_type = %@)", self.person, factType];
+	}
 	[fetchRequest setPredicate:predicate]; 
 	
 	// Edit the sort key as appropriate.

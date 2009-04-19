@@ -94,8 +94,8 @@
 	// Set up the cell...
 	Person *person = (Person *)[fetchedResultsController objectAtIndexPath:indexPath];
 	
-	cell.cellView.title = person.first_name;
-	cell.cellView.subtitle = @"Kelvin Grove, QLD, Australia";
+	cell.cellView.title = person.fullName;
+	cell.cellView.subtitle = person.partialAddress;
 	
 	
     return cell;
@@ -176,8 +176,35 @@
 { 
 	NSInteger recordID = ABRecordGetRecordID(personRef);
 	
+	// Single Values
 	NSString *firstName = (NSString *)ABRecordCopyValue(personRef, kABPersonFirstNameProperty); 
 	NSString *lastName = (NSString *)ABRecordCopyValue(personRef, kABPersonLastNameProperty);
+	NSString *middleName = (NSString *)ABRecordCopyValue(personRef, kABPersonMiddleNameProperty);
+	NSDate *birthday = (NSDate *)ABRecordCopyValue(personRef, kABPersonBirthdayProperty);
+	
+	// Multiple Values
+	ABMultiValueRef addressesRef = ABRecordCopyValue(personRef, kABPersonAddressProperty);
+	NSArray *addresses = (NSArray *)ABMultiValueCopyArrayOfAllValues(addressesRef);
+	// Set up an NSDictionary to hold the contents of the array.
+	NSDictionary *address = nil;
+	if ([addresses count] > 0) {
+		address = [addresses objectAtIndex:0];
+		DLog(@"address: %@", address);
+	}
+	
+	// Image
+	BOOL hasImageData = ABPersonHasImageData(personRef);
+	NSString *imageURL = nil;
+	if (hasImageData) {
+		NSData *imageData = (NSData *)ABPersonCopyImageData(personRef);
+		// save the image somewhere
+		//Build the path we want the file to be at 
+		imageURL = [self.appDelegate applicationDocumentsDirectory];
+		NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString]; 
+		imageURL = [imageURL stringByAppendingPathComponent:guid]; 
+		[imageData writeToFile:imageURL atomically:FALSE];
+		[imageData release];
+	}
 	
 	// Get Mangaged object context
 	NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
@@ -193,6 +220,14 @@
 	// If appropriate, configure the new managed object.
 	person.first_name = firstName;
 	person.last_name = lastName;
+	person.middle_names = middleName;
+	person.birthday = birthday;
+	person.local_image_url = imageURL;
+	person.street = [address valueForKey:(NSString *)kABPersonAddressStreetKey];
+	person.city = [address valueForKey:(NSString *)kABPersonAddressCityKey];
+	person.state = [address valueForKey:(NSString *)kABPersonAddressStateKey];
+	person.post_code = [address valueForKey:(NSString *)kABPersonAddressZIPKey];
+	person.country = [address valueForKey:(NSString *)kABPersonAddressCountryKey];
 	
 	person.group = self.group;
 	
@@ -206,6 +241,9 @@
 	
 	[firstName release];
 	[lastName release];
+	[middleName release];
+	[birthday release];
+	[addresses release];
 	
 	[self dismissModalViewControllerAnimated:YES]; 
 	
