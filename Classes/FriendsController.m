@@ -20,6 +20,14 @@
     [super viewDidLoad];
 	
 	self.tableView.rowHeight = ROW_HEIGHT;
+	
+	// Reload tableview when this notifiation fire
+	[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableview:) name:ShouldReloadFriendsController object:nil];
+}
+
+- (void)reloadTableview:(id)sender
+{
+	[self.tableView reloadData];
 }
 
 - (void)setupNavigationBar
@@ -259,6 +267,7 @@
 
 
 - (void)dealloc {
+	[[NSNotificationCenter defaultCenter]removeObserver:self];
 	[_group release];
 	
     [super dealloc];

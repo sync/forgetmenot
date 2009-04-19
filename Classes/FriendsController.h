@@ -20,5 +20,6 @@
 @property (nonatomic, retain) Group *group;
 
 - (IBAction)addPerson:(id)sender;
+- (void)reloadTableview:(id)sender;
 
 @end

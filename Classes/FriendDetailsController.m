@@ -113,7 +113,7 @@
 	// Let user add row
 	UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
 																		 target:self 
-																		 action:@selector(addNewFact:)];
+																		 action:@selector(addNewFactType:)];
 	self.navigationItem.rightBarButtonItem = item;
 	[item release];
 	
@@ -142,10 +142,10 @@
 																			  target:nil
 																			  action:nil];
 	
-	UIBarButtonItem *newFactType = [[UIBarButtonItem alloc]initWithTitle:@"New Fact Type"
+	UIBarButtonItem *newFactType = [[UIBarButtonItem alloc]initWithTitle:@"Add New Fact"
 																   style:UIBarButtonItemStyleBordered
 																  target:self 
-																  action:@selector(addNewFactType:)];
+																  action:@selector(addNewFact:)];
 	
 	
 	// flex item used to separate the left groups items and right grouped items
@@ -167,6 +167,22 @@
 	[newFactType release];
 	[flexItemRight release];
 	[mapItem release];
+}
+
+- (IBAction)removePerson:(id)sender
+{
+	[self.navigationController popViewControllerAnimated:TRUE];
+	
+	NSManagedObjectContext *context = self.appDelegate.managedObjectContext;
+	[context deleteObject:self.person];
+	
+	// Save the context.
+	NSError *error;
+	if (![context save:&error]) {
+		// Handle the error...
+	}
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:ShouldReloadFriendsController object:nil];
 }
 
 - (IBAction)addNewFactType:(id)sender

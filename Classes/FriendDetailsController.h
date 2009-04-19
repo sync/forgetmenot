@@ -32,6 +32,7 @@
 - (IBAction)addNewFactType:(id)sender;
 
 - (IBAction)addNewFact:(id)sender;
+- (IBAction)removePerson:(id)sender;
 
 - (void)selectedItemIndexChanged:(id)sender;
 
