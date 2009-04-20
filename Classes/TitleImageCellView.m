@@ -46,13 +46,13 @@
 #pragma mark -
 #pragma mark Set The location If Different And Redraw The String:
 
-//- (void)setSubtitle:(NSString *)subtitle {
-//	if (_subtitle != subtitle) {
-//		[subtitle release];
-//		_subtitle = [subtitle retain];
-//		[self setNeedsDisplay];
-//	}
-//}
+- (void)setSubtitle:(NSString *)subtitle {
+	if (_subtitle != subtitle) {
+		[_subtitle release];
+		_subtitle = [subtitle retain];
+		[self setNeedsDisplay];
+	}
+}
 
 #pragma mark -
 #pragma mark Drawing

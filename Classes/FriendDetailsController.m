@@ -391,7 +391,7 @@
 	controller.object = fact;
 	controller.factType = factType;
 	controller.notificationName = ShouldReloadFriendController;
-	controller.title = @"New Fact";
+	controller.title = @"Edit Fact";
 	[self.navigationController presentModalViewController:controller animated:TRUE];
 	[controller release];	
 	

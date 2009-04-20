@@ -43,11 +43,13 @@
 	// Check if object was given
 	if (self.object) {
 		self.textField.text = [self.object valueForKey:self.propertyName];
+	} else {
+		self.doneButton.enabled = FALSE;
 	}
 	
 	[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
 	
-	self.doneButton.enabled = FALSE;
+	
 	
 	[self.textField becomeFirstResponder];
 }
