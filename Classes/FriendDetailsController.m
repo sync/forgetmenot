@@ -358,6 +358,28 @@
 	}
 }
 
+- (void)scrollViewDoubleTappedAtIndex:(NSNumber *)index
+{
+	// Make sure the tableview is not currently in edit mode
+	[self setEditing:FALSE];
+	
+	FactType *factType = nil;
+	if ([self.factTypes count] > 0) {
+		factType = [self.factTypes objectAtIndex:[index integerValue]];
+	}
+	
+	// Present modal view controller, were you can enter the group name
+	OneRowOneImageEditController *controller = [[OneRowOneImageEditController alloc]initWithNibName:@"OneRowOneImageEditController" bundle:nil];
+	controller.entityName = @"FactType";
+	controller.propertyName = @"name";
+	controller.imagePropertyName = @"image_name";
+	controller.object = factType;
+	controller.notificationName = ShouldReloadFriendController;
+	controller.title = @"Edit Facty Type";
+	[self.navigationController presentModalViewController:controller animated:TRUE];
+	[controller release];
+}
+
 
 #pragma mark Table view methods
 

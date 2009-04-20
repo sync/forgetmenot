@@ -33,7 +33,13 @@
 		
 		if (itemIndex >= 0 && itemIndex < subviewsCount) {
 			[self setContentOffset:CGPointMake(itemIndex * itemWidth, 0.0) animated:TRUE];
+			if (touch.tapCount != 2) {
+				if ([self.delegate respondsToSelector:@selector(scrollViewDoubleTappedAtIndex:)]) {
+					[self.delegate performSelector:@selector(scrollViewDoubleTappedAtIndex:) withObject:[NSNumber numberWithInt:itemIndex]];
+				}
+			}
 		}
+		
 	}		
 	[super touchesEnded: touches withEvent: event];
 }

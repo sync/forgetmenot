@@ -78,8 +78,23 @@
 	self.imageView.selector = @selector(showPicker:);
 	self.imageView.target = self;
 	
-	OneImagePickerItem *firstItem = [self.pickerViews objectAtIndex:0];
-	self.imageView.image = [UIImage imageNamed:firstItem.imageNameToSet];
+	// Check if object was given
+	if (self.object) {
+		self.imageView.image = [UIImage imageNamed:[self.object valueForKey:self.imagePropertyName]];
+		// Get the index of the image
+		NSInteger index = 0;
+		for (OneImagePickerItem *item in self.pickerViews) {
+			if ([item.imageNameToSet isEqualToString:[self.object valueForKey:self.imagePropertyName]]) {
+				break;
+			}
+			index++;
+		}
+		// Set the picker selected index
+		[self.pickerView selectRow:index inComponent:0 animated:FALSE];
+	} else {
+		OneImagePickerItem *firstItem = [self.pickerViews objectAtIndex:0];
+		self.imageView.image = [UIImage imageNamed:firstItem.imageNameToSet];
+	}
 }
 
 - (IBAction)doneEditing:(id)sender
