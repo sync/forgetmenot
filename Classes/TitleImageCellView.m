@@ -69,12 +69,9 @@
 	// Image
 	if (self.imagePreview) {
 		// Masked image
-		CGImageRef imageRef = CGImageRetain([self.imagePreview CGImage]);
-		CGImageRef maskRef = CGImageRetain([[UIImage imageNamed:@"imageCell_mask.tif"] CGImage]);
-		//CGImageRef borderRef = [[UIImage imageNamed:@"housesBorder.png"] CGImage];
+		CGImageRef imageRef = [self.imagePreview CGImage];
+		CGImageRef maskRef = [[UIImage imageNamed:@"imageCell_mask.tif"]CGImage];
 		
-		CGImageRelease(imageRef);
-		CGImageRelease(maskRef);
 		// Save the context state 
 		CGContextSaveGState(context); 
 		// Adjust the coordinate system so that the origin 
