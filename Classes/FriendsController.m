@@ -104,7 +104,11 @@
 	
 	cell.cellView.title = person.fullName;
 	cell.cellView.subtitle = person.partialAddress;
-	
+	NSString *imageURL = [self.appDelegate applicationDocumentsDirectory];
+	imageURL = [NSString stringWithFormat:@"%@/%@", imageURL, person.local_image_url];
+	UIImage *image = [[UIImage alloc]initWithContentsOfFile:imageURL];
+	cell.cellView.imagePreview = image;
+	[image release];
 	
     return cell;
 }
@@ -202,14 +206,15 @@
 	
 	// Image
 	BOOL hasImageData = ABPersonHasImageData(personRef);
-	NSString *imageURL = nil;
+	NSString *imagePath = nil;
 	if (hasImageData) {
 		NSData *imageData = (NSData *)ABPersonCopyImageData(personRef);
 		// save the image somewhere
 		//Build the path we want the file to be at 
-		imageURL = [self.appDelegate applicationDocumentsDirectory];
+		NSString *imageURL = [self.appDelegate applicationDocumentsDirectory];
 		NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString]; 
-		imageURL = [imageURL stringByAppendingPathComponent:guid]; 
+		imagePath = [NSString stringWithFormat:@"%@.jpeg", guid];
+		imageURL = [NSString stringWithFormat:@"%@/%@", imageURL, imagePath];
 		[imageData writeToFile:imageURL atomically:FALSE];
 		[imageData release];
 	}
@@ -230,7 +235,7 @@
 	person.last_name = lastName;
 	person.middle_names = middleName;
 	person.birthday = birthday;
-	person.local_image_url = imageURL;
+	person.local_image_url = imagePath;
 	person.street = [address valueForKey:(NSString *)kABPersonAddressStreetKey];
 	person.city = [address valueForKey:(NSString *)kABPersonAddressCityKey];
 	person.state = [address valueForKey:(NSString *)kABPersonAddressStateKey];

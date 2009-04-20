@@ -62,24 +62,19 @@
 	// Retrieve the graphics context 
 	CGContextRef context = UIGraphicsGetCurrentContext(); 
 	
+	// Image Background
+	CGRect imgRect = CGRectMake(12.0, (ROW_HEIGHT-50.0)/2, 50.0, 50.0);
+	[[UIImage imageNamed:@"imageCell.png"]drawInRect:imgRect];
+	
 	// Image
 	if (self.imagePreview) {
 		// Masked image
-		CGImageRef imageRef = [self.imagePreview CGImage];
-		CGContextRef alphaContext = CGBitmapContextCreate(
-														  NULL,CGImageGetWidth(imageRef),
-														  CGImageGetHeight(imageRef),
-														  CGImageGetBitsPerComponent(imageRef),
-														  CGImageGetBytesPerRow(imageRef),
-														  NULL,
-														  kCGImageAlphaOnly
-		);
-		CGContextDrawImage(alphaContext,CGRectMake(0,0,CGImageGetWidth(imageRef),-CGImageGetHeight(imageRef)),imageRef);
-		CGImageRef maskRef = CGBitmapContextCreateImage(alphaContext);
-		CGContextRelease(alphaContext);
-
-		//CGImageRelease(imageRef);
-		//CGImageRelease(maskRef);
+		CGImageRef imageRef = CGImageRetain([self.imagePreview CGImage]);
+		CGImageRef maskRef = CGImageRetain([[UIImage imageNamed:@"imageCell_mask.tif"] CGImage]);
+		//CGImageRef borderRef = [[UIImage imageNamed:@"housesBorder.png"] CGImage];
+		
+		CGImageRelease(imageRef);
+		CGImageRelease(maskRef);
 		// Save the context state 
 		CGContextSaveGState(context); 
 		// Adjust the coordinate system so that the origin 
@@ -90,16 +85,13 @@
 		// Create mask
 		CGImageRef xMaskedImage = CGImageCreateWithMask (imageRef,maskRef);
 		// Draw the image 
-		CGContextDrawImage(context, CGRectMake(14.2, (ROW_HEIGHT-54.0)/2, 54.0, 54.0), xMaskedImage); 
-		CGImageRelease(maskRef);
+		CGContextDrawImage(context, CGRectMake(12.0, (ROW_HEIGHT-50.0)/2, 50.0, 50.0), xMaskedImage); 
 		CGImageRelease(xMaskedImage);
 		CGContextRestoreGState(context);
 	}
 	
 	
-	// Border
-	CGRect imgRect = CGRectMake(12.0, (ROW_HEIGHT-50.0)/2, 50.0, 50.0);
-	[[UIImage imageNamed:@"imageCell.png"]drawInRect:imgRect];
+
 	
 	// Text
 	// Save the context state 

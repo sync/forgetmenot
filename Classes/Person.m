@@ -188,7 +188,7 @@
 		country = @"";
 	}
 	
-	return [NSString stringWithFormat:@"%@%@%@", state, city, country];
+	return [NSString stringWithFormat:@"%@%@%@", city, state, country];
 }
 
 @end

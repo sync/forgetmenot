@@ -17,6 +17,7 @@
 @synthesize notificationName=_notificationName;
 @synthesize object=_object;
 @synthesize doneButton=_doneButton;
+@synthesize deleteButton=_deleteButton;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -45,13 +46,30 @@
 		self.textField.text = [self.object valueForKey:self.propertyName];
 	} else {
 		self.doneButton.enabled = FALSE;
+		self.deleteButton.hidden = TRUE;
 	}
 	
 	[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
 	
-	
-	
 	[self.textField becomeFirstResponder];
+}
+
+- (IBAction)deleteEntity:(id)sender
+{
+	if (self.object) {
+		NSManagedObjectContext *context = self.appDelegate.managedObjectContext;
+		[context deleteObject:self.object];
+		
+		// Save the context.
+		NSError *error;
+		if (![context save:&error]) {
+			// Handle the error...
+		}
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:self.notificationName object:nil];
+		
+		[self dismissModalViewControllerAnimated:TRUE];
+	}
 }
 
 - (void)textDidChange:(id)sender

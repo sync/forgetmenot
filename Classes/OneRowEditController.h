@@ -21,11 +21,14 @@
 	NSManagedObject *_object;
 	
 	UIBarButtonItem *_doneButton;
+	
+	UIButton *_deleteButton;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationBar *navigationBar;
 @property (nonatomic, retain) IBOutlet UITextField *textField;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
+@property (nonatomic, retain) IBOutlet UIButton *deleteButton;
 
 @property (nonatomic, copy) NSString *entityName;
 @property (nonatomic, copy) NSString *propertyName;
@@ -34,5 +37,6 @@
 
 - (IBAction)cancelEditing:(id)sender;
 - (IBAction)doneEditing:(id)sender;
+- (IBAction)deleteEntity:(id)sender;
 
 @end

@@ -198,6 +198,20 @@
         return persistentStoreCoordinator;
     }
 	
+	NSString *storePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"ForgetMeNot.sqlite"];
+	/*
+	 Set up the store.
+	 For the sake of illustration, provide a pre-populated default store.
+	 */
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	// If the expected store doesn't exist, copy the default store.
+	if (![fileManager fileExistsAtPath:storePath]) {
+		NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"ForgetMeNot" ofType:@"sqlite"];
+		if (defaultStorePath) {
+			[fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
+		}
+	}
+	
     NSURL *storeUrl = [NSURL fileURLWithPath: [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"ForgetMeNot.sqlite"]];
 	
 	NSError *error;
