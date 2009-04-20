@@ -48,6 +48,12 @@
 	
 	self.personView.title = self.person.fullName;
 	self.personView.subtitle = self.person.partialAddress;
+	NSString *imageURL = [self.appDelegate applicationDocumentsDirectory];
+	imageURL = [imageURL stringByAppendingPathComponent:self.person.local_image_url];
+	UIImage *image = [[UIImage alloc]initWithContentsOfFile:imageURL];
+	self.personView.imagePreview = image;
+	[image release];
+	
 	
 	[self loadFactTypes];
 	

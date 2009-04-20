@@ -191,4 +191,38 @@
 	return [NSString stringWithFormat:@"%@%@%@", city, state, country];
 }
 
+#pragma mark -
+#pragma mark Before Deleting
+
+- (void)prepareForDeletion
+{
+	if (self.local_image_url) {
+		// Remove the image 
+		NSString *imageURL = [[self applicationDocumentsDirectory]stringByAppendingPathComponent:self.local_image_url];
+		/*
+		 Set up the store.
+		 For the sake of illustration, provide a pre-populated default store.
+		 */
+		NSFileManager *fileManager = [NSFileManager defaultManager];
+		// If the expected store doesn't exist, copy the default store.
+		if ([fileManager fileExistsAtPath:imageURL]) {
+			[fileManager removeItemAtPath:imageURL error:nil];
+		}
+	}
+}
+
+#pragma mark -
+#pragma mark Application's documents directory
+
+/**
+ Returns the path to the application's documents directory.
+ */
+- (NSString *)applicationDocumentsDirectory 
+{
+	
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    return basePath;
+}
+
 @end

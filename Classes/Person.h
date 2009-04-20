@@ -46,6 +46,8 @@
 - (NSString *) getId;
 - (NSString *) getObjectIdString;
 
+- (NSString *)applicationDocumentsDirectory;
+
 @end
 
 @interface Person (CoreDataGeneratedAccessors)

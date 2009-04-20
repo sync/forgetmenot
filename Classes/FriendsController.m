@@ -105,7 +105,7 @@
 	cell.cellView.title = person.fullName;
 	cell.cellView.subtitle = person.partialAddress;
 	NSString *imageURL = [self.appDelegate applicationDocumentsDirectory];
-	imageURL = [NSString stringWithFormat:@"%@/%@", imageURL, person.local_image_url];
+	imageURL = [imageURL stringByAppendingPathComponent:person.local_image_url];
 	UIImage *image = [[UIImage alloc]initWithContentsOfFile:imageURL];
 	cell.cellView.imagePreview = image;
 	[image release];
@@ -214,7 +214,7 @@
 		NSString *imageURL = [self.appDelegate applicationDocumentsDirectory];
 		NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString]; 
 		imagePath = [NSString stringWithFormat:@"%@.jpeg", guid];
-		imageURL = [NSString stringWithFormat:@"%@/%@", imageURL, imagePath];
+		imageURL = [imageURL stringByAppendingPathComponent:imagePath];
 		[imageData writeToFile:imageURL atomically:FALSE];
 		[imageData release];
 	}
