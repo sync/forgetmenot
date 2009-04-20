@@ -84,6 +84,8 @@
 		3AF7EC0C0F9C00150082F751 /* delete_big_top_right_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AF7EC0A0F9C00150082F751 /* delete_big_top_right_selected.png */; };
 		3AF7EC4A0F9C0D670082F751 /* ForgetMeNot.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3AF7EC490F9C0D670082F751 /* ForgetMeNot.sqlite */; };
 		3AF7ECC40F9C42C30082F751 /* imageCell_mask.tif in Resources */ = {isa = PBXBuildFile; fileRef = 3AF7ECC30F9C42C30082F751 /* imageCell_mask.tif */; };
+		3AF7EE150F9C927D0082F751 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF7EE140F9C927D0082F751 /* PreferencesController.m */; };
+		3AF7EE2C0F9C946D0082F751 /* PreferencesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AF7EE2B0F9C946D0082F751 /* PreferencesController.xib */; };
 		3AF9C7560F9473E900C29763 /* Fact.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9C74F0F9473E900C29763 /* Fact.m */; };
 		3AF9C7570F9473E900C29763 /* FactType.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9C7510F9473E900C29763 /* FactType.m */; };
 		3AF9C76A0F94750100C29763 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9C7670F94750100C29763 /* Group.m */; };
@@ -213,6 +215,9 @@
 		3AF7EC0A0F9C00150082F751 /* delete_big_top_right_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_big_top_right_selected.png; sourceTree = "<group>"; };
 		3AF7EC490F9C0D670082F751 /* ForgetMeNot.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = ForgetMeNot.sqlite; path = DefaultDB/ForgetMeNot.sqlite; sourceTree = "<group>"; };
 		3AF7ECC30F9C42C30082F751 /* imageCell_mask.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = imageCell_mask.tif; sourceTree = "<group>"; };
+		3AF7EE130F9C927D0082F751 /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesController.h; sourceTree = "<group>"; };
+		3AF7EE140F9C927D0082F751 /* PreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesController.m; sourceTree = "<group>"; };
+		3AF7EE2B0F9C946D0082F751 /* PreferencesController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesController.xib; sourceTree = "<group>"; };
 		3AF9C74E0F9473E900C29763 /* Fact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fact.h; sourceTree = "<group>"; };
 		3AF9C74F0F9473E900C29763 /* Fact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fact.m; sourceTree = "<group>"; };
 		3AF9C7500F9473E900C29763 /* FactType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactType.h; sourceTree = "<group>"; };
@@ -323,6 +328,7 @@
 				8D1107310486CEB800E47090 /* ForgetMeNot-Info.plist */,
 				3A963CFD0F93458800FB643F /* OneRowEditController.xib */,
 				3AF7E2E90F9775CF0082F751 /* OneRowOneImageEditController.xib */,
+				3AF7EE2B0F9C946D0082F751 /* PreferencesController.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -408,6 +414,7 @@
 		3A963A150F8DC9B600FB643F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3AF7EE120F9C92450082F751 /* Preferences */,
 				3A963CF90F9344AE00FB643F /* Modal */,
 				3A963A160F8DC9BF00FB643F /* Friends */,
 			);
@@ -576,6 +583,15 @@
 			name = Black;
 			sourceTree = "<group>";
 		};
+		3AF7EE120F9C92450082F751 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				3AF7EE130F9C927D0082F751 /* PreferencesController.h */,
+				3AF7EE140F9C927D0082F751 /* PreferencesController.m */,
+			);
+			name = Preferences;
+			sourceTree = "<group>";
+		};
 		3AF9C9380F949A9600C29763 /* FriendDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -712,6 +728,7 @@
 				3AF7EC0C0F9C00150082F751 /* delete_big_top_right_selected.png in Resources */,
 				3AF7EC4A0F9C0D670082F751 /* ForgetMeNot.sqlite in Resources */,
 				3AF7ECC40F9C42C30082F751 /* imageCell_mask.tif in Resources */,
+				3AF7EE2C0F9C946D0082F751 /* PreferencesController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -761,6 +778,7 @@
 				3AF7E4340F9862D90082F751 /* OneImagePickerItem.m in Sources */,
 				3AF7E6900F98CC820082F751 /* FactOneRowEditController.m in Sources */,
 				3AF7EAFF0F9BDC3D0082F751 /* TouchScrollView.m in Sources */,
+				3AF7EE150F9C927D0082F751 /* PreferencesController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
