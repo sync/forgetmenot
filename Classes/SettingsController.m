@@ -115,8 +115,6 @@
 	
 	NSString *imageNamed = [[title stringByReplacingOccurrencesOfString:@" " withString:@"_"]lowercaseString];
 	[cell setImage:[UIImage imageNamed:[imageNamed stringByAppendingString:@".png"]]];
-    
-    // Set up the cell...
 	
     return cell;
 }
@@ -126,17 +124,15 @@
 	
 	NSString *title = [[self.content objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	
-	[self pushNextControllerWithTitle:title animated:[NSNumber numberWithBool:TRUE]];
-	
-}
-
-- (void)pushNextControllerWithTitle:(NSString *)title animated:(NSNumber *)animated
-{
-	if ([title isEqual:@"GPS Radius"]) {
-		
-	} else if ([title isEqual:@"User Details"]) {
-		
+	if ([title isEqual:@"Fact Types"]) {
+		SettingsController *controller = [[SettingsController alloc]initWithNibName:@"SettingsController" bundle:nil];
+		[controller.navigationController pushViewController:controller animated:TRUE];
+		[controller release];
+	} else {
+		[self.tableView deselectRowAtIndexPath:indexPath animated:TRUE];
 	}
+	
+	
 }
 
 

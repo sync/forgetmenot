@@ -20,7 +20,6 @@
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) NSArray *content;
 
-- (void)pushNextControllerWithTitle:(NSString *)title animated:(NSNumber *)animated;
 - (IBAction)doneSettings:(id)sender;
 
 @end
