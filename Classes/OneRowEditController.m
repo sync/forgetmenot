@@ -144,6 +144,7 @@
 - (void)dealloc {
 	[[NSNotificationCenter defaultCenter]removeObserver:self];
 	
+	[_deleteButton release];
 	[_doneButton release];
 	[_object release];
 	[_notificationName release];

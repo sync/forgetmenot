@@ -21,6 +21,8 @@
 	if (![[self fetchedResultsController] performFetch:&error]) {
 		// Handle the error...
 	}
+	
+	self.tableView.backgroundColor = [UIColor clearColor];
 }
 
 

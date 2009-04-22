@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-#import "PreferencesController.h"
+#import "SettingsController.h"
 
 
 @implementation BaseViewController
@@ -62,9 +62,9 @@
 
 - (IBAction)showSettings:(id)sender
 {
-//	PreferencesController *controller = [[PreferencesController alloc]initWithNibName:@"PreferencesController" bundle:nil];
-//	[self.navigationController presentModalViewController:controller animated:TRUE];
-//	[controller release];
+	SettingsController *controller = [[SettingsController alloc]initWithNibName:@"SettingsController" bundle:nil];
+	[self.navigationController presentModalViewController:controller animated:TRUE];
+	[controller release];
 }
 
 - (IBAction)showMap:(id)sender

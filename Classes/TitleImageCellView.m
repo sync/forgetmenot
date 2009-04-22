@@ -32,7 +32,7 @@
 }
 
 #pragma mark -
-#pragma mark Set The surfAndReporterConditions If Different And Redraw The String:
+#pragma mark Set Image Preview
 
 - (void)setImagePreview:(UIImage *)imagePreview 
 {

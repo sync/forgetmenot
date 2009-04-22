@@ -1,6 +1,6 @@
 //
 //  LocationCell.m
-//  Surfline
+//  ForgetMeNot
 //
 //  Created by Anthony Mittaz on 27/09/08.
 //  Copyright 2008 Anthony Mittaz. All rights reserved.

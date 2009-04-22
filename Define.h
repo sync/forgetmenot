@@ -21,3 +21,10 @@
 #define ShouldReloadFriendsController @"ShouldReloadFriendsController"
 // Friend
 #define ShouldReloadFriendController @"ShouldReloadFriendController"
+
+// Settings Cell
+#define TopTransparentCell @"TopTransparentCell"
+#define MiddleTransparentCell @"MiddleTransparentCell"
+#define BottomTransparentCell @"BottomTransparentCell"
+#define UniqueTransparentCell @"UniqueTransparentCell"
+#define SETTINGS_CELL_VIEW 3000
