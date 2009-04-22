@@ -112,6 +112,9 @@
 	NSString *title = [[self.content objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	
 	[cell setTitle:title];
+	
+	NSString *imageNamed = [[title stringByReplacingOccurrencesOfString:@" " withString:@"_"]lowercaseString];
+	[cell setImage:[UIImage imageNamed:[imageNamed stringByAppendingString:@".png"]]];
     
     // Set up the cell...
 	
