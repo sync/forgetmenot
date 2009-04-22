@@ -10,16 +10,17 @@
 #import "BaseViewController.h"
 
 @interface SettingsController : BaseViewController <UITableViewDelegate, UITableViewDataSource>{
-	UINavigationBar *_navigationBar;
+	UINavigationController *_navigationController;
 	UITableView *_tableView;
 	
 	NSArray *_content;
 }
 
-@property (nonatomic, retain) IBOutlet UINavigationBar *navigationBar;
+@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) NSArray *content;
 
 - (IBAction)doneSettings:(id)sender;
+- (void)setupNavigationBar;
 
 @end

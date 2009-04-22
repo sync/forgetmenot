@@ -8,11 +8,12 @@
 
 #import "SettingsController.h"
 #import "SettingsCell.h"
+#import "SettingsFactTypesController.h"
 
 @implementation SettingsController
 
 @synthesize content=_content;
-@synthesize navigationBar=_navigationBar;
+@synthesize navigationController=_navigationController;
 @synthesize tableView=_tableView;
 
 /*
@@ -26,19 +27,32 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-	// Color of the navigation bar
-	self.navigationBar.tintColor = [UIColor colorWithRed:120.0/255.0 green:120.0/255.0 blue:120.0/255.0 alpha:1.0];
 	
-	self.navigationBar.topItem.title = @"Settings";
+	// Color of the navigation bar
+	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:120.0/255.0 green:120.0/255.0 blue:120.0/255.0 alpha:1.0];
 	
 	self.tableView.backgroundColor = [UIColor clearColor];
+	
+	[self.view addSubview:self.navigationController.view];
 	
 	NSArray *sectionOne = [NSArray arrayWithObjects:@"Fact Types", @"Your Infos", @"Something Here", nil];
 	NSArray *sectionTwo = [NSArray arrayWithObjects:@"Online Creditentials", @"Online Mode", nil];
 	
 	self.content = [NSArray arrayWithObjects:sectionOne, sectionTwo, nil];
 	
+	[self setupNavigationBar];
+}
+
+- (void)setupNavigationBar
+{	
+	// Let user add row
+	UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+																		 target:self 
+																		 action:@selector(doneSettings:)];
+	self.navigationController.navigationBar.topItem.rightBarButtonItem = item;
+	[item release];
+	
+	self.navigationItem.title = @"Groups";
 }
 
 - (IBAction)doneSettings:(id)sender
@@ -125,13 +139,11 @@
 	NSString *title = [[self.content objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	
 	if ([title isEqual:@"Fact Types"]) {
-		SettingsController *controller = [[SettingsController alloc]initWithNibName:@"SettingsController" bundle:nil];
-		[controller.navigationController pushViewController:controller animated:TRUE];
+		SettingsFactTypesController *controller = [[SettingsFactTypesController alloc]initWithNibName:@"SettingsFactTypesController" bundle:nil];
+		[self.navigationController pushViewController:controller animated:TRUE];
 		[controller release];
-	} else {
-		[self.tableView deselectRowAtIndexPath:indexPath animated:TRUE];
 	}
-	
+	[self.tableView deselectRowAtIndexPath:indexPath animated:TRUE];
 	
 }
 
@@ -179,7 +191,7 @@
 
 - (void)dealloc {
 	[_tableView release];
-	[_navigationBar release];
+	[_navigationController release];
 	[_content release];
 	
     [super dealloc];
