@@ -36,7 +36,7 @@
 	[self.view addSubview:self.navigationController.view];
 	
 	NSArray *sectionOne = [NSArray arrayWithObjects:@"Fact Types", @"Your Infos", @"Something Here", nil];
-	NSArray *sectionTwo = [NSArray arrayWithObjects:@"Online Creditentials", @"Online Mode", nil];
+	NSArray *sectionTwo = [NSArray arrayWithObjects:@"Online Credentials", @"Online Mode", nil];
 	
 	self.content = [NSArray arrayWithObjects:sectionOne, sectionTwo, nil];
 	

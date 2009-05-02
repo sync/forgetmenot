@@ -10,7 +10,9 @@
 #import "BaseFetchedTableViewController.h"
 
 @interface SettingsFactTypesController : BaseFetchedTableViewController {
-
+	NSArray *_factTypes;
 }
+
+@property (nonatomic, retain) NSArray *factTypes;
 
 @end

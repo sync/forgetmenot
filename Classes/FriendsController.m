@@ -106,9 +106,13 @@
 	cell.cellView.subtitle = person.partialAddress;
 	NSString *imageURL = [self.appDelegate applicationDocumentsDirectory];
 	imageURL = [imageURL stringByAppendingPathComponent:person.local_image_url];
-	UIImage *image = [[UIImage alloc]initWithContentsOfFile:imageURL];
+	if (!person.local_image_url) {
+	}
+	UIImage *image = [UIImage imageWithContentsOfFile:imageURL];
+	if (!image) {
+		image = [UIImage imageNamed:@"empty_friend.png"];
+	}
 	cell.cellView.imagePreview = image;
-	[image release];
 	
     return cell;
 }

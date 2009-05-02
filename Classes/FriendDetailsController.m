@@ -50,10 +50,11 @@
 	self.personView.subtitle = self.person.partialAddress;
 	NSString *imageURL = [self.appDelegate applicationDocumentsDirectory];
 	imageURL = [imageURL stringByAppendingPathComponent:self.person.local_image_url];
-	UIImage *image = [[UIImage alloc]initWithContentsOfFile:imageURL];
+	UIImage *image = [UIImage imageWithContentsOfFile:imageURL];
+	if (!image) {
+		image = [UIImage imageNamed:@"empty_friend.png"];
+	}
 	self.personView.imagePreview = image;
-	[image release];
-	
 	
 	[self loadFactTypes];
 	
@@ -124,7 +125,7 @@
 	self.navigationItem.rightBarButtonItem = item;
 	[item release];
 	
-	if ([self.factTypes count] > 0) {
+	if ([self.factTypes count] > self.selectItemIndex) {
 		FactType *factType = [self.factTypes objectAtIndex:self.selectItemIndex];
 		self.navigationItem.title = factType.name;
 	} else {
@@ -203,7 +204,7 @@
 	controller.propertyName = @"name";
 	controller.imagePropertyName = @"image_name";
 	controller.notificationName = ShouldReloadFriendController;
-	controller.title = @"New Facty Type";
+	controller.title = @"New Fact Type";
 	[self.navigationController presentModalViewController:controller animated:TRUE];
 	[controller release];
 }
@@ -252,6 +253,13 @@
 - (void)reloadTableview:(id)sender
 {
 	[self loadFactTypes];
+	if ([self.factTypes count] > self.selectItemIndex) {
+		FactType *factType = [self.factTypes objectAtIndex:self.selectItemIndex];
+		self.navigationItem.title = factType.name;
+	} else {
+		self.navigationItem.title = @"Details";
+	}
+	
 	[self.tableView reloadData];
 }
 
@@ -364,7 +372,7 @@
 	[self setEditing:FALSE];
 	
 	FactType *factType = nil;
-	if ([self.factTypes count] > 0) {
+	if ([self.factTypes count] > [index integerValue]) {
 		factType = [self.factTypes objectAtIndex:[index integerValue]];
 	}
 	
@@ -375,7 +383,7 @@
 	controller.imagePropertyName = @"image_name";
 	controller.object = factType;
 	controller.notificationName = ShouldReloadFriendController;
-	controller.title = @"Edit Facty Type";
+	controller.title = @"Edit Fact Type";
 	[self.navigationController presentModalViewController:controller animated:TRUE];
 	[controller release];
 }
@@ -472,7 +480,7 @@
 	[fetchRequest setEntity:entity];
 	
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(person = %@)", self.person];
-	if ([self.factTypes count] > 0) {
+	if ([self.factTypes count] > self.selectItemIndex) {
 		FactType *factType = [self.factTypes objectAtIndex:self.selectItemIndex];
 		predicate = [NSPredicate predicateWithFormat:@"(person = %@) AND (fact_type = %@)", self.person, factType];
 	}

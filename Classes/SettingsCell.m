@@ -28,7 +28,8 @@
 		CGRect cellFrame = CGRectMake(0.0, 0.0, self.contentView.bounds.size.width, self.contentView.bounds.size.height);
 		SettingsCellView *cellView = [SettingsCellView viewWithFrame:cellFrame selected:FALSE];
 		cellView.tag = SETTINGS_CELL_VIEW;
-		[self addSubview:cellView];
+		cellView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+		[self.contentView addSubview:cellView];
 		
 		NSString *imageName = @"";
 		NSString *selectedImageName = @"";

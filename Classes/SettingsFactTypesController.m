@@ -7,56 +7,52 @@
 //
 
 #import "SettingsFactTypesController.h"
+#import "SettingsCell.h"
+#import "FactType.h"
 
 
 @implementation SettingsFactTypesController
 
-/*
-- (id)initWithStyle:(UITableViewStyle)style {
-    // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if (self = [super initWithStyle:style]) {
-    }
-    return self;
-}
-*/
+@synthesize factTypes=_factTypes;
 
-/*
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	if (!self.factTypes) {
+		// Create the fetch request for the entity.
+		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+		// Edit the entity name as appropriate.
+		NSEntityDescription *entity = [NSEntityDescription entityForName:@"FactType" inManagedObjectContext:self.appDelegate.managedObjectContext];
+		[fetchRequest setEntity:entity];
+		
+		self.factTypes = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:NULL];
+	}
+	
+//	NSInteger index = 0;
+//	for (FactType *factType in self.factTypes) {
+//		factType.priority = [NSNumber numberWithInteger:index];;
+//		index++;
+//	}
+//	
+//	NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
+//	NSError *error;
+//	if (![context save:&error]) {
+//		// Handle the error...
+//	}
+}
 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+- (void)setupNavigationBar
+{
+	// Let user delete row
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	
+	self.navigationItem.title = @"Fact Types";
 }
-*/
 
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)setupToolbar
+{	
+	[self.navigationController setToolbarHidden:TRUE animated:FALSE];
 }
-*/
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-*/
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
@@ -68,87 +64,160 @@
 - (void)viewDidUnload {
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
+	[super viewDidUnload];
 }
+
 
 
 #pragma mark Table view methods
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-
-// Customize the number of rows in the table view.
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
-}
-
-
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+	if (!self.factTypes) {
+		// Create the fetch request for the entity.
+		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+		// Edit the entity name as appropriate.
+		NSEntityDescription *entity = [NSEntityDescription entityForName:@"FactType" inManagedObjectContext:self.appDelegate.managedObjectContext];
+		[fetchRequest setEntity:entity];
+		
+		self.factTypes = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:NULL];
+	}
+	
+	NSInteger count = [self.factTypes count];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	UITableViewCellPosition position;
+	NSString *cellIdentifier = nil;
+	if (count == 1) {
+		position = UITableViewCellPositionUnique;
+		cellIdentifier = UniqueTransparentCell;
+	} else {
+		if (indexPath.row == 0) {
+			position = UITableViewCellPositionTop;
+			cellIdentifier = TopTransparentCell;
+		} else if (indexPath.row == (count -1)) {
+			position = UITableViewCellPositionBottom;
+			cellIdentifier = BottomTransparentCell;
+		} else {
+			position = UITableViewCellPositionMiddle;
+			cellIdentifier = MiddleTransparentCell;
+		}
+	}
+	
+	SettingsCell *cell = (SettingsCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [SettingsCell cellWithStyle:UITableViewCellStyleDefault position:position];
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    
-    // Set up the cell...
+	
+	// Set up the cell...
+	FactType *factType = (FactType *)[fetchedResultsController objectAtIndexPath:indexPath];
+	
+	[cell setTitle:factType.name];
+	
+//	NSString *imageNamed = [[title stringByReplacingOccurrencesOfString:@" " withString:@"_"]lowercaseString];
+//	[cell setImage:[UIImage imageNamed:[imageNamed stringByAppendingString:@".png"]]];
 	
     return cell;
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
-	// [self.navigationController pushViewController:anotherViewController];
-	// [anotherViewController release];
-}
 
 
-/*
+
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
+	
     return YES;
 }
-*/
 
 
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+        // Delete the managed object for the given index path
+		NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
+		[context deleteObject:[fetchedResultsController objectAtIndexPath:indexPath]];
+		
+		// Save the context.
+		NSError *error;
+		if (![context save:&error]) {
+			// Handle the error...
+		}
+		
+		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
     }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
 }
-*/
 
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return YES;
 }
-*/
 
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+{
+	NSLog(@"commited");
+	// Set up the cell...
+	FactType *factType = (FactType *)[fetchedResultsController objectAtIndexPath:fromIndexPath];
+	factType.priority = [NSNumber numberWithInteger:toIndexPath.row];
+	
+	NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
+	NSError *error;
+	if (![context save:&error]) {
+		// Handle the error...
+	}
+	
+	//[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+	
+	//[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:fromIndexPath, toIndexPath, nil] withRowAnimation:reloadSections:withRowAnimation:];
 }
-*/
+
+//- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+//{
+//	
+//}
+
+- (NSFetchedResultsController *)fetchedResultsController {
+    
+	if (fetchedResultsController != nil) {
+        return fetchedResultsController;
+    }
+    
+    /*
+	 Set up the fetched results controller.
+	 */
+	// Create the fetch request for the entity.
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	// Edit the entity name as appropriate.
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"FactType" inManagedObjectContext:self.appDelegate.managedObjectContext];
+	[fetchRequest setEntity:entity];
+	
+	// Edit the sort key as appropriate.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"priority" ascending:YES];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	
+	// Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+	NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.appDelegate.managedObjectContext sectionNameKeyPath:nil cacheName:@"Root"];
+    aFetchedResultsController.delegate = self;
+	self.fetchedResultsController = aFetchedResultsController;
+	
+	[aFetchedResultsController release];
+	[fetchRequest release];
+	[sortDescriptor release];
+	[sortDescriptors release];
+	
+	return fetchedResultsController;
+} 
 
 
 - (void)dealloc {
+	[_factTypes release];
+	
     [super dealloc];
 }
 
