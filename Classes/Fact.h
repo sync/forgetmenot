@@ -23,9 +23,6 @@
 
 + (Fact *)factWithID:(NSString *)fact_id forContext:(NSManagedObjectContext *)context;
 
-- (NSString *) getId;
-- (NSString *) getObjectIdString;
-
 @end
 
 

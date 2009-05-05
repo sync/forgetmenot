@@ -43,9 +43,6 @@
 + (Person *)personWithID:(NSString *)person_id forContext:(NSManagedObjectContext *)context;
 + (Person *)personWithRecordID:(NSNumber *)recordID forContext:(NSManagedObjectContext *)context;
 
-- (NSString *) getId;
-- (NSString *) getObjectIdString;
-
 - (NSString *)applicationDocumentsDirectory;
 
 @end

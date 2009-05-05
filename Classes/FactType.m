@@ -35,39 +35,4 @@
 					  parameters: mkdict({key,factType_id})];
 }
 
-#pragma mark -
-#pragma mark Give you the person id
-
-- (NSString *)getId
-{
-	[self willAccessValueForKey:@"id"];
-	if ([self primitiveValueForKey:@"id"] == nil)
-		[self getObjectIdString];
-	[self didAccessValueForKey:@"id"];
-	
-	return [self primitiveValueForKey:@"id"];
-}
-
-#pragma mark -
-#pragma mark Generate the person id
-
-- (NSString *)getObjectIdString
-{
-	[self willAccessValueForKey:@"id"];
-	NSString * objId = [self primitiveValueForKey:@"id"];
-	[self didAccessValueForKey:@"id"];
-	
-	if (objId == nil || [objId isEqualToString:@""])
-	{
-		CFUUIDRef uuid = CFUUIDCreate (kCFAllocatorDefault);
-		NSString * uuidString = (NSString *) CFUUIDCreateString (kCFAllocatorDefault, uuid);
-		
-		[self setPrimitiveValue:uuidString forKey:@"id"];
-		
-		return [self valueForKey:@"id"];
-	}
-	
-	return objId;
-}
-
 @end

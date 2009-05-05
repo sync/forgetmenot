@@ -120,7 +120,7 @@
 	
 	[cell setTitle:factType.name];
 	
-	cell.factTypeID = [factType getId];
+	cell.factTypeID = factType.objectID;
 	
 //	NSString *imageNamed = [[title stringByReplacingOccurrencesOfString:@" " withString:@"_"]lowercaseString];
 //	[cell setImage:[UIImage imageNamed:[imageNamed stringByAppendingString:@".png"]]];

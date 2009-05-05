@@ -25,9 +25,6 @@
 
 + (FactType *)factTypeWithID:(NSString *)factType_id forContext:(NSManagedObjectContext *)context;
 
-- (NSString *) getId;
-- (NSString *) getObjectIdString;
-
 @end
 
 @interface FactType (CoreDataGeneratedAccessors)
