@@ -120,11 +120,9 @@
 	
 	[cell setTitle:factType.name];
 	
-	cell.factTypeID = factType.objectID;
+	cell.objectID = factType.objectID;
 	
-//	NSString *imageNamed = [[title stringByReplacingOccurrencesOfString:@" " withString:@"_"]lowercaseString];
-//	[cell setImage:[UIImage imageNamed:[imageNamed stringByAppendingString:@".png"]]];
-	
+	//[cell setImage:[UIImage imageNamed:factType.image_name]];
     return cell;
 }
 
@@ -190,18 +188,22 @@
 	// Check the number of fact types
 	NSInteger count = [self.factTypes count];
 	
+	NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
+	
 	for (NSInteger i=index;i<count;i++) {
 		SettingsCell *cell = (SettingsCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-		FactType *factType = [FactType factTypeWithID:cell.factTypeID forContext:self.fetchedResultsController.managedObjectContext];
+		FactType *factType = (FactType *)[context objectWithID:cell.objectID];
 		factType.priority = [NSNumber numberWithInteger:i];
 	}
 }
 
 - (void)reconstructPositionUpFromIndex:(NSInteger)index
 {	
+	NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
+	
 	for (NSInteger i=index;i>=0;i--) {
 		SettingsCell *cell = (SettingsCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-		FactType *factType = [FactType factTypeWithID:cell.factTypeID forContext:self.fetchedResultsController.managedObjectContext];
+		FactType *factType = (FactType *)[context objectWithID:cell.objectID];
 		factType.priority = [NSNumber numberWithInteger:i];
 	}
 }

@@ -14,7 +14,7 @@
 @implementation SettingsCell
 
 @synthesize highlighted=_highlighted;
-@synthesize factTypeID=_factTypeID;
+@synthesize objectID=_objectID;
 
 #pragma mark -
 #pragma mark Initialisation:
@@ -144,7 +144,7 @@
 #pragma mark Dealloc:
 
 - (void)dealloc {
-	[_factTypeID release];
+	[_objectID release];
     
 	[super dealloc];
 }
