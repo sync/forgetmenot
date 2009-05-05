@@ -11,8 +11,12 @@
 
 @interface SettingsFactTypesController : BaseFetchedTableViewController {
 	NSArray *_factTypes;
+	
+	NSIndexPath *_lastIndexPath;
 }
 
 @property (nonatomic, retain) NSArray *factTypes;
+@property (nonatomic, retain) NSIndexPath *lastIndexPath;
+- (void)modifyBackgroundForCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath;
 
 @end

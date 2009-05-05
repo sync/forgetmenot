@@ -9,11 +9,13 @@
 #import "SettingsFactTypesController.h"
 #import "SettingsCell.h"
 #import "FactType.h"
+#import "BackgroundViewWithImage.h"
 
 
 @implementation SettingsFactTypesController
 
 @synthesize factTypes=_factTypes;
+@synthesize lastIndexPath=_lastIndexPath;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -158,7 +160,7 @@
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-	NSLog(@"commited");
+	DLog(@"move row at index path");
 	// Set up the cell...
 	FactType *factType = (FactType *)[fetchedResultsController objectAtIndexPath:fromIndexPath];
 	factType.priority = [NSNumber numberWithInteger:toIndexPath.row];
@@ -169,15 +171,159 @@
 		// Handle the error...
 	}
 	
+	self.lastIndexPath = nil;
+	
 	//[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
 	
 	//[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:fromIndexPath, toIndexPath, nil] withRowAnimation:reloadSections:withRowAnimation:];
 }
 
-//- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
-//{
-//	
-//}
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+	DLog(@"target row at index path    : %@", sourceIndexPath);
+	DLog(@"target row at index path to : %@", proposedDestinationIndexPath);
+	
+	// Redraw the dragged cell
+	SettingsCell *selectedCell = (SettingsCell *)[tableView cellForRowAtIndexPath:sourceIndexPath];
+	[self modifyBackgroundForCell:selectedCell forIndexPath:proposedDestinationIndexPath];
+	
+	// Check if up or down
+	BOOL up = TRUE;
+	if (self.lastIndexPath) {
+		if (proposedDestinationIndexPath.row > self.lastIndexPath.row) {
+			up = FALSE;
+			DLog(@"down");
+		} else {
+			DLog(@"up");
+		}
+	} else {
+		if (proposedDestinationIndexPath.row > sourceIndexPath.row) {
+			up = FALSE;
+			DLog(@"down");
+		} else {
+			DLog(@"up");
+		}
+	}
+	
+	// Check the number of facts
+	NSInteger count = [self.factTypes count];
+	
+	// down
+	if (!up) {
+		DLog(@"last Index down: %d", self.lastIndexPath.row);
+		// If down should check for source index path +1 and redraw
+		// Only if source is first index
+		if (sourceIndexPath.row == 0) {
+			SettingsCell *cell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sourceIndexPath.row+1 inSection:sourceIndexPath.section]];
+			[self modifyBackgroundForCell:cell forIndexPath:[NSIndexPath indexPathForRow:0 inSection:sourceIndexPath.section]];
+		}
+		if (self.lastIndexPath.row == 0 && sourceIndexPath.row != 0) {
+			SettingsCell *cell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:sourceIndexPath.section]];
+			[self modifyBackgroundForCell:cell forIndexPath:[NSIndexPath indexPathForRow:0 inSection:sourceIndexPath.section]];
+		}
+		if (self.lastIndexPath.row == count-2) {
+			SettingsCell *cell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:count-2 inSection:proposedDestinationIndexPath.section]];
+			[self modifyBackgroundForCell:cell forIndexPath:[NSIndexPath indexPathForRow:count-2 inSection:proposedDestinationIndexPath.section]];
+		}
+		
+		// Last bottom row should redrawn
+		// Only if proposed index is last
+		if (proposedDestinationIndexPath.row == count-1 && sourceIndexPath.row != count-1) {
+			SettingsCell *cell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:count-1 inSection:proposedDestinationIndexPath.section]];
+			[self modifyBackgroundForCell:cell forIndexPath:[NSIndexPath indexPathForRow:count-2 inSection:proposedDestinationIndexPath.section]];
+		}
+	// up
+	} else {
+		DLog(@"last Index up: %d", self.lastIndexPath.row);
+		// If source is last redraw source -1
+		// With last Index count-1
+		if (sourceIndexPath.row == count-1) {
+			SettingsCell *cell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sourceIndexPath.row-1 inSection:sourceIndexPath.section]];
+			[self modifyBackgroundForCell:cell forIndexPath:[NSIndexPath indexPathForRow:count-1 inSection:sourceIndexPath.section]];
+		}
+		if (self.lastIndexPath.row == count-1 && sourceIndexPath.row != count-1) {
+			SettingsCell *cell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:count-1 inSection:proposedDestinationIndexPath.section]];
+			[self modifyBackgroundForCell:cell forIndexPath:[NSIndexPath indexPathForRow:count-1 inSection:proposedDestinationIndexPath.section]];
+		}
+		if (proposedDestinationIndexPath.row == 0 && sourceIndexPath.row != 0) {
+			SettingsCell *cell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:proposedDestinationIndexPath.section]];
+			[self modifyBackgroundForCell:cell forIndexPath:[NSIndexPath indexPathForRow:proposedDestinationIndexPath.row+1 inSection:proposedDestinationIndexPath.section]];
+		}
+		if (self.lastIndexPath.row == 1) {
+			SettingsCell *cell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:proposedDestinationIndexPath.section]];
+			[self modifyBackgroundForCell:cell forIndexPath:[NSIndexPath indexPathForRow:1 inSection:proposedDestinationIndexPath.section]];
+		}
+	}
+	
+	// Remember last index
+	self.lastIndexPath = proposedDestinationIndexPath;
+	
+//	for (int i=proposedDestinationIndexPath.row;i=0;i--) {
+//		SettingsCell *toCell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:proposedDestinationIndexPath.section]];
+//	}
+	
+//	SettingsCell *toCell = (SettingsCell *)[tableView cellForRowAtIndexPath:proposedDestinationIndexPath];
+//	[self modifyBackgroundForCell:toCell forIndexPath:[NSIndexPath indexPathForRow:!up?proposedDestinationIndexPath.row+1:proposedDestinationIndexPath.row-1 inSection:proposedDestinationIndexPath.section]];
+	
+	return proposedDestinationIndexPath;
+}
+
+- (void)modifyBackgroundForCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath
+{
+	NSInteger count = [self.factTypes count];
+    
+	UITableViewCellPosition position;
+	NSString *cellIdentifier = nil;
+	if (count == 1) {
+		position = UITableViewCellPositionUnique;
+		cellIdentifier = UniqueTransparentCell;
+	} else {
+		if (indexPath.row == 0) {
+			position = UITableViewCellPositionTop;
+			cellIdentifier = TopTransparentCell;
+		} else if (indexPath.row == (count -1)) {
+			position = UITableViewCellPositionBottom;
+			cellIdentifier = BottomTransparentCell;
+		} else {
+			position = UITableViewCellPositionMiddle;
+			cellIdentifier = MiddleTransparentCell;
+		}
+	}
+	
+	NSString *imageName = nil;
+	NSString *selectedImageName = nil;
+	
+	switch (position) {
+		case UITableViewCellPositionTop:
+			imageName = @"settings_cell_top.png";
+			selectedImageName = @"settings_cell_top_selected.png";
+			break;
+		case UITableViewCellPositionBottom:
+			imageName = @"settings_cell_bottom.png";
+			selectedImageName = @"settings_cell_bottom_selected.png";
+			break;
+		case UITableViewCellPositionUnique:
+			imageName = @"settings_cell_unique.png";
+			selectedImageName = @"settings_cell_unique_selected.png";
+			break;
+		default:
+			imageName = @"settings_cell_middle.png";
+			selectedImageName = @"settings_cell_middle_selected.png";
+			break;
+	}
+	
+	CGRect cellFrame = CGRectMake(0.0, 0.0, cell.contentView.bounds.size.width, cell.contentView.bounds.size.height);
+	
+	
+	// BackgroundView
+	BackgroundViewWithImage *backgroundView = [BackgroundViewWithImage backgroundViewWithFrame:cellFrame andBackgroundImageName:imageName];
+	cell.backgroundView = backgroundView;
+	
+	BackgroundViewWithImage *selectedBackgroundView = [BackgroundViewWithImage backgroundViewWithFrame:cellFrame andBackgroundImageName:selectedImageName];
+	cell.selectedBackgroundView = selectedBackgroundView;
+	
+	[cell setNeedsDisplay];
+}
 
 - (NSFetchedResultsController *)fetchedResultsController {
     
@@ -216,6 +362,7 @@
 
 
 - (void)dealloc {
+	[_lastIndexPath release];
 	[_factTypes release];
 	
     [super dealloc];
