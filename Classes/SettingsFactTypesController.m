@@ -28,7 +28,10 @@
 		[fetchRequest setEntity:entity];
 		
 		self.factTypes = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:NULL];
+		
+		[self setEditing:TRUE];
 	}
+	
 	
 //	NSInteger index = 0;
 //	for (FactType *factType in self.factTypes) {
@@ -134,23 +137,14 @@
     return YES;
 }
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return UITableViewCellEditingStyleNone;
+}
 
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the managed object for the given index path
-		NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
-		[context deleteObject:[fetchedResultsController objectAtIndexPath:indexPath]];
-		
-		// Save the context.
-		NSError *error;
-		if (![context save:&error]) {
-			// Handle the error...
-		}
-		
-		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
-    }   
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return NO;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
@@ -221,7 +215,7 @@
 			SettingsCell *cell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:sourceIndexPath.section]];
 			[self modifyBackgroundForCell:cell forIndexPath:[NSIndexPath indexPathForRow:0 inSection:sourceIndexPath.section]];
 		}
-		if (self.lastIndexPath.row == count-2) {
+		if (self.lastIndexPath.row == count-2 && count > 3) {
 			SettingsCell *cell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:count-2 inSection:proposedDestinationIndexPath.section]];
 			[self modifyBackgroundForCell:cell forIndexPath:[NSIndexPath indexPathForRow:count-2 inSection:proposedDestinationIndexPath.section]];
 		}
