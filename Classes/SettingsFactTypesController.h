@@ -17,6 +17,10 @@
 
 @property (nonatomic, retain) NSArray *factTypes;
 @property (nonatomic, retain) NSIndexPath *lastIndexPath;
+
+- (void)reconstructPositionUpFromIndex:(NSInteger)index;
+- (void)reconstructPositionDownFromIndex:(NSInteger)index;
+
 - (void)modifyBackgroundForCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath;
 
 @end

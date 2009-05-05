@@ -120,6 +120,8 @@
 	
 	[cell setTitle:factType.name];
 	
+	cell.factTypeID = [factType getId];
+	
 //	NSString *imageNamed = [[title stringByReplacingOccurrencesOfString:@" " withString:@"_"]lowercaseString];
 //	[cell setImage:[UIImage imageNamed:[imageNamed stringByAppendingString:@".png"]]];
 	
@@ -154,10 +156,25 @@
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-	DLog(@"move row at index path");
 	// Set up the cell...
 	FactType *factType = (FactType *)[fetchedResultsController objectAtIndexPath:fromIndexPath];
 	factType.priority = [NSNumber numberWithInteger:toIndexPath.row];
+	
+	// Check if up / down
+	BOOL up = TRUE;
+	if (toIndexPath.row > fromIndexPath.row) {
+		up = FALSE;
+		DLog(@"down");
+	} else {
+		DLog(@"up");
+	}
+	// Should rebuilt before to index path
+	if (!up) {
+		[self reconstructPositionUpFromIndex:toIndexPath.row];
+	// Should rebuilt after the index path
+	} else {
+		[self reconstructPositionDownFromIndex:toIndexPath.row];
+	}
 	
 	NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
 	NSError *error;
@@ -166,10 +183,27 @@
 	}
 	
 	self.lastIndexPath = nil;
+}
+
+- (void)reconstructPositionDownFromIndex:(NSInteger)index
+{
+	// Check the number of fact types
+	NSInteger count = [self.factTypes count];
 	
-	//[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
-	
-	//[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:fromIndexPath, toIndexPath, nil] withRowAnimation:reloadSections:withRowAnimation:];
+	for (NSInteger i=index;i<count;i++) {
+		SettingsCell *cell = (SettingsCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+		FactType *factType = [FactType factTypeWithID:cell.factTypeID forContext:self.fetchedResultsController.managedObjectContext];
+		factType.priority = [NSNumber numberWithInteger:i];
+	}
+}
+
+- (void)reconstructPositionUpFromIndex:(NSInteger)index
+{	
+	for (NSInteger i=index;i>=0;i--) {
+		SettingsCell *cell = (SettingsCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+		FactType *factType = [FactType factTypeWithID:cell.factTypeID forContext:self.fetchedResultsController.managedObjectContext];
+		factType.priority = [NSNumber numberWithInteger:i];
+	}
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
@@ -186,25 +220,18 @@
 	if (self.lastIndexPath) {
 		if (proposedDestinationIndexPath.row > self.lastIndexPath.row) {
 			up = FALSE;
-			DLog(@"down");
-		} else {
-			DLog(@"up");
 		}
 	} else {
 		if (proposedDestinationIndexPath.row > sourceIndexPath.row) {
 			up = FALSE;
-			DLog(@"down");
-		} else {
-			DLog(@"up");
 		}
 	}
 	
-	// Check the number of facts
+	// Check the number of fact types
 	NSInteger count = [self.factTypes count];
 	
 	// down
 	if (!up) {
-		DLog(@"last Index down: %d", self.lastIndexPath.row);
 		// If down should check for source index path +1 and redraw
 		// Only if source is first index
 		if (sourceIndexPath.row == 0) {
@@ -228,7 +255,6 @@
 		}
 	// up
 	} else {
-		DLog(@"last Index up: %d", self.lastIndexPath.row);
 		// If source is last redraw source -1
 		// With last Index count-1
 		if (sourceIndexPath.row == count-1) {

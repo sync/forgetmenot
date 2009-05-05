@@ -23,7 +23,7 @@
 @property (retain) NSString * id;
 @property (retain) NSSet* fact;
 
-+ (FactType *)personWithID:(NSString *)factType_id forContext:(NSManagedObjectContext *)context;
++ (FactType *)factTypeWithID:(NSString *)factType_id forContext:(NSManagedObjectContext *)context;
 
 - (NSString *) getId;
 - (NSString *) getObjectIdString;

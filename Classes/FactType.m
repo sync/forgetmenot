@@ -24,7 +24,7 @@
 #pragma mark -
 #pragma mark Retrieve a person from it's id
 
-+ (FactType *)personWithID:(NSString *)factType_id forContext:(NSManagedObjectContext *)context
++ (FactType *)factTypeWithID:(NSString *)factType_id forContext:(NSManagedObjectContext *)context
 {
 	NSString *key = @"id";
 	
