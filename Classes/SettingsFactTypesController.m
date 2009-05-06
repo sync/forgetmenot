@@ -236,9 +236,6 @@
 
 - (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
 {
-	DLog(@"target row at index path    : %@", sourceIndexPath);
-	DLog(@"target row at index path to : %@", proposedDestinationIndexPath);
-	
 	// Redraw the dragged cell
 	SettingsCell *selectedCell = (SettingsCell *)[tableView cellForRowAtIndexPath:sourceIndexPath];
 	[self modifyBackgroundForCell:selectedCell forIndexPath:proposedDestinationIndexPath];
@@ -297,7 +294,7 @@
 			SettingsCell *cell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:proposedDestinationIndexPath.section]];
 			[self modifyBackgroundForCell:cell forIndexPath:[NSIndexPath indexPathForRow:proposedDestinationIndexPath.row+1 inSection:proposedDestinationIndexPath.section]];
 		}
-		if (self.lastIndexPath.row == 1) {
+		if (self.lastIndexPath.row == 1 & count > 3) {
 			SettingsCell *cell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:proposedDestinationIndexPath.section]];
 			[self modifyBackgroundForCell:cell forIndexPath:[NSIndexPath indexPathForRow:1 inSection:proposedDestinationIndexPath.section]];
 		}
