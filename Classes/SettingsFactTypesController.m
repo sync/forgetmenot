@@ -47,10 +47,7 @@
 }
 
 - (void)setupNavigationBar
-{
-	// Let user delete row
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
-	
+{	
 	self.navigationItem.title = @"Fact Types";
 }
 
@@ -177,6 +174,8 @@
 		// Handle the error...
 	}
 	
+	[[NSNotificationCenter defaultCenter] postNotificationName:ShouldReloadFriendController object:nil];
+	
 	self.lastIndexPath = nil;
 }
 
@@ -302,14 +301,7 @@
 	
 	// Remember last index
 	self.lastIndexPath = proposedDestinationIndexPath;
-	
-//	for (int i=proposedDestinationIndexPath.row;i=0;i--) {
-//		SettingsCell *toCell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:proposedDestinationIndexPath.section]];
-//	}
-	
-//	SettingsCell *toCell = (SettingsCell *)[tableView cellForRowAtIndexPath:proposedDestinationIndexPath];
-//	[self modifyBackgroundForCell:toCell forIndexPath:[NSIndexPath indexPathForRow:!up?proposedDestinationIndexPath.row+1:proposedDestinationIndexPath.row-1 inSection:proposedDestinationIndexPath.section]];
-	
+		
 	return proposedDestinationIndexPath;
 }
 
