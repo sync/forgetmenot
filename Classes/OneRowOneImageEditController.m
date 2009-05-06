@@ -16,16 +16,17 @@
 @synthesize pickerViews=_pickerViews;
 @synthesize pickerView=_pickerView;
 @synthesize imageView=_imageView;
+@synthesize priority=_priority;
 
-/*
+
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         // Custom initialization
+		self.priority = -1;
     }
     return self;
 }
-*/
 
 /*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
@@ -112,6 +113,11 @@
 	
 	OneImagePickerItem *selectedItem = [self.pickerViews objectAtIndex:[self.pickerView selectedRowInComponent:0]];
 	[self.object setValue:selectedItem.imageNameToSet forKey:self.imagePropertyName];
+	
+	// Set priority
+	if (self.priority != -1) {
+		[self.object setValue:[NSNumber numberWithInteger:self.priority] forKey:@"priority"];
+	}
 	
 	// Save the context.
     NSError *error;

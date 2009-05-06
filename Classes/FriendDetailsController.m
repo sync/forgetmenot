@@ -121,7 +121,7 @@
 	// Let user add row
 	UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
 																		 target:self 
-																		 action:@selector(addNewFactType:)];
+																		 action:@selector(addNewFact:)];
 	self.navigationItem.rightBarButtonItem = item;
 	[item release];
 	
@@ -150,10 +150,10 @@
 																			  target:nil
 																			  action:nil];
 	
-	UIBarButtonItem *newFactType = [[UIBarButtonItem alloc]initWithTitle:@"Add New Fact"
+	UIBarButtonItem *newFactType = [[UIBarButtonItem alloc]initWithTitle:@"New Fact Type"
 																   style:UIBarButtonItemStyleBordered
 																  target:self 
-																  action:@selector(addNewFact:)];
+																  action:@selector(addNewFactType:)];
 	
 	
 	// flex item used to separate the left groups items and right grouped items
@@ -205,6 +205,12 @@
 	controller.imagePropertyName = @"image_name";
 	controller.notificationName = ShouldReloadFriendController;
 	controller.title = @"New Fact Type";
+	// Find out last priority
+	if (!self.factTypes) {
+		[self loadFactTypes];
+	}
+	NSInteger factTypesCount = [self.factTypes count];
+	controller.priority = factTypesCount;
 	[self.navigationController presentModalViewController:controller animated:TRUE];
 	[controller release];
 }

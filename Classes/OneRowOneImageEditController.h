@@ -18,6 +18,7 @@
 	TouchImageView *_imageView;
 	
 	NSMutableArray *_pickerViews;
+	NSInteger _priority;
 }
 
 @property (nonatomic, copy) NSString *imagePropertyName;
@@ -25,6 +26,7 @@
 
 @property (nonatomic, retain) IBOutlet UIPickerView *pickerView;
 @property (nonatomic, retain) IBOutlet TouchImageView *imageView;
+@property (nonatomic) IBOutlet NSInteger priority;
 
 - (IBAction)showPicker:(id)sender;
 
