@@ -326,7 +326,7 @@
 	FactType *factType = [self.factTypes objectAtIndex:self.selectItemIndex];
 	
 	// Present modal view controller, were you can enter the group name
-	FactOneRowEditController *controller = [[FactOneRowEditController alloc]initWithNibName:@"OneRowEditController" bundle:nil];
+	FactOneRowEditController *controller = [[FactOneRowEditController alloc]initWithNibName:@"FactOneRowEditController" bundle:nil];
 	controller.entityName = @"Fact";
 	controller.propertyName = @"fact";
 	controller.person = self.person;
@@ -457,7 +457,7 @@
 	FactType *factType = [self.factTypes objectAtIndex:self.selectItemIndex];
 	
 	// Present modal view controller
-	FactOneRowEditController *controller = [[FactOneRowEditController alloc]initWithNibName:@"OneRowEditController" bundle:nil];
+	FactOneRowEditController *controller = [[FactOneRowEditController alloc]initWithNibName:@"FactOneRowEditController" bundle:nil];
 	controller.entityName = @"Fact";
 	controller.propertyName = @"fact";
 	controller.person = self.person;
