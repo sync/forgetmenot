@@ -120,8 +120,6 @@
 	
 	[cell setTitle:factType.name];
 	
-	cell.objectID = factType.objectID;
-	
 	//[cell setImage:[UIImage imageNamed:factType.image_name]];
     return cell;
 }
@@ -158,20 +156,19 @@
 	FactType *factType = (FactType *)[fetchedResultsController objectAtIndexPath:fromIndexPath];
 	factType.priority = [NSNumber numberWithInteger:toIndexPath.row];
 	
-	// Check if up / down
-	BOOL up = TRUE;
-	if (toIndexPath.row > fromIndexPath.row) {
-		up = FALSE;
-		DLog(@"down");
+	NSInteger count = [self.factTypes count];
+	
+	if (toIndexPath.row == 0) {
+		[self reconstructPositionUpFromIndex:toIndexPath.row+1 draggedObject:factType newPosition:toIndexPath.row];
+	} else if (toIndexPath.row == count-1) {
+		[self reconstructPositionDownFromIndex:toIndexPath.row-1 draggedObject:factType newPosition:toIndexPath.row];
 	} else {
-		DLog(@"up");
-	}
-	// Should rebuilt before to index path
-	if (!up) {
-		[self reconstructPositionUpFromIndex:toIndexPath.row];
-	// Should rebuilt after the index path
-	} else {
-		[self reconstructPositionDownFromIndex:toIndexPath.row];
+		if (toIndexPath.row < fromIndexPath.row) {
+			[self reconstructPositionUpFromIndex:toIndexPath.row+1 draggedObject:factType newPosition:toIndexPath.row];
+		} else {
+			[self reconstructPositionDownFromIndex:toIndexPath.row-1 draggedObject:factType newPosition:toIndexPath.row];
+			[self reconstructPositionUpFromIndex:toIndexPath.row+1 draggedObject:factType newPosition:toIndexPath.row];
+		}
 	}
 	
 	NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
@@ -183,28 +180,57 @@
 	self.lastIndexPath = nil;
 }
 
-- (void)reconstructPositionDownFromIndex:(NSInteger)index
-{
-	// Check the number of fact types
-	NSInteger count = [self.factTypes count];
+- (void)reconstructPositionUpFromIndex:(NSInteger)index draggedObject:(id)draggedObject newPosition:(NSInteger)newPosition
+{	
+	// Create the fetch request for the entity.
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	// Edit the entity name as appropriate.
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"FactType" inManagedObjectContext:self.appDelegate.managedObjectContext];
+	[fetchRequest setEntity:entity];
 	
-	NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
+	// Filter 
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(self != %@) AND (priority >= %d)", draggedObject, newPosition]; 
+	[fetchRequest setPredicate:predicate]; 
 	
-	for (NSInteger i=index;i<count;i++) {
-		SettingsCell *cell = (SettingsCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-		FactType *factType = (FactType *)[context objectWithID:cell.objectID];
+	// Edit the sort key as appropriate.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"priority" ascending:YES];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	
+	NSArray *factTypes = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:NULL];
+	
+	NSInteger i = index;
+	for (FactType *factType in factTypes) {
 		factType.priority = [NSNumber numberWithInteger:i];
+		i++;
 	}
 }
 
-- (void)reconstructPositionUpFromIndex:(NSInteger)index
-{	
-	NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
+- (void)reconstructPositionDownFromIndex:(NSInteger)index draggedObject:(id)draggedObject newPosition:(NSInteger)newPosition
+{
+	// Create the fetch request for the entity.
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	// Edit the entity name as appropriate.
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"FactType" inManagedObjectContext:self.appDelegate.managedObjectContext];
+	[fetchRequest setEntity:entity];
 	
-	for (NSInteger i=index;i>=0;i--) {
-		SettingsCell *cell = (SettingsCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-		FactType *factType = (FactType *)[context objectWithID:cell.objectID];
+	// Filter 
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(self != %@) AND (priority >= %d)", draggedObject, newPosition]; 
+	[fetchRequest setPredicate:predicate]; 
+	
+	// Edit the sort key as appropriate.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"priority" ascending:NO];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	
+	NSArray *factTypes = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:NULL];
+	
+	NSInteger i = index;
+	for (FactType *factType in factTypes) {
 		factType.priority = [NSNumber numberWithInteger:i];
+		i--;
 	}
 }
 

@@ -18,11 +18,9 @@ typedef enum {
 
 @interface SettingsCell : UITableViewCell {
 	BOOL _highlighted;
-	NSManagedObjectID *_objectID;
 }
 
 @property (nonatomic, getter=isHighlighted) BOOL highlighted;
-@property (nonatomic, retain) NSManagedObjectID *objectID;
 
 + (id)cellWithStyle:(UITableViewCellStyle)style position:(UITableViewCellPosition)position;
 

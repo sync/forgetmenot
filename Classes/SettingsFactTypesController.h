@@ -18,8 +18,8 @@
 @property (nonatomic, retain) NSArray *factTypes;
 @property (nonatomic, retain) NSIndexPath *lastIndexPath;
 
-- (void)reconstructPositionUpFromIndex:(NSInteger)index;
-- (void)reconstructPositionDownFromIndex:(NSInteger)index;
+- (void)reconstructPositionDownFromIndex:(NSInteger)index draggedObject:(id)draggedObject newPosition:(NSInteger)newPosition;
+- (void)reconstructPositionUpFromIndex:(NSInteger)index draggedObject:(id)draggedObject newPosition:(NSInteger)newPosition;
 
 - (void)modifyBackgroundForCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath;
 
