@@ -17,7 +17,6 @@
 @property (retain) NSString * name;
 @property (retain) NSDate * updated_at;
 @property (retain) NSDate * created_at;
-@property (retain) NSNumber * online_id;
 @property (retain) NSString * id;
 @property (retain) NSString * color;
 @property (retain) NSSet* person;

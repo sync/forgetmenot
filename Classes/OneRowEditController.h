@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface OneRowEditController : BaseViewController <UITextFieldDelegate>{
+@interface OneRowEditController : BaseViewController <UITextFieldDelegate, UIActionSheetDelegate>{
 	UINavigationBar *_navigationBar;
 	
 	UITextField *_textField;
@@ -38,5 +38,6 @@
 - (IBAction)cancelEditing:(id)sender;
 - (IBAction)doneEditing:(id)sender;
 - (IBAction)deleteEntity:(id)sender;
+- (IBAction)removeEntityConfirm:(id)sender;
 
 @end

@@ -15,7 +15,6 @@
 @dynamic name;
 @dynamic image_name;
 @dynamic created_at;
-@dynamic online_id;
 @dynamic upated_at;
 @dynamic priority;
 @dynamic id;

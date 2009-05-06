@@ -1,34 +1,33 @@
 // 
-//  Fact.m
+//  Keyword.m
 //  ForgetMeNot
 //
 //  Created by Anthony Mittaz on 6/05/09.
 //  Copyright 2009 Anthony Mittaz. All rights reserved.
 //
 
+#import "Keyword.h"
+
 #import "Fact.h"
 
-#import "Person.h"
-#import "FactType.h"
+@implementation Keyword 
 
-@implementation Fact 
-
-@dynamic fact;
+@dynamic created_at;
+@dynamic name;
+@dynamic updated_at;
 @dynamic id;
-@dynamic person;
-@dynamic fact_type;
-@dynamic keyword;
+@dynamic fact;
 
 #pragma mark -
 #pragma mark Retrieve a person from it's id
 
-+ (Fact *)factWithID:(NSString *)fact_id forContext:(NSManagedObjectContext *)context
++ (Keyword *)keywordWithID:(NSString *)keyword_id forContext:(NSManagedObjectContext *)context
 {
 	NSString *key = @"id";
 	
 	NSString *template = [NSString stringWithFormat: @"%@_with_%@",[self description],key];
     
-	return (Fact *)[context
+	return (Keyword *)[context
 					fetchUniqueObjectWithTemplate: template
 					parameters: mkdict({key,fact_id})];
 }

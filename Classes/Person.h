@@ -20,7 +20,6 @@
 @property (retain) NSString * last_name;
 @property (retain) NSDate * modified_at;
 @property (retain) NSString * middle_names;
-@property (retain) NSNumber * online_id;
 @property (retain) NSString * country;
 @property (retain) NSNumber * latitude;
 @property (retain) NSString * image_url;

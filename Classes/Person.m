@@ -18,7 +18,6 @@
 @dynamic last_name;
 @dynamic modified_at;
 @dynamic middle_names;
-@dynamic online_id;
 @dynamic country;
 @dynamic latitude;
 @dynamic image_url;

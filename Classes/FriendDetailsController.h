@@ -12,7 +12,7 @@
 @class TitleImageCellView;
 @class Person;
 
-@interface FriendDetailsController : BaseFetchedViewController <UIScrollViewDelegate>{
+@interface FriendDetailsController : BaseFetchedViewController <UIScrollViewDelegate, UIActionSheetDelegate>{
 	TitleImageCellView *_personView;
 	UIScrollView *_scrollView;
 	
@@ -35,5 +35,6 @@
 - (IBAction)removePerson:(id)sender;
 
 - (void)selectedItemIndexChanged:(id)sender;
+- (IBAction)removePersonConfirm:(id)sender;
 
 @end

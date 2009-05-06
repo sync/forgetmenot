@@ -15,7 +15,6 @@
 @dynamic name;
 @dynamic updated_at;
 @dynamic created_at;
-@dynamic online_id;
 @dynamic color;
 @dynamic person;
 @dynamic id;

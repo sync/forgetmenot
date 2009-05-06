@@ -193,6 +193,37 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:ShouldReloadFriendsController object:nil];
 }
 
+#pragma mark -
+#pragma mark Show User confirmation panel before deleting
+- (IBAction)removePersonConfirm:(id)sender
+{
+	UIActionSheet *styleAlert =
+	[[UIActionSheet alloc] initWithTitle:nil
+								delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil
+					   otherButtonTitles:@"Delete Friend", nil, nil];
+	
+	[styleAlert showInView:self.view];
+	[styleAlert release];
+}
+// change the navigation bar style, also make the status bar match with it
+- (void)actionSheet:(UIActionSheet *)modalView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	switch (buttonIndex)
+	{
+		case 0:
+		{
+			// Open Settings
+			[self removePerson:self];
+			break;
+		}
+		case 1:
+		{
+			// Cancel ==> do nothing
+			break;
+		}
+	}
+}
+
 - (IBAction)addNewFactType:(id)sender
 {
 	// Make sure the tableview is not currently in edit mode

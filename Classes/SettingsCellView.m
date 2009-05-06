@@ -41,8 +41,8 @@
 	
 	if (self.image) {
 		// Draw top image
-		[self.image drawInRect:CGRectMake(self.bounds.origin.x + 20.0, self.bounds.origin.y + (self.bounds.size.height - 30) / 2.0, 30.0, 30.0) blendMode:kCGBlendModeNormal alpha:1.0];
-		leftWidthToAdd = 50.0;
+		[self.image drawInRect:CGRectMake(self.bounds.origin.x + 10.0, self.bounds.origin.y + (self.bounds.size.height - 30) / 2.0, 30.0, 30.0) blendMode:kCGBlendModeNormal alpha:1.0];
+		leftWidthToAdd = 40.0;
 	} else {
 		leftWidthToAdd = 0;
 	}
@@ -58,7 +58,7 @@
 		[bigColor set];
 		// Set shadow
 		CGContextSetShadowWithColor(context,  CGSizeMake(0.0, -1.0), 0.5, [[UIColor whiteColor]CGColor]);
-		[self.title drawInRect:CGRectMake(self.bounds.origin.x + 20.0 + leftWidthToAdd, self.bounds.origin.y + (self.bounds.size.height - 20.0) / 2.0, 230.0 - leftWidthToAdd, 20.0) withFont:boldFont lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentLeft];
+		[self.title drawInRect:CGRectMake(self.bounds.origin.x + 10.0 + leftWidthToAdd, self.bounds.origin.y + (self.bounds.size.height - 20.0) / 2.0, 230.0 - leftWidthToAdd, 20.0) withFont:boldFont lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentLeft];
 		CGContextRestoreGState(context);
 	}
 }

@@ -17,7 +17,6 @@
 @property (retain) NSString * name;
 @property (retain) NSString * image_name;
 @property (retain) NSDate * created_at;
-@property (retain) NSNumber * online_id;
 @property (retain) NSDate * upated_at;
 @property (retain) NSNumber * priority;
 @property (retain) NSString * id;

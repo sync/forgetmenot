@@ -54,6 +54,37 @@
 	[self.textField becomeFirstResponder];
 }
 
+#pragma mark -
+#pragma mark Show User confirmation panel before deleting
+- (IBAction)removeEntityConfirm:(id)sender
+{
+	UIActionSheet *styleAlert =
+	[[UIActionSheet alloc] initWithTitle:nil
+								delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil
+					   otherButtonTitles:@"Delete", nil, nil];
+	
+	[styleAlert showInView:self.view];
+	[styleAlert release];
+}
+// change the navigation bar style, also make the status bar match with it
+- (void)actionSheet:(UIActionSheet *)modalView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	switch (buttonIndex)
+	{
+		case 0:
+		{
+			// Open Settings
+			[self deleteEntity:self];
+			break;
+		}
+		case 1:
+		{
+			// Cancel ==> do nothing
+			break;
+		}
+	}
+}
+
 - (IBAction)deleteEntity:(id)sender
 {
 	if (self.object) {

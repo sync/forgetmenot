@@ -215,7 +215,7 @@
 	[fetchRequest setEntity:entity];
 	
 	// Filter 
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(self != %@) AND (priority >= %d)", draggedObject, newPosition]; 
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(self != %@) AND (priority <= %d)", draggedObject, newPosition]; 
 	[fetchRequest setPredicate:predicate]; 
 	
 	// Edit the sort key as appropriate.
