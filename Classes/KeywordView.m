@@ -82,9 +82,9 @@
 	for (Keyword *keyword in keywords) {
 		RoundedLabelView *keywordView = [RoundedLabelView unitViewWithFrame:CGRectMake(framesLength + 10.0, (self.frame.size.height-31.0)/2.0, 20.0, 31.0)];
 		keywordView.label.text = keyword.name;
-		[keywordView setNeedsLayout];
+		[keywordView layoutSubviews];
 		[self addSubview:keywordView];
-		framesLength += keywordView.frame.size.width+keywordView.frame.origin.x;
+		framesLength += keywordView.frame.size.width + 5.0;
 	}
 	
 	// Then add the text field to the end
