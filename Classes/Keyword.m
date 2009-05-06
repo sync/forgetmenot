@@ -9,6 +9,7 @@
 #import "Keyword.h"
 
 #import "Fact.h"
+#import "FactType.h"
 
 @implementation Keyword 
 
@@ -17,9 +18,10 @@
 @dynamic updated_at;
 @dynamic id;
 @dynamic fact;
+@dynamic fact_type;
 
 #pragma mark -
-#pragma mark Retrieve a person from it's id
+#pragma mark Retrieve a keyword from it's id
 
 + (Keyword *)keywordWithID:(NSString *)keyword_id forContext:(NSManagedObjectContext *)context
 {
@@ -28,8 +30,8 @@
 	NSString *template = [NSString stringWithFormat: @"%@_with_%@",[self description],key];
     
 	return (Keyword *)[context
-					fetchUniqueObjectWithTemplate: template
-					parameters: mkdict({key,fact_id})];
+					   fetchUniqueObjectWithTemplate: template
+					   parameters: mkdict({key,keyword_id})];
 }
 
 @end

@@ -9,6 +9,7 @@
 #import <CoreData/CoreData.h>
 
 @class Fact;
+@class FactType;
 
 @interface Keyword :  NSManagedObject  
 {
@@ -19,6 +20,7 @@
 @property (nonatomic, retain) NSDate * updated_at;
 @property (nonatomic, retain) NSString * id;
 @property (nonatomic, retain) Fact * fact;
+@property (nonatomic, retain) FactType * fact_type;
 
 + (Keyword *)keywordWithID:(NSString *)keyword_id forContext:(NSManagedObjectContext *)context;
 
