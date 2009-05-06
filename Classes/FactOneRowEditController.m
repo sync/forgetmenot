@@ -9,11 +9,14 @@
 #import "FactOneRowEditController.h"
 #import "Person.h"
 #import "FactType.h"
+#import "KeywordView.h"
 
 @implementation FactOneRowEditController
 
 @synthesize person=_person;
 @synthesize factType=_factType;
+@synthesize scrollView=_scrollView;
+@synthesize keywordView=_keywordView;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -85,6 +88,8 @@
 - (void)dealloc {
 	[_factType release];
 	[_person release];
+	[_scrollView release];
+	[_keywordView release];
 	
     [super dealloc];
 }

@@ -11,9 +11,11 @@
 
 @interface RoundedLabelView : UIView {
 	CGFloat _offset;
+	UILabel *_label;
 }
 
 @property CGFloat offset;
+@property (nonatomic, retain) UILabel *label;
 
 + (id)unitViewWithFrame:(CGRect)frame;
 

@@ -85,6 +85,7 @@
 		3AB472460FB1A00600955526 /* Keyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB472440FB1A00600955526 /* Keyword.m */; };
 		3AB472900FB1A3F700955526 /* ForgetMeNot.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3AB4728F0FB1A3F700955526 /* ForgetMeNot.sqlite */; };
 		3AB472A10FB1A81A00955526 /* FactOneRowEditController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AB472A00FB1A81A00955526 /* FactOneRowEditController.xib */; };
+		3AB472A90FB1B5DD00955526 /* KeywordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB472A80FB1B5DD00955526 /* KeywordView.m */; };
 		3AF7E1440F95F7EB0082F751 /* toolbar_friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AF7E1420F95F7EB0082F751 /* toolbar_friends.png */; };
 		3AF7E1450F95F7EB0082F751 /* toolbar_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AF7E1430F95F7EB0082F751 /* toolbar_map.png */; };
 		3AF7E1D80F9615FC0082F751 /* chat_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AF7E1D30F9615FC0082F751 /* chat_icon.png */; };
@@ -241,6 +242,8 @@
 		3AB472440FB1A00600955526 /* Keyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keyword.m; sourceTree = "<group>"; };
 		3AB4728F0FB1A3F700955526 /* ForgetMeNot.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ForgetMeNot.sqlite; sourceTree = "<group>"; };
 		3AB472A00FB1A81A00955526 /* FactOneRowEditController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FactOneRowEditController.xib; sourceTree = "<group>"; };
+		3AB472A70FB1B5DD00955526 /* KeywordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeywordView.h; sourceTree = "<group>"; };
+		3AB472A80FB1B5DD00955526 /* KeywordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeywordView.m; sourceTree = "<group>"; };
 		3AF7E1420F95F7EB0082F751 /* toolbar_friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_friends.png; sourceTree = "<group>"; };
 		3AF7E1430F95F7EB0082F751 /* toolbar_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_map.png; sourceTree = "<group>"; };
 		3AF7E1D30F9615FC0082F751 /* chat_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_icon.png; sourceTree = "<group>"; };
@@ -609,6 +612,8 @@
 				3A963CFB0F93455E00FB643F /* OneRowEditController.m */,
 				3AF7E68E0F98CC820082F751 /* FactOneRowEditController.h */,
 				3AF7E68F0F98CC820082F751 /* FactOneRowEditController.m */,
+				3AB472A70FB1B5DD00955526 /* KeywordView.h */,
+				3AB472A80FB1B5DD00955526 /* KeywordView.m */,
 			);
 			name = Modal;
 			sourceTree = "<group>";
@@ -913,6 +918,7 @@
 				3AB4721E0FB198F300955526 /* Fact.m in Sources */,
 				3AB472450FB1A00600955526 /* FactType.m in Sources */,
 				3AB472460FB1A00600955526 /* Keyword.m in Sources */,
+				3AB472A90FB1B5DD00955526 /* KeywordView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

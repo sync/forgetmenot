@@ -10,13 +10,18 @@
 
 @class Person;
 @class FactType;
+@class KeywordView;
 
 @interface FactOneRowEditController : OneRowEditController {
 	Person *_person;
 	FactType *_factType;
+	UIScrollView *_scrollView;
+	KeywordView *_keywordView;
 }
 
 @property (nonatomic, retain) Person *person;
 @property (nonatomic, retain) FactType *factType;
+@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, retain) IBOutlet KeywordView *keywordView;
 
 @end

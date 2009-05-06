@@ -11,6 +11,7 @@
 @implementation RoundedLabelView
 
 @synthesize offset=_offset;
+@synthesize label=_label;
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -24,6 +25,12 @@
 + (id)unitViewWithFrame:(CGRect)frame 
 {
 	RoundedLabelView *unitView = [[[RoundedLabelView alloc]initWithFrame:frame]autorelease];
+	UILabel *label = [[UILabel alloc]initWithFrame:CGRectZero];
+	unitView.label = label;
+	[label release];
+	
+	[unitView addSubview:label];
+	
 	return unitView;
 }
 
@@ -36,6 +43,7 @@
 	CGRect unitRect = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height);
 	CGContextSetLineWidth(context, 0.0);
 	CGContextBeginPath(context);
+	CGContextAddRect(context, unitRect);
 	CGContextDrawPath(context, kCGPathFill);
 	CGContextRestoreGState(context);
 }
@@ -62,6 +70,7 @@
 
 
 - (void)dealloc {
+	[_label release];
 	
     [super dealloc];
 }
