@@ -83,6 +83,7 @@
 		3AB4721E0FB198F300955526 /* Fact.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4721B0FB198F300955526 /* Fact.m */; };
 		3AB472450FB1A00600955526 /* FactType.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB472420FB1A00600955526 /* FactType.m */; };
 		3AB472460FB1A00600955526 /* Keyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB472440FB1A00600955526 /* Keyword.m */; };
+		3AB472900FB1A3F700955526 /* ForgetMeNot.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3AB4728F0FB1A3F700955526 /* ForgetMeNot.sqlite */; };
 		3AF7E1440F95F7EB0082F751 /* toolbar_friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AF7E1420F95F7EB0082F751 /* toolbar_friends.png */; };
 		3AF7E1450F95F7EB0082F751 /* toolbar_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AF7E1430F95F7EB0082F751 /* toolbar_map.png */; };
 		3AF7E1D80F9615FC0082F751 /* chat_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AF7E1D30F9615FC0082F751 /* chat_icon.png */; };
@@ -237,6 +238,7 @@
 		3AB472420FB1A00600955526 /* FactType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FactType.m; sourceTree = "<group>"; };
 		3AB472430FB1A00600955526 /* Keyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keyword.h; sourceTree = "<group>"; };
 		3AB472440FB1A00600955526 /* Keyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keyword.m; sourceTree = "<group>"; };
+		3AB4728F0FB1A3F700955526 /* ForgetMeNot.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ForgetMeNot.sqlite; sourceTree = "<group>"; };
 		3AF7E1420F95F7EB0082F751 /* toolbar_friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_friends.png; sourceTree = "<group>"; };
 		3AF7E1430F95F7EB0082F751 /* toolbar_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_map.png; sourceTree = "<group>"; };
 		3AF7E1D30F9615FC0082F751 /* chat_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_icon.png; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 			children = (
 				3A963A2B0F8DCAAD00FB643F /* Images */,
 				3A9639E30F8DC7CA00FB643F /* ForgetMeNot.xcdatamodel */,
+				3AB4728F0FB1A3F700955526 /* ForgetMeNot.sqlite */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				3A963A170F8DCA0A00FB643F /* FriendsController.xib */,
 				3AF9C92F0F9499E600C29763 /* FriendDetailsController.xib */,
@@ -850,6 +853,7 @@
 				3A25E1790F9F35F300591131 /* SettingsFactTypesController.xib in Resources */,
 				3A25E1D70FA007B200591131 /* empty_friend.png in Resources */,
 				3A25AEAE0FA94A4000BCD866 /* keyword_background.png in Resources */,
+				3AB472900FB1A3F700955526 /* ForgetMeNot.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
