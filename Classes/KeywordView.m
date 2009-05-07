@@ -10,6 +10,7 @@
 #import "Fact.h"
 #import "Keyword.h"
 #import "RoundedLabelView.h"
+#import "ViewWithAction.h"
 
 @implementation KeywordView
 
@@ -17,6 +18,8 @@
 @synthesize fact=_fact;
 @synthesize appDelegate=_appDelegate;
 @synthesize backgroundImage=_backgroundImage;
+@synthesize deleteButton=_deleteButton;
+@synthesize addedKeywords=_addedKeywords;
 
 
 - (id)initWithFrame:(CGRect)frame {
@@ -31,6 +34,10 @@
 	if (!self.appDelegate) {
 		self.appDelegate = (ForgetMeNotAppDelegate *)[[UIApplication sharedApplication]delegate];
 	}
+}
+
+- (BOOL)canBecomeFirstResponder {
+	return NO;
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -53,8 +60,6 @@
 		
 		[self addSubview:self.textField];
 		self.textField.delegate = self;
-		
-		[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
 		
 		[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showDeleteButton:) name:ShouldShowKeywordDeleteButtonNotification object:nil];
 		[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(hideDeleteButton:) name:ShouldHideKeywordDeleteButtonNotification object:nil];
@@ -86,6 +91,15 @@
 	
 	NSArray *keywords = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:NULL];
 	
+	if (!self.addedKeywords) {
+		self.addedKeywords = [NSMutableArray arrayWithCapacity:0];
+	} else {
+		for (UIView *view in self.addedKeywords) {
+			[view removeFromSuperview];
+		}
+		[self.addedKeywords removeAllObjects];
+	}
+	
 	// For each keyword
 	// Init a rounded label view
 	// Size to fit (rounded label view)
@@ -94,14 +108,27 @@
 	for (Keyword *keyword in keywords) {
 		RoundedLabelView *keywordView = [RoundedLabelView roundedLabelViewWithFrame:CGRectMake(framesLength + 10.0, (self.frame.size.height-26.0)/2.0, 20.0, 26.0)];
 		keywordView.label.text = keyword.name;
+		keywordView.objectID = keyword.objectID;
 		[keywordView layoutSubviews];
 		[self addSubview:keywordView];
+		[self.addedKeywords addObject:keywordView];
 		framesLength += keywordView.frame.size.width + 5.0;
 	}
 	
 	// Then add the text field to the end
 	// add all the keyword frames together
-	self.textField.frame = CGRectMake(framesLength + 10.0, (self.frame.size.height-31.0)/2.0 + 4.0, self.frame.size.width - 20.0 - framesLength, 31.0);
+	self.textField.frame = CGRectMake(framesLength + 10.0, (self.frame.size.height-31.0)/2.0 + 4.0, self.frame.size.width - 20.0 - framesLength - 25.0 - 10.0, 31.0);
+	
+	if (!self.deleteButton) {
+		
+		self.deleteButton = [ViewWithAction viewWithFrame:CGRectMake(320.0 - 25.0 - 10.0 , (42.0 - 16) / 2.0, 25.0, 16.0)
+												   target:self
+												   action:@selector(deleteFirstResponderLabel:) 
+										  backgroundImage:[UIImage imageNamed:@"keyword_delete.png"] 
+								  selectedBackgroundImage:[UIImage imageNamed:@"keyword_delete_selected.png"] ];
+	}
+	[self addSubview:self.deleteButton];
+	[self.deleteButton setHidden:TRUE];
 	
 	[super layoutSubviews];
 	
@@ -109,18 +136,59 @@
 
 - (void)showDeleteButton:(id)sender
 {
-	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.5];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationTransition:(UIViewAnimationTransitionFlipFromRight)
+						   forView:self.deleteButton cache:YES];
+	[self.deleteButton setHidden:FALSE];
+	[UIView commitAnimations];
 }
 
 - (void)hideDeleteButton:(id)sender
 {
-	
+	NSArray *subviews = self.subviews;
+	BOOL isFirstResponder = FALSE;
+	for (UIView *view in subviews) {
+		if (![view isEqual:self.textField] && ![view isEqual:self.deleteButton]) {
+			if ([view isFirstResponder]) {
+				isFirstResponder = TRUE;
+				break;
+			}
+		}
+	}
+	if (!isFirstResponder) {
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.5];
+		[UIView setAnimationDelegate:self];
+		[UIView setAnimationTransition:(UIViewAnimationTransitionFlipFromLeft)
+							   forView:self.deleteButton cache:YES];
+		[self.deleteButton setHidden:TRUE];
+		[UIView commitAnimations];
+	}
 }
 
-- (void)textDidChange:(id)sender
+- (void)deleteFirstResponderLabel:(id)sender
 {
-	DLog(@"text field did change");
-	// Should refresh tableview
+	// Find which label is first responder
+	// If yes remove the label and the keyword entity
+	for (UIView *view in self.addedKeywords) {
+		if ([view isFirstResponder]) {
+			NSManagedObjectContext *context = self.appDelegate.managedObjectContext;
+			RoundedLabelView *labelView = (RoundedLabelView *)view;
+			Keyword *keyword = (Keyword *)[context objectWithID:labelView.objectID];
+			[context deleteObject:keyword];
+			
+			// Save the context.
+			NSError *error;
+			if (![context save:&error]) {
+				// Handle the error...
+			}
+			
+			[self setNeedsLayout];
+			break;
+		}
+	}
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -150,6 +218,10 @@
 
 
 - (void)dealloc {
+	[[NSNotificationCenter defaultCenter]removeObserver:self];
+	
+	[_addedKeywords release];
+	[_deleteButton release];
 	[_backgroundImage release];
 	[_appDelegate release];
 	[_textField release];

@@ -293,7 +293,11 @@
 			SettingsCell *cell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:proposedDestinationIndexPath.section]];
 			[self modifyBackgroundForCell:cell forIndexPath:[NSIndexPath indexPathForRow:proposedDestinationIndexPath.row+1 inSection:proposedDestinationIndexPath.section]];
 		}
-		if (self.lastIndexPath.row == 1 & count > 3) {
+		if (self.lastIndexPath.row == 1 && count > 3) {
+			SettingsCell *cell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:proposedDestinationIndexPath.section]];
+			[self modifyBackgroundForCell:cell forIndexPath:[NSIndexPath indexPathForRow:1 inSection:proposedDestinationIndexPath.section]];
+		}
+		if (self.lastIndexPath.row == 1 && sourceIndexPath.row == 0) {
 			SettingsCell *cell = (SettingsCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:proposedDestinationIndexPath.section]];
 			[self modifyBackgroundForCell:cell forIndexPath:[NSIndexPath indexPathForRow:1 inSection:proposedDestinationIndexPath.section]];
 		}

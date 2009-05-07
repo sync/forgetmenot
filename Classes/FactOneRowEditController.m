@@ -32,8 +32,6 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
-	
 }
 
 - (IBAction)doneEditing:(id)sender
@@ -49,6 +47,8 @@
 	}
 	[self.object setValue:self.textField.text forKey:self.propertyName];
 	[self.object setValue:self.factType forKey:@"fact_type"];
+	
+	self.keywordView.fact = (Fact *)self.object;
 	
 	[self.person addFactObject:(Fact *)self.object];
 	

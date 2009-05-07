@@ -12,6 +12,7 @@
 #define ShouldHideKeywordDeleteButtonNotification @"ShouldHideKeywordDeleteButtonNotification"
 
 @class Fact;
+@class ViewWithAction;
 
 @interface KeywordView : UIView <UITextFieldDelegate>{
 	UITextField *_textField;
@@ -20,6 +21,10 @@
 	ForgetMeNotAppDelegate *_appDelegate;
 	
 	UIImage *_backgroundImage;
+	
+	ViewWithAction *_deleteButton;
+	
+	NSMutableArray *_addedKeywords;
 }
 
 
@@ -27,11 +32,14 @@
 @property (nonatomic, retain) UITextField *textField;
 @property (nonatomic, retain) Fact *fact;
 @property (nonatomic, retain) UIImage *backgroundImage;
+@property (nonatomic, retain) ViewWithAction *deleteButton;
+@property (nonatomic, retain) NSMutableArray *addedKeywords;
 
-- (void)textDidChange:(id)sender;
 - (void)loadAppDelegate;
 
 - (void)showDeleteButton:(id)sender;
 - (void)hideDeleteButton:(id)sender;
+
+- (void)deleteFirstResponderLabel:(id)sender;
 
 @end

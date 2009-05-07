@@ -7,6 +7,7 @@
 //
 
 #import "RoundedLabelView.h"
+#import "KeywordView.h"
 
 @implementation RoundedLabelView
 
@@ -14,6 +15,7 @@
 @synthesize label=_label;
 @synthesize backgroundImage=_backgroundImage;
 @synthesize selectedBackgroundImage=_selectedBackgroundImage;
+@synthesize objectID=_objectID;
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -55,6 +57,7 @@
 {
 	self.label.textColor = [UIColor whiteColor];
 	[self setNeedsDisplay];
+	[[NSNotificationCenter defaultCenter] postNotificationName:ShouldShowKeywordDeleteButtonNotification object:self];
 	return [super becomeFirstResponder];
 }
 
@@ -62,7 +65,19 @@
 {
 	self.label.textColor = [UIColor blackColor];
 	[self setNeedsDisplay];
+	
+	[self performSelector:@selector(checkIfNoMoreFirstResponder:) withObject:self afterDelay:0.1];
+	
 	return [super resignFirstResponder];;
+}
+
+- (void)checkIfNoMoreFirstResponder:(id)sender
+{
+	if (![self isFirstResponder]) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:ShouldHideKeywordDeleteButtonNotification object:nil];
+	} else {
+		[self performSelector:@selector(checkIfNoMoreFirstResponder:) withObject:self afterDelay:0.1];
+	}
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -110,6 +125,7 @@
 
 
 - (void)dealloc {
+	[_objectID release];
 	[_selectedBackgroundImage release];
 	[_backgroundImage release];
 	[_label release];

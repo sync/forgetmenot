@@ -14,13 +14,16 @@
 	UILabel *_label;
 	UIImage *_backgroundImage;
 	UIImage *_selectedBackgroundImage;
+	NSManagedObjectID *_objectID;
 }
 
 @property CGFloat offset;
 @property (nonatomic, retain) UILabel *label;
 @property (nonatomic, retain) UIImage *backgroundImage;
 @property (nonatomic, retain) UIImage *selectedBackgroundImage;
+@property (nonatomic, retain) NSManagedObjectID *objectID;
 
 + (id)roundedLabelViewWithFrame:(CGRect)frame;
+- (void)checkIfNoMoreFirstResponder:(id)sender;
 
 @end
