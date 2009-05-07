@@ -9,14 +9,18 @@
 #import <UIKit/UIKit.h>
 
 
-@interface RoundedLabelView : UIView {
+@interface RoundedLabelView : UIView  <UITextInputTraits>{
 	CGFloat _offset;
 	UILabel *_label;
+	UIImage *_backgroundImage;
+	UIImage *_selectedBackgroundImage;
 }
 
 @property CGFloat offset;
 @property (nonatomic, retain) UILabel *label;
+@property (nonatomic, retain) UIImage *backgroundImage;
+@property (nonatomic, retain) UIImage *selectedBackgroundImage;
 
-+ (id)unitViewWithFrame:(CGRect)frame;
++ (id)roundedLabelViewWithFrame:(CGRect)frame;
 
 @end

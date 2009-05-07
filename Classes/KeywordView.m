@@ -16,6 +16,7 @@
 @synthesize textField=_textField;
 @synthesize fact=_fact;
 @synthesize appDelegate=_appDelegate;
+@synthesize backgroundImage=_backgroundImage;
 
 
 - (id)initWithFrame:(CGRect)frame {
@@ -32,6 +33,14 @@
 	}
 }
 
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+	if (!self.backgroundImage) {
+		self.backgroundImage = [UIImage imageNamed:@"keyword_background.png"];
+	}
+	[self.backgroundImage drawInRect:rect];
+}
+
 - (void)layoutSubviews
 {
 	NSArray *subviews = self.subviews;
@@ -46,6 +55,9 @@
 		self.textField.delegate = self;
 		
 		[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
+		
+		[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showDeleteButton:) name:ShouldShowKeywordDeleteButtonNotification object:nil];
+		[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(hideDeleteButton:) name:ShouldHideKeywordDeleteButtonNotification object:nil];
 	}
 	
 	if (!self.appDelegate) {
@@ -80,7 +92,7 @@
 	// Add it to the subview
 	CGFloat framesLength = 0.0;
 	for (Keyword *keyword in keywords) {
-		RoundedLabelView *keywordView = [RoundedLabelView unitViewWithFrame:CGRectMake(framesLength + 10.0, (self.frame.size.height-31.0)/2.0, 20.0, 31.0)];
+		RoundedLabelView *keywordView = [RoundedLabelView roundedLabelViewWithFrame:CGRectMake(framesLength + 10.0, (self.frame.size.height-26.0)/2.0, 20.0, 26.0)];
 		keywordView.label.text = keyword.name;
 		[keywordView layoutSubviews];
 		[self addSubview:keywordView];
@@ -92,6 +104,16 @@
 	self.textField.frame = CGRectMake(framesLength + 10.0, (self.frame.size.height-31.0)/2.0 + 4.0, self.frame.size.width - 20.0 - framesLength, 31.0);
 	
 	[super layoutSubviews];
+	
+}
+
+- (void)showDeleteButton:(id)sender
+{
+	
+}
+
+- (void)hideDeleteButton:(id)sender
+{
 	
 }
 
@@ -128,6 +150,7 @@
 
 
 - (void)dealloc {
+	[_backgroundImage release];
 	[_appDelegate release];
 	[_textField release];
 	[_fact release];
