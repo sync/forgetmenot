@@ -55,6 +55,7 @@
 		// Setup the textfield
 		UITextField *textField = [[UITextField alloc]initWithFrame:CGRectZero];
 		textField.borderStyle = UITextBorderStyleNone;
+		textField.placeholder = @"Keyword";
 		self.textField = textField;
 		[textField release];
 		
@@ -147,14 +148,11 @@
 
 - (void)hideDeleteButton:(id)sender
 {
-	NSArray *subviews = self.subviews;
 	BOOL isFirstResponder = FALSE;
-	for (UIView *view in subviews) {
-		if (![view isEqual:self.textField] && ![view isEqual:self.deleteButton]) {
-			if ([view isFirstResponder]) {
-				isFirstResponder = TRUE;
-				break;
-			}
+	for (UIView *view in self.addedKeywords) {
+		if ([view isFirstResponder]) {
+			isFirstResponder = TRUE;
+			break;
 		}
 	}
 	if (!isFirstResponder) {
