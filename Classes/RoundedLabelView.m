@@ -57,7 +57,7 @@
 {
 	self.label.textColor = [UIColor whiteColor];
 	[self setNeedsDisplay];
-	[[NSNotificationCenter defaultCenter] postNotificationName:ShouldShowKeywordDeleteButtonNotification object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:ShouldShowKeywordDeleteButtonNotification object:[NSNumber numberWithFloat:self.frame.origin.y]];
 	return [super becomeFirstResponder];
 }
 
@@ -66,17 +66,17 @@
 	self.label.textColor = [UIColor blackColor];
 	[self setNeedsDisplay];
 	
-	[self performSelector:@selector(checkIfNoMoreFirstResponder:) withObject:self afterDelay:0.1];
+	[self performSelector:@selector(checkIfNoMoreFirstResponder:) withObject:[NSNumber numberWithFloat:self.frame.origin.y] afterDelay:0.1];
 	
-	return [super resignFirstResponder];;
+	return [super resignFirstResponder];
 }
 
 - (void)checkIfNoMoreFirstResponder:(id)sender
 {
 	if (![self isFirstResponder]) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:ShouldHideKeywordDeleteButtonNotification object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:ShouldHideKeywordDeleteButtonNotification object:sender];
 	} else {
-		[self performSelector:@selector(checkIfNoMoreFirstResponder:) withObject:self afterDelay:0.1];
+		[self performSelector:@selector(checkIfNoMoreFirstResponder:) withObject:sender afterDelay:0.1];
 	}
 }
 

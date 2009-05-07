@@ -106,11 +106,26 @@
 	// Size to fit (rounded label view)
 	// Add it to the subview
 	CGFloat framesLength = 0.0;
+	// if framw lenght is wider that a certain point
+	// create a new line
+	// increase the keyword view height
+	NSInteger lineNumber = 0;
 	for (Keyword *keyword in keywords) {
-		RoundedLabelView *keywordView = [RoundedLabelView roundedLabelViewWithFrame:CGRectMake(framesLength + 10.0, (self.frame.size.height-26.0)/2.0, 20.0, 26.0)];
+		RoundedLabelView *keywordView = [RoundedLabelView roundedLabelViewWithFrame:CGRectMake(framesLength + 10.0, (42.0-26.0)/2.0 + lineNumber * 33.0, 20.0, 26.0)];
 		keywordView.label.text = keyword.name;
 		keywordView.objectID = keyword.objectID;
 		[keywordView layoutSubviews];
+		
+		if (framesLength + keywordView.frame.size.width + 5.0 > 320.0 - 10.0 - 25.0 - 10.0) {
+			framesLength = 0.0;
+			lineNumber += 1;
+			self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, 42.0 + lineNumber * 36.0);
+			[self setNeedsDisplay];
+			
+			keywordView.frame = CGRectMake(framesLength + 10.0, (42.0-26.0)/2.0 + lineNumber * 33.0, keywordView.frame.size.width, keywordView.frame.size.height);
+		} else {
+			self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, 42.0 + lineNumber * 36.0);
+		}
 		[self addSubview:keywordView];
 		[self.addedKeywords addObject:keywordView];
 		framesLength += keywordView.frame.size.width + 5.0;
@@ -118,11 +133,11 @@
 	
 	// Then add the text field to the end
 	// add all the keyword frames together
-	self.textField.frame = CGRectMake(framesLength + 10.0, (self.frame.size.height-31.0)/2.0 + 4.0, self.frame.size.width - 20.0 - framesLength - 25.0 - 10.0, 31.0);
+	self.textField.frame = CGRectMake(framesLength + 10.0, (42.0-31.0)/2.0 + 4.0 + lineNumber * 33.0, self.frame.size.width - 20.0 - framesLength - 25.0 - 10.0, 31.0);
 	
 	if (!self.deleteButton) {
 		
-		self.deleteButton = [ViewWithAction viewWithFrame:CGRectMake(320.0 - 25.0 - 10.0 , (42.0 - 16) / 2.0, 25.0, 16.0)
+		self.deleteButton = [ViewWithAction viewWithFrame:CGRectMake(320.0 - 25.0 - 10.0 , (42.0 - 16.0) / 2.0, 25.0, 16.0)
 												   target:self
 												   action:@selector(deleteFirstResponderLabel:) 
 										  backgroundImage:[UIImage imageNamed:@"keyword_delete.png"] 
@@ -137,6 +152,10 @@
 
 - (void)showDeleteButton:(id)sender
 {
+	// findout line number
+	CGFloat lineNumber =  round([[sender object]floatValue] / 33.0);
+	
+	self.deleteButton.frame = CGRectMake(self.deleteButton.frame.origin.x, (42.0 - 16) / 2.0 + lineNumber * 33.0, self.deleteButton.frame.size.width, self.deleteButton.frame.size.height);
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.5];
 	[UIView setAnimationDelegate:self];
