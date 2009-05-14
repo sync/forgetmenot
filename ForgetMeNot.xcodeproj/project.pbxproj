@@ -80,9 +80,9 @@
 		3A963D040F9346C000FB643F /* editingCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A963D030F9346C000FB643F /* editingCell.png */; };
 		3A963D060F93479600FB643F /* modalBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A963D050F93479600FB643F /* modalBorder.png */; };
 		3A963D400F934C9C00FB643F /* editingCellBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A963D3F0F934C9C00FB643F /* editingCellBackground.png */; };
-		3AB4721E0FB198F300955526 /* Fact.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4721B0FB198F300955526 /* Fact.m */; };
+		3A9C04D80FB441D1009D5E03 /* Fact.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9C04D50FB441D1009D5E03 /* Fact.m */; };
+		3A9C04D90FB441D1009D5E03 /* Keyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9C04D70FB441D1009D5E03 /* Keyword.m */; };
 		3AB472450FB1A00600955526 /* FactType.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB472420FB1A00600955526 /* FactType.m */; };
-		3AB472460FB1A00600955526 /* Keyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB472440FB1A00600955526 /* Keyword.m */; };
 		3AB472900FB1A3F700955526 /* ForgetMeNot.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3AB4728F0FB1A3F700955526 /* ForgetMeNot.sqlite */; };
 		3AB472A10FB1A81A00955526 /* FactOneRowEditController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AB472A00FB1A81A00955526 /* FactOneRowEditController.xib */; };
 		3AB472A90FB1B5DD00955526 /* KeywordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB472A80FB1B5DD00955526 /* KeywordView.m */; };
@@ -239,12 +239,12 @@
 		3A963D030F9346C000FB643F /* editingCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editingCell.png; sourceTree = "<group>"; };
 		3A963D050F93479600FB643F /* modalBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modalBorder.png; sourceTree = "<group>"; };
 		3A963D3F0F934C9C00FB643F /* editingCellBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editingCellBackground.png; sourceTree = "<group>"; };
-		3AB4721A0FB198F300955526 /* Fact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fact.h; sourceTree = "<group>"; };
-		3AB4721B0FB198F300955526 /* Fact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fact.m; sourceTree = "<group>"; };
+		3A9C04D40FB441D1009D5E03 /* Fact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fact.h; sourceTree = "<group>"; };
+		3A9C04D50FB441D1009D5E03 /* Fact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fact.m; sourceTree = "<group>"; };
+		3A9C04D60FB441D1009D5E03 /* Keyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keyword.h; sourceTree = "<group>"; };
+		3A9C04D70FB441D1009D5E03 /* Keyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keyword.m; sourceTree = "<group>"; };
 		3AB472410FB1A00600955526 /* FactType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactType.h; sourceTree = "<group>"; };
 		3AB472420FB1A00600955526 /* FactType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FactType.m; sourceTree = "<group>"; };
-		3AB472430FB1A00600955526 /* Keyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keyword.h; sourceTree = "<group>"; };
-		3AB472440FB1A00600955526 /* Keyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keyword.m; sourceTree = "<group>"; };
 		3AB4728F0FB1A3F700955526 /* ForgetMeNot.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ForgetMeNot.sqlite; sourceTree = "<group>"; };
 		3AB472A00FB1A81A00955526 /* FactOneRowEditController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FactOneRowEditController.xib; sourceTree = "<group>"; };
 		3AB472A70FB1B5DD00955526 /* KeywordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeywordView.h; sourceTree = "<group>"; };
@@ -566,14 +566,14 @@
 		3A963AB20F93117B00FB643F /* Model Class */ = {
 			isa = PBXGroup;
 			children = (
-				3AB4721A0FB198F300955526 /* Fact.h */,
-				3AB4721B0FB198F300955526 /* Fact.m */,
+				3A9C04D40FB441D1009D5E03 /* Fact.h */,
+				3A9C04D50FB441D1009D5E03 /* Fact.m */,
+				3A9C04D60FB441D1009D5E03 /* Keyword.h */,
+				3A9C04D70FB441D1009D5E03 /* Keyword.m */,
 				3AB472410FB1A00600955526 /* FactType.h */,
 				3AB472420FB1A00600955526 /* FactType.m */,
 				3AF9C7660F94750100C29763 /* Group.h */,
 				3AF9C7670F94750100C29763 /* Group.m */,
-				3AB472430FB1A00600955526 /* Keyword.h */,
-				3AB472440FB1A00600955526 /* Keyword.m */,
 				3AF9C7680F94750100C29763 /* Person.h */,
 				3AF9C7690F94750100C29763 /* Person.m */,
 			);
@@ -936,11 +936,11 @@
 				3A364D660F9E05840070357D /* SettingsCellView.m in Sources */,
 				3A25E1760F9F35B000591131 /* SettingsFactTypesController.m in Sources */,
 				3A4CC49F0FAC6C2300A833F8 /* RoundedLabelView.m in Sources */,
-				3AB4721E0FB198F300955526 /* Fact.m in Sources */,
 				3AB472450FB1A00600955526 /* FactType.m in Sources */,
-				3AB472460FB1A00600955526 /* Keyword.m in Sources */,
 				3AB472A90FB1B5DD00955526 /* KeywordView.m in Sources */,
 				3AB476FE0FB2C8CE00955526 /* ViewWithAction.m in Sources */,
+				3A9C04D80FB441D1009D5E03 /* Fact.m in Sources */,
+				3A9C04D90FB441D1009D5E03 /* Keyword.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

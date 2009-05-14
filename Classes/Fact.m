@@ -2,25 +2,23 @@
 //  Fact.m
 //  ForgetMeNot
 //
-//  Created by Anthony Mittaz on 6/05/09.
+//  Created by Anthony Mittaz on 8/05/09.
 //  Copyright 2009 Anthony Mittaz. All rights reserved.
 //
 
 #import "Fact.h"
 
-#import "Person.h"
 #import "FactType.h"
+#import "Person.h"
+#import "Keyword.h"
 
 @implementation Fact 
 
 @dynamic fact;
 @dynamic id;
-@dynamic person;
 @dynamic fact_type;
+@dynamic person;
 @dynamic keyword;
-
-#pragma mark -
-#pragma mark Retrieve a person from it's id
 
 + (Fact *)factWithID:(NSString *)fact_id forContext:(NSManagedObjectContext *)context
 {

@@ -217,7 +217,7 @@
 	
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Keyword" inManagedObjectContext:context];
 	Keyword *keyword = (Keyword *)[NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-	keyword.fact = self.fact;
+//	keyword.fact = self.fact;
 	keyword.name = textField.text;
 
 	// Save the context.
