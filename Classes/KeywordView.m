@@ -29,6 +29,20 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)decoder {
+	if (self = [super initWithCoder:decoder]) {
+		[self loadAppDelegate];
+		
+		// Define background color, if you don't want set it to [UIColor clearColor]
+		self.backgroundColor = [UIColor colorWithRed:230.0/255.0 green:231.0/255.0 blue:232.0/255.0 alpha:1.0];
+		
+		// Here you can init your background image
+		//self.backgroundImage = [UIImage imageNamed:@"keyword_background.png"];
+		
+	}
+	return self;
+}
+
 - (void)loadAppDelegate
 {
 	if (!self.appDelegate) {
@@ -42,14 +56,14 @@
 
 - (void)drawRect:(CGRect)rect {
     // Drawing code
-	if (!self.backgroundImage) {
-		self.backgroundImage = [UIImage imageNamed:@"keyword_background.png"];
+	if (self.backgroundImage) {
+		[self.backgroundImage drawInRect:rect];
 	}
-	[self.backgroundImage drawInRect:rect];
+	
 }
 
 - (void)layoutSubviews
-{
+{	
 	NSArray *subviews = self.subviews;
 	if ([subviews count] == 0 && !self.textField) {
 		// Setup the textfield
