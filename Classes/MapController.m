@@ -87,12 +87,12 @@
 - (void)setupNavigationBar
 {
 //	// previous
-//	UIBarButtonItem *peviousItem = [[UIBarButtonItem alloc]initWithTitle:@"Previous"
+//	UIBarButtonItem *previousItem = [[UIBarButtonItem alloc]initWithTitle:@"Previous"
 //																   style:UIBarButtonItemStylePlain 
 //																  target:self
 //																   action:@selector(goPrevious:)];
-//	self.navigationItem.leftBarButtonItem = peviousItem;
-//	[peviousItem release];
+//	self.navigationItem.leftBarButtonItem = previousItem;
+//	[previousItem release];
 //	
 //	// next
 //	UIBarButtonItem *nextItem = [[UIBarButtonItem alloc]initWithTitle:@"Next"
@@ -120,17 +120,30 @@
 																			  target:nil
 																			  action:nil];
 	
+	// previous
+	UIBarButtonItem *currentItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"toolbar_current_location.png"]
+																   style:UIBarButtonItemStylePlain 
+																  target:self
+																   action:@selector(showCurrentLocation:)];
+	
 	// create a special tab bar item with a custom image and title
 	UIBarButtonItem *mapItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toolbar_friends.png"]
 																style:UIBarButtonItemStylePlain
 															   target:self
 															   action:@selector(showFriends:)];
 	
-	NSArray *items = [NSArray arrayWithObjects:settingsItem, flexItem, mapItem, nil];
+	NSArray *items = [NSArray arrayWithObjects:settingsItem, flexItem, currentItem, flexItem, mapItem, nil];
 	[self setToolbarItems:items animated:FALSE];
 	[settingsItem release];
+	[currentItem release];
+	[flexItem release];
 	[flexItem release];
 	[mapItem release];
+}
+
+- (IBAction)showCurrentLocation:(id)sender
+{
+	self.mapView.showsUserLocation = TRUE;
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
@@ -152,13 +165,15 @@
 {
 	FriendPinAnnotation *annotation = (FriendPinAnnotation *)view.annotation;
 	
-	NSManagedObjectContext *context = self.appDelegate.managedObjectContext;
-	Person *person = (Person *)[context objectWithID:annotation.objectID];
-	
-	FriendDetailsController *controller = [[FriendDetailsController alloc] initWithNibName:@"FriendDetailsController" bundle:nil];
-	controller.person = person;
-	[self.navigationController pushViewController:controller animated:TRUE];
-	[controller release];
+	if ([annotation respondsToSelector:@selector(objectID)] && annotation.objectID) {
+		NSManagedObjectContext *context = self.appDelegate.managedObjectContext;
+		Person *person = (Person *)[context objectWithID:annotation.objectID];
+		
+		FriendDetailsController *controller = [[FriendDetailsController alloc] initWithNibName:@"FriendDetailsController" bundle:nil];
+		controller.person = person;
+		[self.navigationController pushViewController:controller animated:TRUE];
+		[controller release];
+	}
 }
 
 /*

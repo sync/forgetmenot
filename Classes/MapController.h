@@ -18,4 +18,6 @@
 
 - (void)addAnnotations;
 
+- (IBAction)showCurrentLocation:(id)sender;
+
 @end
