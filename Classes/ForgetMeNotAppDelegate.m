@@ -7,6 +7,7 @@
 //
 
 #import "ForgetMeNotAppDelegate.h"
+#import "MyLocationGetter.h"
 
 
 @implementation ForgetMeNotAppDelegate
@@ -18,6 +19,7 @@
 @synthesize localWiFiConnectionStatus;
 @synthesize hasValidNetworkConnection=_hasValidNetworkConnection;
 @synthesize noConnectionAlertShowing=_noConnectionAlertShowing;
+@synthesize locationGetter=_locationGetter;
 
 
 #pragma mark -
@@ -56,6 +58,14 @@
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error 
 {
     NSLog(@"Error in registration. Error: %@", error); 
+}
+
+- (MyLocationGetter *)locationGetter
+{
+	if (!_locationGetter) {
+		_locationGetter = [[MyLocationGetter alloc]init];
+	}
+	return _locationGetter;
 }
 
 - (void)alertNoNetworkConnection
@@ -244,6 +254,12 @@
 
 - (void)dealloc {
 	[[NSNotificationCenter defaultCenter]removeObserver:self];
+	
+	[_locationGetter release];
+	
+	[managedObjectContext release];
+    [managedObjectModel release];
+    [persistentStoreCoordinator release];
 	
 	[navigationController release];
 	[window release];

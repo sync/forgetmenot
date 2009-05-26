@@ -28,3 +28,6 @@
 #define BottomTransparentCell @"BottomTransparentCell"
 #define UniqueTransparentCell @"UniqueTransparentCell"
 #define SETTINGS_CELL_VIEW 3000
+
+// GPS
+#define ShouldStopGPSLocationFix @"ShouldStopGPSLocationFix"

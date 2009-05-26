@@ -28,6 +28,7 @@
 		[fetchRequest setEntity:entity];
 		
 		self.factTypes = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:NULL];
+		[fetchRequest release];
 		
 		[self setEditing:TRUE];
 	}
@@ -84,6 +85,7 @@
 		[fetchRequest setEntity:entity];
 		
 		self.factTypes = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:NULL];
+		[fetchRequest release];
 	}
 	
 	NSInteger count = [self.factTypes count];
@@ -194,10 +196,13 @@
 	// Edit the sort key as appropriate.
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"priority" ascending:YES];
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	[sortDescriptor release];
 	
 	[fetchRequest setSortDescriptors:sortDescriptors];
+	[sortDescriptors release];
 	
 	NSArray *factTypes = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:NULL];
+	[fetchRequest release];
 	
 	NSInteger i = index;
 	for (FactType *factType in factTypes) {
@@ -221,10 +226,13 @@
 	// Edit the sort key as appropriate.
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"priority" ascending:NO];
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	[sortDescriptor release];
 	
 	[fetchRequest setSortDescriptors:sortDescriptors];
+	[sortDescriptors release];
 	
 	NSArray *factTypes = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:NULL];
+	[fetchRequest release];
 	
 	NSInteger i = index;
 	for (FactType *factType in factTypes) {
@@ -314,20 +322,15 @@
 	NSInteger count = [self.factTypes count];
     
 	UITableViewCellPosition position;
-	NSString *cellIdentifier = nil;
 	if (count == 1) {
 		position = UITableViewCellPositionUnique;
-		cellIdentifier = UniqueTransparentCell;
 	} else {
 		if (indexPath.row == 0) {
 			position = UITableViewCellPositionTop;
-			cellIdentifier = TopTransparentCell;
 		} else if (indexPath.row == (count -1)) {
 			position = UITableViewCellPositionBottom;
-			cellIdentifier = BottomTransparentCell;
 		} else {
 			position = UITableViewCellPositionMiddle;
-			cellIdentifier = MiddleTransparentCell;
 		}
 	}
 	

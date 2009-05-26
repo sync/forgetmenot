@@ -101,10 +101,13 @@
 	// Edit the sort key as appropriate.
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	[sortDescriptor release];
 	
 	[fetchRequest setSortDescriptors:sortDescriptors];
+	[sortDescriptors release];
 	
 	NSArray *keywords = [self.appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:NULL];
+	[fetchRequest release];
 	
 	if (!self.addedKeywords) {
 		self.addedKeywords = [NSMutableArray arrayWithCapacity:0];

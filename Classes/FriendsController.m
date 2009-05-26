@@ -105,8 +105,8 @@
 	cell.cellView.title = person.fullName;
 	cell.cellView.subtitle = person.partialAddress;
 	NSString *imageURL = [self.appDelegate applicationDocumentsDirectory];
-	imageURL = [imageURL stringByAppendingPathComponent:person.local_image_url];
-	if (!person.local_image_url) {
+	if (person.local_image_url) {
+		imageURL = [imageURL stringByAppendingPathComponent:person.local_image_url];
 	}
 	UIImage *image = [UIImage imageWithContentsOfFile:imageURL];
 	if (!image) {
@@ -206,6 +206,10 @@
 	if ([addresses count] > 0) {
 		address = [addresses objectAtIndex:0];
 		DLog(@"address: %@", address);
+	}
+	
+	if (addressesRef != NULL) {
+		CFRelease(addressesRef);
 	}
 	
 	// Image

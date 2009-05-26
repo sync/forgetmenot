@@ -276,6 +276,7 @@
 			UIImageView *icon = [[UIImageView alloc]initWithFrame:CGRectMake(LEFT_RIGHT_BORDER + (2 + index) * ICON_WIDTH + (2 + index) * ICON_SPACE, TOP_BOTTOM_BORDER, ICON_WIDTH, ICON_HEIGHT)];
 			icon.image = [UIImage imageNamed:fact.image_name];
 			[self.scrollView addSubview:icon];
+			[icon release];
 			index++;
 		}
 	}

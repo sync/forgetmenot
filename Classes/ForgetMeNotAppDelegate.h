@@ -9,6 +9,8 @@
 // Remote status
 #import "Reachability.h"
 
+@class MyLocationGetter;
+
 @interface ForgetMeNotAppDelegate : NSObject <UIApplicationDelegate> {
     
     UIWindow *window;
@@ -24,6 +26,8 @@
 	
 	BOOL _hasValidNetworkConnection;
 	BOOL _noConnectionAlertShowing;
+	
+	MyLocationGetter *_locationGetter;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -39,6 +43,8 @@
 @property NetworkStatus remoteHostStatus;
 @property NetworkStatus internetConnectionStatus;
 @property NetworkStatus localWiFiConnectionStatus;
+
+@property (nonatomic, readonly) MyLocationGetter *locationGetter;
 
 - (IBAction)saveAction:sender;
 - (NSString *)applicationDocumentsDirectory;
