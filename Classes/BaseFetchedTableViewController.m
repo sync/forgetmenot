@@ -1,6 +1,6 @@
 //
 //  BaseFetchedTableViewController.m.m
-//  Mneme
+//  ForgetMeNot
 //
 //  Created by Anthony Mittaz on 19/03/09.
 //  Copyright 2009 Anthony Mittaz. All rights reserved.

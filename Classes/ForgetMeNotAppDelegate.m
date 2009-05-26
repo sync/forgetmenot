@@ -20,6 +20,8 @@
 @synthesize hasValidNetworkConnection=_hasValidNetworkConnection;
 @synthesize noConnectionAlertShowing=_noConnectionAlertShowing;
 @synthesize locationGetter=_locationGetter;
+@synthesize mapNavigationController;
+@synthesize friendsDisplayed=_friendsDisplayed;
 
 
 #pragma mark -
@@ -27,10 +29,21 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
     
-    // Override point for customization after app launch    
-	
+    // Override point for customization after app launch 
+	[window addSubview:[mapNavigationController view]];
+	[[mapNavigationController view]removeFromSuperview];
 	[window addSubview:[navigationController view]];
-    [window makeKeyAndVisible];
+	self.friendsDisplayed = TRUE;
+	[window makeKeyAndVisible];
+	
+//	self.mapNavigationController.view.frame = [[UIScreen mainScreen]bounds];
+//	
+//	[self.mapNavigationController viewWillAppear:NO];
+//	[self.mapNavigationController viewDidLoad];
+//	[self.mapNavigationController viewDidAppear:NO];
+	
+//	[window addSubview:[mapNavigationController view]];
+    
 
 	/*
 	 You can use the Reachability class to check the reachability of a remote host
@@ -261,6 +274,7 @@
     [managedObjectModel release];
     [persistentStoreCoordinator release];
 	
+	[mapNavigationController release];
 	[navigationController release];
 	[window release];
 	[super dealloc];

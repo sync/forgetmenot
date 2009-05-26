@@ -26,5 +26,6 @@
 - (IBAction)showSettings:(id)sender;
 
 - (IBAction)showMap:(id)sender;
+- (IBAction)showFriends:(id)sender;
 
 @end

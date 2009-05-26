@@ -1,6 +1,6 @@
 //
 //  LocationCell.m
-//  Latitude
+//  ForgetMeNot
 //
 //  Created by Anthony Mittaz on 26/09/08.
 //  Copyright 2009 Anthony Mittaz. All rights reserved.

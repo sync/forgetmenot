@@ -38,6 +38,10 @@
 		3A692BDD0F9F23DF00E30A2F /* something_here.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A692BDC0F9F23DF00E30A2F /* something_here.png */; };
 		3A692BE10F9F23F700E30A2F /* your_infos.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A692BE00F9F23F700E30A2F /* your_infos.png */; };
 		3A8830DB0FCC074700862790 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A8830DA0FCC074700862790 /* Icon.png */; };
+		3A8831020FCC0FC200862790 /* MapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8831010FCC0FC200862790 /* MapController.m */; };
+		3A8831040FCC0FD500862790 /* MapController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A8831030FCC0FD500862790 /* MapController.xib */; };
+		3A8832080FCC3B9400862790 /* FriendPinAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8832070FCC3B9400862790 /* FriendPinAnnotation.m */; };
+		3A88334D0FCC50FC00862790 /* DefaultOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A88334C0FCC50FC00862790 /* DefaultOperation.m */; };
 		3A9638640F8DBA8800FB643F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9638630F8DBA8800FB643F /* QuartzCore.framework */; };
 		3A9638660F8DBA8E00FB643F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9638650F8DBA8E00FB643F /* MapKit.framework */; };
 		3A9638680F8DBA9800FB643F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9638670F8DBA9800FB643F /* CoreFoundation.framework */; };
@@ -175,6 +179,13 @@
 		3A692BDC0F9F23DF00E30A2F /* something_here.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = something_here.png; sourceTree = "<group>"; };
 		3A692BE00F9F23F700E30A2F /* your_infos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = your_infos.png; sourceTree = "<group>"; };
 		3A8830DA0FCC074700862790 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		3A8831000FCC0FC200862790 /* MapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapController.h; sourceTree = "<group>"; };
+		3A8831010FCC0FC200862790 /* MapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapController.m; sourceTree = "<group>"; };
+		3A8831030FCC0FD500862790 /* MapController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapController.xib; sourceTree = "<group>"; };
+		3A8832060FCC3B9400862790 /* FriendPinAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendPinAnnotation.h; sourceTree = "<group>"; };
+		3A8832070FCC3B9400862790 /* FriendPinAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendPinAnnotation.m; sourceTree = "<group>"; };
+		3A88334B0FCC50FC00862790 /* DefaultOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultOperation.h; sourceTree = "<group>"; };
+		3A88334C0FCC50FC00862790 /* DefaultOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultOperation.m; sourceTree = "<group>"; };
 		3A9638630F8DBA8800FB643F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3A9638650F8DBA8E00FB643F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3A9638670F8DBA9800FB643F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -351,6 +362,7 @@
 				3A963AB20F93117B00FB643F /* Model Class */,
 				3A2857490FC53EB30073BC01 /* GeoLocation */,
 				3A9639410F8DBE0D00FB643F /* JSON */,
+				3A8833360FCC50CE00862790 /* NSOperations */,
 				3A9639390F8DBD6400FB643F /* Reachibility */,
 				3A9639240F8DBD0D00FB643F /* Utilities */,
 			);
@@ -403,6 +415,7 @@
 				3AF7E2E90F9775CF0082F751 /* OneRowOneImageEditController.xib */,
 				3AF7EE2B0F9C946D0082F751 /* SettingsController.xib */,
 				3A25E1780F9F35F300591131 /* SettingsFactTypesController.xib */,
+				3A8831030FCC0FD500862790 /* MapController.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -483,6 +496,26 @@
 			name = "Settings Icons";
 			sourceTree = "<group>";
 		};
+		3A8830FF0FCC0F9F00862790 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				3A8831000FCC0FC200862790 /* MapController.h */,
+				3A8831010FCC0FC200862790 /* MapController.m */,
+				3A8832060FCC3B9400862790 /* FriendPinAnnotation.h */,
+				3A8832070FCC3B9400862790 /* FriendPinAnnotation.m */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		3A8833360FCC50CE00862790 /* NSOperations */ = {
+			isa = PBXGroup;
+			children = (
+				3A88334B0FCC50FC00862790 /* DefaultOperation.h */,
+				3A88334C0FCC50FC00862790 /* DefaultOperation.m */,
+			);
+			name = NSOperations;
+			sourceTree = "<group>";
+		};
 		3A9639240F8DBD0D00FB643F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -547,6 +580,7 @@
 			children = (
 				3A963CF90F9344AE00FB643F /* Modal */,
 				3A963A160F8DC9BF00FB643F /* Friends */,
+				3A8830FF0FCC0F9F00862790 /* Map */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -901,6 +935,7 @@
 				3AB476030FB2A8CE00955526 /* keyword_delete_selected.png in Resources */,
 				3A31142A0FBBFE0900E0312C /* ForgetMeNot.sqlite in Resources */,
 				3A8830DB0FCC074700862790 /* Icon.png in Resources */,
+				3A8831040FCC0FD500862790 /* MapController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -959,6 +994,9 @@
 				3A9C04D80FB441D1009D5E03 /* Fact.m in Sources */,
 				3A9C04D90FB441D1009D5E03 /* Keyword.m in Sources */,
 				3A28574E0FC53EC40073BC01 /* MyLocationGetter.m in Sources */,
+				3A8831020FCC0FC200862790 /* MapController.m in Sources */,
+				3A8832080FCC3B9400862790 /* FriendPinAnnotation.m in Sources */,
+				3A88334D0FCC50FC00862790 /* DefaultOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

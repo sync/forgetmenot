@@ -1,6 +1,6 @@
 //
-//  HousesCell.h
-//  Latitude
+//  TitleImageCell.h
+//  ForgetMeNot
 //
 //  Created by Anthony Mittaz on 18/07/08.
 //  Copyright 2009 Anthony Mittaz. All rights reserved.

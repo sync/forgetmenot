@@ -69,7 +69,34 @@
 
 - (IBAction)showMap:(id)sender
 {
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:1.0];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft
+						   forView:self.appDelegate.window cache:YES];
 	
+	[self.appDelegate.navigationController.view removeFromSuperview];
+	[self.appDelegate.window addSubview:self.appDelegate.mapNavigationController.view];
+	self.appDelegate.friendsDisplayed = FALSE;
+	
+	
+	[UIView commitAnimations];
+}
+
+- (IBAction)showFriends:(id)sender
+{
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:1.0];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight
+						   forView:self.appDelegate.window cache:YES];
+	
+	[self.appDelegate.mapNavigationController.view removeFromSuperview];
+	[self.appDelegate.window addSubview:self.appDelegate.navigationController.view];
+	self.appDelegate.friendsDisplayed = TRUE;
+	
+	
+	[UIView commitAnimations];
 }
 
 - (void)viewDidUnload {

@@ -15,6 +15,7 @@
     
     UIWindow *window;
     UINavigationController *navigationController;
+	UINavigationController *mapNavigationController;
 	
 	NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;	    
@@ -28,10 +29,13 @@
 	BOOL _noConnectionAlertShowing;
 	
 	MyLocationGetter *_locationGetter;
+	
+	BOOL _friendsDisplayed;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
+@property (nonatomic, retain) IBOutlet UINavigationController *mapNavigationController;
 
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
@@ -45,6 +49,8 @@
 @property NetworkStatus localWiFiConnectionStatus;
 
 @property (nonatomic, readonly) MyLocationGetter *locationGetter;
+
+@property (nonatomic) BOOL friendsDisplayed;
 
 - (IBAction)saveAction:sender;
 - (NSString *)applicationDocumentsDirectory;

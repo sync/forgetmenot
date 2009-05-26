@@ -1,9 +1,9 @@
 //
 //  Base64.h
-//  CoOp
+//  ForgetMeNot
 //
 //  Created by Anthony Mittaz on 21/01/09.
-//  Copyright 2009 Mocra. All rights reserved.
+//  Copyright 2009 Anthony Mittaz. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
