@@ -17,6 +17,7 @@
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 
 - (void)addAnnotations;
+- (void)updateAnnotations;
 
 - (IBAction)showCurrentLocation:(id)sender;
 

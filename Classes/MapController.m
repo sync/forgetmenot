@@ -39,7 +39,28 @@
     [super viewDidLoad];
 	
 	self.mapView.showsUserLocation = TRUE;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	if (self.mapView.annotations) {
+		[self updateAnnotations];
+	} else {
+		[self addAnnotations];
+	}
 	
+	// here we should update the annotation dict
+}
+
+- (void)updateAnnotations
+{	
+	// remove all
+	[self.mapView removeAnnotations:self.mapView.annotations];
+	
+	self.mapView.showsUserLocation = TRUE;
+	
+	// add the all
 	[self addAnnotations];
 }
 

@@ -322,7 +322,6 @@
 		NSDictionary *objectDict = [info valueForKey:@"object"];
 		
 		Person *person = (Person *)[context objectWithID:[info valueForKey:@"objectID"]];
-		NSNumber *latitude = [objectDict valueForKey:@"latitude"];
 		person.latitude = [objectDict valueForKey:@"latitude"];
 		person.longitude = [objectDict valueForKey:@"longitude"];
 		
