@@ -38,6 +38,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	self.mapView.showsUserLocation = TRUE;
+	
 	[self addAnnotations];
 }
 

@@ -34,7 +34,12 @@
 	[[mapNavigationController view]removeFromSuperview];
 	[window addSubview:[navigationController view]];
 	self.friendsDisplayed = TRUE;
+	
+	self.window.backgroundColor = [UIColor clearColor];
+	
 	[window makeKeyAndVisible];
+	
+	
 	
 //	self.mapNavigationController.view.frame = [[UIScreen mainScreen]bounds];
 //	

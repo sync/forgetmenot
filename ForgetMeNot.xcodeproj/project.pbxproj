@@ -42,7 +42,8 @@
 		3A8831040FCC0FD500862790 /* MapController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A8831030FCC0FD500862790 /* MapController.xib */; };
 		3A8832080FCC3B9400862790 /* FriendPinAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8832070FCC3B9400862790 /* FriendPinAnnotation.m */; };
 		3A88334D0FCC50FC00862790 /* DefaultOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A88334C0FCC50FC00862790 /* DefaultOperation.m */; };
-		3A8834180FCC591F00862790 /* toolbar_current_location.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A8834170FCC591F00862790 /* toolbar_current_location.png */; };
+		3A8834580FCD728F00862790 /* ReverseGeoCodeOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8834570FCD728F00862790 /* ReverseGeoCodeOperation.m */; };
+		3A88345A0FCD766C00862790 /* toolbar_current_location.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A8834590FCD766C00862790 /* toolbar_current_location.png */; };
 		3A9638640F8DBA8800FB643F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9638630F8DBA8800FB643F /* QuartzCore.framework */; };
 		3A9638660F8DBA8E00FB643F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9638650F8DBA8E00FB643F /* MapKit.framework */; };
 		3A9638680F8DBA9800FB643F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9638670F8DBA9800FB643F /* CoreFoundation.framework */; };
@@ -187,7 +188,9 @@
 		3A8832070FCC3B9400862790 /* FriendPinAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendPinAnnotation.m; sourceTree = "<group>"; };
 		3A88334B0FCC50FC00862790 /* DefaultOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultOperation.h; sourceTree = "<group>"; };
 		3A88334C0FCC50FC00862790 /* DefaultOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultOperation.m; sourceTree = "<group>"; };
-		3A8834170FCC591F00862790 /* toolbar_current_location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = toolbar_current_location.png; path = "../../iPhone Ressources/icons/toolbar_current_location.png"; sourceTree = SOURCE_ROOT; };
+		3A8834560FCD728F00862790 /* ReverseGeoCodeOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReverseGeoCodeOperation.h; sourceTree = "<group>"; };
+		3A8834570FCD728F00862790 /* ReverseGeoCodeOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReverseGeoCodeOperation.m; sourceTree = "<group>"; };
+		3A8834590FCD766C00862790 /* toolbar_current_location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_current_location.png; sourceTree = "<group>"; };
 		3A9638630F8DBA8800FB643F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3A9638650F8DBA8E00FB643F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3A9638670F8DBA9800FB643F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -514,6 +517,8 @@
 			children = (
 				3A88334B0FCC50FC00862790 /* DefaultOperation.h */,
 				3A88334C0FCC50FC00862790 /* DefaultOperation.m */,
+				3A8834560FCD728F00862790 /* ReverseGeoCodeOperation.h */,
+				3A8834570FCD728F00862790 /* ReverseGeoCodeOperation.m */,
 			);
 			name = NSOperations;
 			sourceTree = "<group>";
@@ -795,7 +800,7 @@
 				3A3B50110F943AE5004ECC37 /* toolbar_settings.png */,
 				3AF7E1420F95F7EB0082F751 /* toolbar_friends.png */,
 				3AF7E1430F95F7EB0082F751 /* toolbar_map.png */,
-				3A8834170FCC591F00862790 /* toolbar_current_location.png */,
+				3A8834590FCD766C00862790 /* toolbar_current_location.png */,
 			);
 			name = Toolbar;
 			sourceTree = "<group>";
@@ -939,7 +944,7 @@
 				3A31142A0FBBFE0900E0312C /* ForgetMeNot.sqlite in Resources */,
 				3A8830DB0FCC074700862790 /* Icon.png in Resources */,
 				3A8831040FCC0FD500862790 /* MapController.xib in Resources */,
-				3A8834180FCC591F00862790 /* toolbar_current_location.png in Resources */,
+				3A88345A0FCD766C00862790 /* toolbar_current_location.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1001,6 +1006,7 @@
 				3A8831020FCC0FC200862790 /* MapController.m in Sources */,
 				3A8832080FCC3B9400862790 /* FriendPinAnnotation.m in Sources */,
 				3A88334D0FCC50FC00862790 /* DefaultOperation.m in Sources */,
+				3A8834580FCD728F00862790 /* ReverseGeoCodeOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
