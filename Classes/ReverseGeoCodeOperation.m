@@ -7,7 +7,7 @@
 //
 
 #import "ReverseGeoCodeOperation.h"
-
+#import "JSON.h"
 
 @implementation ReverseGeoCodeOperation
 
@@ -23,17 +23,42 @@
 		return;  // user cancelled this operation
 	}
 	
+	[self startOperation];
+	
 	NSData *responseData = [self downloadUrl];
 	
 	if ([responseData length] != 0)  {
         
 		if (![self isCancelled])
 		{
-			NSString *contentAsString = [[NSString alloc]initWithData:responseData encoding:<#(NSStringEncoding)encoding#>
-			[self finishPostWithObject:responseData];
+			NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithCapacity:0];
+			[dictionary addEntriesFromDictionary:self.infoDictionary];
+			NSString *jsonString = [[NSString alloc]initWithData:responseData encoding:NSUTF8StringEncoding];
+			SBJSON *json = [[SBJSON alloc]init]; 
+			NSDictionary* result = (NSDictionary *)[json objectWithString:jsonString error:nil];
+			
+			NSArray *placemarks = [result valueForKey:@"Placemark"];
+			if (placemarks && [placemarks count] > 0) {
+				NSDictionary *placemark = [placemarks objectAtIndex:0];
+				
+				NSArray *coordinates = [placemark valueForKeyPath:@"Point.coordinates"];
+				if (coordinates && [coordinates count] > 1) {
+					[dictionary setValue:[NSNumber numberWithDouble:[[NSString stringWithFormat:@"%@", 
+																	  [coordinates objectAtIndex:1]]doubleValue]] 
+								  forKey:@"latitude"];	
+					[dictionary setValue:[NSNumber numberWithDouble:[[NSString stringWithFormat:@"%@", 
+																	  [coordinates objectAtIndex:0]]doubleValue]]
+								  forKey:@"longitude"];	
+				}
+				
+			}
+			[jsonString release];
+			[json release];
+			
+			[self finishOperationWithObject:dictionary];
 		}
 	} else {
-		[self failPostWithErrorString:@"Unable to retrieve coordinate"];
+		[self failOperationWithErrorString:@"Unable to retrieve coordinate"];
 	}
 }
 

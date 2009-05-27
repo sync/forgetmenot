@@ -12,12 +12,19 @@
 #import "TitleImageCell.h"
 #import "FriendDetailsController.h"
 
+
 @implementation FriendsController
 
 @synthesize group=_group;
+@synthesize reverseOperationQueue=_reverseOperationQueue;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	NSOperationQueue *queue =  [[NSOperationQueue alloc]init];
+	queue.maxConcurrentOperationCount = 1;
+	self.reverseOperationQueue = queue;
+	[queue release];
 	
 	self.tableView.rowHeight = ROW_HEIGHT;
 	
@@ -268,7 +275,26 @@
 	
 	[self dismissModalViewControllerAnimated:YES]; 
 	
+	// Find user location
+	NSString *urlString = [self urlEncodeValue:[NSString stringWithFormat:@"http://maps.google.com/maps/geo?q=%@&output=json&key=ABQIAAAA4yFxsxoDDepDo3ro17yA1hTjOjqphGs0Y9m3nFH3QZboM8-tuxRd5uNAoXEI-bEFHhLbT33JcyYACA", person.fullAddress]];
+	
+	ReverseGeoCodeOperation *operation = [[ReverseGeoCodeOperation alloc]initWithURL:[NSURL URLWithString:urlString] 
+																	  infoDictionary:[NSDictionary dictionaryWithObject:person.objectID forKey:@"objectID"]];
+	operation.delegate = self;
+	[self.reverseOperationQueue addOperation:operation];
+	[operation release];
+	
 	return NO; 
+}
+
+- (NSString *)urlEncodeValue:(NSString *)string
+{
+	CFStringRef originalURLString = (CFStringRef)string;
+	CFStringRef preprocessedString = CFURLCreateStringByAddingPercentEscapes(NULL, originalURLString, NULL, (CFStringRef)@"", kCFStringEncodingUTF8);
+	//CFStringRef urlString = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, preprocessedString, NULL, (CFStringRef)@";/?:@&=+$", kCFStringEncodingUTF8);
+	NSString *stringToReturn = [NSString stringWithString:(NSString *)preprocessedString];
+	CFRelease(preprocessedString);
+	return stringToReturn;
 }
 
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person 
@@ -278,9 +304,32 @@
 	return NO;
 }
 
+- (void)defaultOperationDidStartLoadingWithInfo:(NSDictionary *)info
+{
+	[[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:TRUE];
+}
+
+- (void)defaultOperationDidFailWithInfo:(NSDictionary *)info
+{
+	[[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:FALSE];
+}
+
+- (void)defaultOperationDidFinishLoadingWithInfo:(NSDictionary *)info
+{
+	if ([info valueForKey:@"objectID"]) {
+		Person *person = (Person *)[self.appDelegate.managedObjectContext objectWithID:[info valueForKey:@"objectID"]];
+		person.latitude = [info valueForKey:@"latitude"];
+		person.longitude = [info valueForKey:@"longitude"];
+	}
+	
+	
+	[[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:FALSE];
+}
+
 
 - (void)dealloc {
 	[[NSNotificationCenter defaultCenter]removeObserver:self];
+	[_reverseOperationQueue release];
 	[_group release];
 	
     [super dealloc];

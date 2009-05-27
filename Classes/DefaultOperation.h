@@ -60,8 +60,9 @@
 
 - (NSString *)bundlePathForRessource:(NSString *)aRessource ofType:(NSString *)aType;
 
-- (void)finishPostWithObject:(id)object;
-- (void)failPostWithErrorString:(NSString *)errorString;
+- (void)startOperation;
+- (void)finishOperationWithObject:(id)object;
+- (void)failOperationWithErrorString:(NSString *)errorString;
 
 @end
 
@@ -69,6 +70,7 @@
 
 @optional
 
+- (void)defaultOperationDidStartLoadingWithInfo:(NSDictionary *)info;
 - (void)defaultOperationDidFailWithInfo:(NSDictionary *)info;
 - (void)defaultOperationDidFinishLoadingWithInfo:(NSDictionary *)info;
 

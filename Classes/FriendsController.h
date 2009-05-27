@@ -10,16 +10,23 @@
 #import "BaseFetchedTableViewController.h"
 #import <AddressBook/AddressBook.h> 
 #import <AddressBookUI/AddressBookUI.h>
+#import "ReverseGeoCodeOperation.h"
 
 @class Group;
 
-@interface FriendsController : BaseFetchedTableViewController <ABPeoplePickerNavigationControllerDelegate>{
+@interface FriendsController : BaseFetchedTableViewController <ABPeoplePickerNavigationControllerDelegate, DefaultOperationDelegate>{
 	Group *_group;
+	
+	NSOperationQueue *_reverseOperationQueue;
 }
 
 @property (nonatomic, retain) Group *group;
 
 - (IBAction)addPerson:(id)sender;
 - (void)reloadTableview:(id)sender;
+
+- (NSString *)urlEncodeValue:(NSString *)string;
+
+@property (nonatomic, retain) NSOperationQueue *reverseOperationQueue;
 
 @end

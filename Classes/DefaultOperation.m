@@ -77,13 +77,14 @@
 		return;  // user cancelled this operation
 	}
 	
+	
 	NSData *responseData = [self downloadUrl];
 	
 	if ([responseData length] != 0)  {
         
 		if (![self isCancelled])
 		{
-			[self finishPostWithObject:responseData];
+			[self finishOperationWithObject:responseData];
 		}
 	}
 }
@@ -94,7 +95,7 @@
 	[_tmpFileHandle truncateFileAtOffset: 0];
 	
 	if (!self.url || [[self.url absoluteString] length] == 0) {
-		[self failPostWithErrorString:@"NOURL"];
+		[self failOperationWithErrorString:@"NOURL"];
 		return nil;
 	}
 	
@@ -259,7 +260,16 @@
 //	self.peformedSelectorOnce = TRUE;
 //}
 
-- (void)finishPostWithObject:(id)object
+- (void)startOperation
+{
+	if ([self.delegate respondsToSelector:@selector(defaultOperationDidStartLoadingWithInfo:)]) {
+		NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
+		[dict addEntriesFromDictionary:self.infoDictionary];
+		[self.delegate performSelectorOnMainThread:@selector(defaultOperationDidStartLoadingWithInfo:) withObject:dict waitUntilDone:FALSE];
+	}
+}
+
+- (void)finishOperationWithObject:(id)object
 {
 	if ([self.delegate respondsToSelector:@selector(defaultOperationDidFinishLoadingWithInfo:)]) {
 		NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
@@ -270,7 +280,7 @@
 	}
 }
 
-- (void)failPostWithErrorString:(NSString *)errorString
+- (void)failOperationWithErrorString:(NSString *)errorString
 {
 	if ([self.delegate respondsToSelector:@selector(defaultOperationDidFailWithInfo:)]) {
 		NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
