@@ -174,10 +174,11 @@
 	if ([annotation respondsToSelector:@selector(objectID)]) {
 		static NSString *defaultPinID = @"DefaultPinID";
 		
-		MKAnnotationView *mkav = [mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+		MKPinAnnotationView *mkav = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
 		if (mkav == nil) {
 			mkav = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:defaultPinID] autorelease];
 			mkav.canShowCallout = TRUE;
+			mkav.pinColor = MKPinAnnotationColorPurple;
 			UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
 			mkav.rightCalloutAccessoryView = button;
 		}
