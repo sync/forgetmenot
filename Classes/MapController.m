@@ -171,17 +171,20 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
-	static NSString *defaultPinID = @"DefaultPinID";
-	
-    MKAnnotationView *mkav = [mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
-    if (mkav == nil) {
-        mkav = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:defaultPinID] autorelease];
-		mkav.canShowCallout = TRUE;
-		UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-		mkav.rightCalloutAccessoryView = button;
-    }
-	
-    return mkav;
+	if ([annotation respondsToSelector:@selector(objectID)]) {
+		static NSString *defaultPinID = @"DefaultPinID";
+		
+		MKAnnotationView *mkav = [mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+		if (mkav == nil) {
+			mkav = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:defaultPinID] autorelease];
+			mkav.canShowCallout = TRUE;
+			UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+			mkav.rightCalloutAccessoryView = button;
+		}
+		
+		return mkav;
+	}
+	return nil;
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
