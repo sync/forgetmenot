@@ -66,22 +66,22 @@
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
 	[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
 	[dateFormatter setDateStyle:NSDateFormatterShortStyle];
-	NSInteger i = 0;
 	for (Person *person in friends) {
-		CLLocationCoordinate2D coordinate;
-		coordinate.latitude = -27.450138 + i;
-		coordinate.longitude = 153.011142 + i;
-		
-		FriendPinAnnotation *annotation = [[FriendPinAnnotation alloc]initWithCoordinate:coordinate];
-		annotation.objectID = person.objectID;
-		annotation.title = person.fullName;
-		// check if brithday
-		if (person.birthday) {
-			annotation.subtitle = [dateFormatter stringFromDate:person.birthday];
+		if (person.latitude && person.longitude) {
+			CLLocationCoordinate2D coordinate;
+			coordinate.latitude = [person.latitude doubleValue];
+			coordinate.longitude = [person.longitude doubleValue];
+			
+			FriendPinAnnotation *annotation = [[FriendPinAnnotation alloc]initWithCoordinate:coordinate];
+			annotation.objectID = person.objectID;
+			annotation.title = person.fullName;
+			// check if brithday
+			if (person.birthday) {
+				annotation.subtitle = [dateFormatter stringFromDate:person.birthday];
+			}
+			[self.mapView addAnnotation:annotation];
+			[annotation release];
 		}
-		[self.mapView addAnnotation:annotation];
-		[annotation release];
-		i++;
 	}
 	[dateFormatter release];	
 }

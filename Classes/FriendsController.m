@@ -317,9 +317,20 @@
 - (void)defaultOperationDidFinishLoadingWithInfo:(NSDictionary *)info
 {
 	if ([info valueForKey:@"objectID"]) {
-		Person *person = (Person *)[self.appDelegate.managedObjectContext objectWithID:[info valueForKey:@"objectID"]];
-		person.latitude = [info valueForKey:@"latitude"];
-		person.longitude = [info valueForKey:@"longitude"];
+		NSManagedObjectContext *context = self.appDelegate.managedObjectContext;
+		
+		NSDictionary *objectDict = [info valueForKey:@"object"];
+		
+		Person *person = (Person *)[context objectWithID:[info valueForKey:@"objectID"]];
+		NSNumber *latitude = [objectDict valueForKey:@"latitude"];
+		person.latitude = [objectDict valueForKey:@"latitude"];
+		person.longitude = [objectDict valueForKey:@"longitude"];
+		
+		// Save the context.
+		NSError *error;
+		if (![context save:&error]) {
+			// Handle the error...
+		}
 	}
 	
 	
