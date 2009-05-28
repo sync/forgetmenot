@@ -166,6 +166,8 @@
 	[self addSubview:self.deleteButton];
 	[self.deleteButton setHidden:TRUE];
 	
+	[[NSNotificationCenter defaultCenter] postNotificationName:ShouldLayoutFactOneLayoutController object:nil];
+	
 	[super layoutSubviews];
 	
 }

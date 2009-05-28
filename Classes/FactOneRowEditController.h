@@ -27,4 +27,6 @@
 @property (nonatomic, retain) IBOutlet KeywordView *keywordView;
 @property (nonatomic) BOOL createdTemporaryObject;
 
+- (void)layoutSubviews:(id)sender;
+
 @end

@@ -54,6 +54,17 @@
 		self.createdTemporaryObject = FALSE;
 	}
 	self.keywordView.fact = (Fact *)self.object;
+	
+	[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(layoutSubviews:) name:ShouldLayoutFactOneLayoutController object:nil];
+}
+
+- (void)layoutSubviews:(id)sender
+{
+	// Check the height of the Keyword view
+	CGFloat keywordHeightDiff = self.keywordView.frame.size.height - 42.0;
+	
+	// Move the deleteButton frame origin y
+	self.deleteButton.frame = CGRectMake(self.deleteButton.frame.origin.x, 134.0 + 21.0 + keywordHeightDiff, self.deleteButton.frame.size.width, self.deleteButton.frame.size.height);
 }
 
 - (IBAction)doneEditing:(id)sender

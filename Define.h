@@ -31,3 +31,6 @@
 
 // GPS
 #define ShouldStopGPSLocationFix @"ShouldStopGPSLocationFix"
+
+// Layout Fact One Row edit controller
+#define  ShouldLayoutFactOneLayoutController @"ShouldLayoutFactOneLayoutController"

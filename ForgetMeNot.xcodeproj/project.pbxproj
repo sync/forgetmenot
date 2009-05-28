@@ -114,6 +114,7 @@
 		3A8839FB0FCE577300862790 /* swimming_icon_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A8839D80FCE577300862790 /* swimming_icon_black.png */; };
 		3A8839FC0FCE577300862790 /* travel_icon_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A8839D90FCE577300862790 /* travel_icon_black.png */; };
 		3A8839FD0FCE577300862790 /* writing_icon_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A8839DA0FCE577300862790 /* writing_icon_black.png */; };
+		3A883C2D0FCE7A6600862790 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A883C2C0FCE7A6600862790 /* Default.png */; };
 		3A9638640F8DBA8800FB643F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9638630F8DBA8800FB643F /* QuartzCore.framework */; };
 		3A9638660F8DBA8E00FB643F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9638650F8DBA8E00FB643F /* MapKit.framework */; };
 		3A9638680F8DBA9800FB643F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9638670F8DBA9800FB643F /* CoreFoundation.framework */; };
@@ -331,6 +332,7 @@
 		3A8839D80FCE577300862790 /* swimming_icon_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swimming_icon_black.png; sourceTree = "<group>"; };
 		3A8839D90FCE577300862790 /* travel_icon_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = travel_icon_black.png; sourceTree = "<group>"; };
 		3A8839DA0FCE577300862790 /* writing_icon_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writing_icon_black.png; sourceTree = "<group>"; };
+		3A883C2C0FCE7A6600862790 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Images/Default.png; sourceTree = "<group>"; };
 		3A9638630F8DBA8800FB643F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3A9638650F8DBA8E00FB643F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3A9638670F8DBA9800FB643F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -547,6 +549,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3A883C2C0FCE7A6600862790 /* Default.png */,
 				3A963A2B0F8DCAAD00FB643F /* Images */,
 				3A3114290FBBFE0900E0312C /* ForgetMeNot.sqlite */,
 				3A9639E30F8DC7CA00FB643F /* ForgetMeNot.xcdatamodel */,
@@ -1225,6 +1228,7 @@
 				3A8839FB0FCE577300862790 /* swimming_icon_black.png in Resources */,
 				3A8839FC0FCE577300862790 /* travel_icon_black.png in Resources */,
 				3A8839FD0FCE577300862790 /* writing_icon_black.png in Resources */,
+				3A883C2D0FCE7A6600862790 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1374,12 +1378,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Anthony Mittaz";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5CE69233-D670-4E12-AF0F-D67CDA7B262F";
 				SDKROOT = iphoneos3.0;
 			};
 			name = "Debug Anthony Mittaz";
@@ -1388,7 +1393,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Anthony Mittaz";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1397,7 +1402,7 @@
 				INFOPLIST_FILE = "ForgetMeNot-Info.plist";
 				OTHER_CFLAGS = "-DDEBUG";
 				PRODUCT_NAME = ForgetMeNot;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5CE69233-D670-4E12-AF0F-D67CDA7B262F";
 			};
 			name = "Debug Anthony Mittaz";
 		};
