@@ -16,6 +16,7 @@
 @implementation MapController
 
 @synthesize mapView=_mapView;
+@synthesize selectedIndex=_selectedIndex;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -39,6 +40,8 @@
     [super viewDidLoad];
 	
 	self.mapView.showsUserLocation = TRUE;
+	
+	self.selectedIndex = -1;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -109,23 +112,68 @@
 
 - (void)setupNavigationBar
 {
-//	// previous
-//	UIBarButtonItem *previousItem = [[UIBarButtonItem alloc]initWithTitle:@"Previous"
-//																   style:UIBarButtonItemStylePlain 
-//																  target:self
-//																   action:@selector(goPrevious:)];
-//	self.navigationItem.leftBarButtonItem = previousItem;
-//	[previousItem release];
-//	
-//	// next
-//	UIBarButtonItem *nextItem = [[UIBarButtonItem alloc]initWithTitle:@"Next"
-//																   style:UIBarButtonItemStylePlain 
-//																  target:self
-//																   action:@selector(goNext:)];
-//	self.navigationItem.rightBarButtonItem = nextItem;
-//	[nextItem release];
+	// previous
+	UIBarButtonItem *previousItem = [[UIBarButtonItem alloc]initWithTitle:@"Previous"
+																   style:UIBarButtonItemStylePlain 
+																  target:self
+																   action:@selector(goPrevious:)];
+	self.navigationItem.leftBarButtonItem = previousItem;
+	[previousItem release];
+	
+	// next
+	UIBarButtonItem *nextItem = [[UIBarButtonItem alloc]initWithTitle:@"Next"
+																   style:UIBarButtonItemStylePlain 
+																  target:self
+																   action:@selector(goNext:)];
+	self.navigationItem.rightBarButtonItem = nextItem;
+	[nextItem release];
+	
+	[self.navigationItem.leftBarButtonItem setEnabled:FALSE];
+	[self.navigationItem.rightBarButtonItem setEnabled:TRUE];
 	
 	self.navigationItem.title = @"Map";
+}
+
+- (IBAction)goNext:(id)sender
+{
+	NSInteger nextIndex = self.selectedIndex + 1;
+	if ([self.mapView.annotations count] > nextIndex) {
+		FriendPinAnnotation *annotation = [self.mapView.annotations objectAtIndex:nextIndex];
+		[self.mapView setRegion:MKCoordinateRegionMakeWithDistance(annotation.coordinate, 1520.0, 1520.0) animated:TRUE];
+		[self.mapView selectAnnotation:annotation animated:TRUE];
+		self.selectedIndex += 1;
+	}
+	if (self.selectedIndex == 0) {
+		[self.navigationItem.leftBarButtonItem setEnabled:FALSE];
+		[self.navigationItem.rightBarButtonItem setEnabled:TRUE];
+	} else if (self.selectedIndex == [self.mapView.annotations count]-1) {
+		[self.navigationItem.leftBarButtonItem setEnabled:TRUE];
+		[self.navigationItem.rightBarButtonItem setEnabled:FALSE];
+	} else {
+		[self.navigationItem.leftBarButtonItem setEnabled:TRUE];
+		[self.navigationItem.rightBarButtonItem setEnabled:TRUE];
+	}
+}
+
+- (IBAction)goPrevious:(id)sender
+{
+	NSInteger previousIndex = self.selectedIndex - 1;
+	if (previousIndex >= 0 && [self.mapView.annotations count] > previousIndex) {
+		FriendPinAnnotation *annotation = [self.mapView.annotations objectAtIndex:previousIndex];
+		[self.mapView setRegion:MKCoordinateRegionMakeWithDistance(annotation.coordinate, 1520.0, 1520.0) animated:TRUE];
+		[self.mapView selectAnnotation:annotation animated:TRUE];
+		self.selectedIndex -= 1;
+	}
+	if (self.selectedIndex == 0) {
+		[self.navigationItem.leftBarButtonItem setEnabled:FALSE];
+		[self.navigationItem.rightBarButtonItem setEnabled:TRUE];
+	} else if (self.selectedIndex == [self.mapView.annotations count]-1) {
+		[self.navigationItem.leftBarButtonItem setEnabled:TRUE];
+		[self.navigationItem.rightBarButtonItem setEnabled:FALSE];
+	} else {
+		[self.navigationItem.leftBarButtonItem setEnabled:TRUE];
+		[self.navigationItem.rightBarButtonItem setEnabled:TRUE];
+	}
 }
 
 - (void)setupToolbar

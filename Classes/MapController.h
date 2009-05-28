@@ -12,13 +12,19 @@
 
 @interface MapController : BaseViewController <MKMapViewDelegate>{
 	MKMapView *_mapView;
+	
+	NSInteger _selectedIndex;
 }
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
+@property (nonatomic) NSInteger selectedIndex;
 
 - (void)addAnnotations;
 - (void)updateAnnotations;
 
 - (IBAction)showCurrentLocation:(id)sender;
+
+- (IBAction)goNext:(id)sender;
+- (IBAction)goPrevious:(id)sender;
 
 @end
