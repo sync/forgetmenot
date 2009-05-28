@@ -36,6 +36,9 @@
 		// Define background color, if you don't want set it to [UIColor clearColor]
 		self.backgroundColor = [UIColor colorWithRed:230.0/255.0 green:231.0/255.0 blue:232.0/255.0 alpha:1.0];
 		
+		self.textField.autocorrectionType = UITextAutocorrectionTypeNo; // Don't get in the way of user typing.
+		self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone; // Don't capitalize each word.
+		
 		// Here you can init your background image
 		//self.backgroundImage = [UIImage imageNamed:@"keyword_background.png"];
 		
@@ -94,7 +97,7 @@
 	
 	// Filter 
 	if (self.fact) {
-		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fact = %@", self.fact]; 
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"Any fact = %@", self.fact]; 
 		[fetchRequest setPredicate:predicate]; 
 	}
 	
@@ -234,7 +237,7 @@
 	
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Keyword" inManagedObjectContext:context];
 	Keyword *keyword = (Keyword *)[NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-//	keyword.fact = self.fact;
+	[keyword addFactObject:self.fact];
 	keyword.name = textField.text;
 
 	// Save the context.

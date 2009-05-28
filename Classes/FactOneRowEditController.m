@@ -17,6 +17,7 @@
 @synthesize factType=_factType;
 @synthesize scrollView=_scrollView;
 @synthesize keywordView=_keywordView;
+@synthesize createdTemporaryObject=_createdTemporaryObject;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -32,6 +33,27 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	
+	// create a fact
+	if (!self.object) {
+		// should state that this object has to be removed on cancel
+		NSManagedObjectContext *context = self.appDelegate.managedObjectContext;
+		// Create a new instance of the entity managed by the fetched results controller.
+		NSEntityDescription *entity = [NSEntityDescription entityForName:self.entityName inManagedObjectContext:context];
+		self.object = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+		
+		// Save the context.
+		NSError *error;
+		if (![context save:&error]) {
+			// Handle the error...
+		}
+		
+		self.createdTemporaryObject = TRUE;
+	} else {
+		self.createdTemporaryObject = FALSE;
+	}
+	self.keywordView.fact = (Fact *)self.object;
 }
 
 - (IBAction)doneEditing:(id)sender
@@ -61,6 +83,24 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:self.notificationName object:nil];
 	
     [self dismissModalViewControllerAnimated:TRUE];
+}
+
+- (IBAction)cancelEditing:(id)sender
+{
+	if (self.object && self.createdTemporaryObject) {
+		// Remove
+		NSManagedObjectContext *context = self.appDelegate.managedObjectContext;
+		[context deleteObject:self.object];
+		
+		// Save the context.
+		NSError *error;
+		if (![context save:&error]) {
+			// Handle the error...
+		}
+	}
+	
+	
+	[self dismissModalViewControllerAnimated:TRUE];
 }
 
 

@@ -17,11 +17,14 @@
 	FactType *_factType;
 	UIScrollView *_scrollView;
 	KeywordView *_keywordView;
+	
+	BOOL _createdTemporaryObject;
 }
 
 @property (nonatomic, retain) Person *person;
 @property (nonatomic, retain) FactType *factType;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet KeywordView *keywordView;
+@property (nonatomic) BOOL createdTemporaryObject;
 
 @end
