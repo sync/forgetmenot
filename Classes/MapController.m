@@ -139,15 +139,22 @@
 																	action:@selector(showSettings:)];
 	
 	// flex item used to separate the left groups items and right grouped items
-	UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+	UIBarButtonItem *leftFlexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
 																			  target:nil
 																			  action:nil];
 	
 	// previous
 	UIBarButtonItem *currentItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"toolbar_current_location.png"]
-																   style:UIBarButtonItemStylePlain 
+																   style:UIBarButtonItemStyleBordered 
 																  target:self
 																   action:@selector(showCurrentLocation:)];
+	// increase the size of the button
+	currentItem.width = 50.0;
+	
+	UIBarButtonItem *rightFlexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+																				  target:nil
+																				  action:nil];
+	
 	
 	// create a special tab bar item with a custom image and title
 	UIBarButtonItem *mapItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toolbar_friends.png"]
@@ -155,19 +162,48 @@
 															   target:self
 															   action:@selector(showFriends:)];
 	
-	NSArray *items = [NSArray arrayWithObjects:settingsItem, flexItem, currentItem, flexItem, mapItem, nil];
+	NSArray *items = [NSArray arrayWithObjects:settingsItem, leftFlexItem, currentItem, rightFlexItem, mapItem, nil];
 	[self setToolbarItems:items animated:FALSE];
 	[settingsItem release];
 	[currentItem release];
-	[flexItem release];
-	[flexItem release];
+	[leftFlexItem release];
+	[rightFlexItem release];
 	[mapItem release];
 }
 
 - (IBAction)showCurrentLocation:(id)sender
 {
-	self.mapView.showsUserLocation = TRUE;
+	
+	CLLocation *location = self.mapView.userLocation.location;
+	if (!location && self.mapView.userLocation.updating) {
+		[self performSelector:@selector(showCurrentLocation:) withObject:sender afterDelay:0.5];
+	} else {
+		if (!self.mapView.showsUserLocation) {
+			self.mapView.showsUserLocation = TRUE;
+			[self performSelector:@selector(showCurrentLocation:) withObject:sender afterDelay:0.5];
+		} else {
+			// zoom to current location
+			[self.mapView setRegion:MKCoordinateRegionMakeWithDistance(location.coordinate, 1520.0, 1520.0) animated:TRUE];
+		}
+	}
 }
+
+- (void)mapViewWillStartLoadingMap:(MKMapView *)mapView
+{
+	[[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:TRUE];
+}
+
+- (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView
+{
+	[[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:FALSE];
+}
+
+- (void)mapViewDidFailLoadingMap:(MKMapView *)mapView withError:(NSError *)error
+{
+	[[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:FALSE];
+}
+
+
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {

@@ -455,14 +455,18 @@
 	
 	[self dismissModalViewControllerAnimated:YES]; 
 	
-	// Find user location
-	NSString *urlString = [self urlEncodeValue:[NSString stringWithFormat:@"http://maps.google.com/maps/geo?q=%@&output=json&key=ABQIAAAA4yFxsxoDDepDo3ro17yA1hTjOjqphGs0Y9m3nFH3QZboM8-tuxRd5uNAoXEI-bEFHhLbT33JcyYACA", person.fullAddress]];
-	
-	ReverseGeoCodeOperation *operation = [[ReverseGeoCodeOperation alloc]initWithURL:[NSURL URLWithString:urlString] 
-																	  infoDictionary:[NSDictionary dictionaryWithObject:person.objectID forKey:@"objectID"]];
-	operation.delegate = self;
-	[self.reverseOperationQueue addOperation:operation];
-	[operation release];
+	if (self.appDelegate.hasValidNetworkConnection) {	
+		// Find user location
+		NSString *urlString = [self urlEncodeValue:[NSString stringWithFormat:@"http://maps.google.com/maps/geo?q=%@&output=json&key=ABQIAAAA4yFxsxoDDepDo3ro17yA1hTjOjqphGs0Y9m3nFH3QZboM8-tuxRd5uNAoXEI-bEFHhLbT33JcyYACA", person.fullAddress]];
+		
+		ReverseGeoCodeOperation *operation = [[ReverseGeoCodeOperation alloc]initWithURL:[NSURL URLWithString:urlString] 
+																		  infoDictionary:[NSDictionary dictionaryWithObject:person.objectID forKey:@"objectID"]];
+		operation.delegate = self;
+		[self.reverseOperationQueue addOperation:operation];
+		[operation release];
+	} else {
+		[self.appDelegate alertNoNetworkConnection];
+	}
 	
 	return NO; 
 }
