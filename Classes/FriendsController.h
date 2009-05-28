@@ -14,13 +14,21 @@
 
 @class Group;
 
-@interface FriendsController : BaseFetchedTableViewController <ABPeoplePickerNavigationControllerDelegate, DefaultOperationDelegate>{
+@interface FriendsController : BaseFetchedTableViewController <ABPeoplePickerNavigationControllerDelegate, DefaultOperationDelegate, UISearchDisplayDelegate, UISearchBarDelegate>{
 	Group *_group;
 	
 	NSOperationQueue *_reverseOperationQueue;
+	
+	UISearchBar *_searchBar;
+	
+	NSFetchedResultsController *searchFetchedResultsController;
+	NSPredicate *_searchPredicate;
 }
 
 @property (nonatomic, retain) Group *group;
+@property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, retain) NSFetchedResultsController *searchFetchedResultsController;
+@property (nonatomic, retain) NSPredicate *searchPredicate;
 
 - (IBAction)addPerson:(id)sender;
 - (void)reloadTableview:(id)sender;

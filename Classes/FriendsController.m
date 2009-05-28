@@ -17,6 +17,9 @@
 
 @synthesize group=_group;
 @synthesize reverseOperationQueue=_reverseOperationQueue;
+@synthesize searchBar=_searchBar;
+@synthesize searchPredicate=_searchPredicate;
+@synthesize searchFetchedResultsController;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,8 +31,117 @@
 	
 	self.tableView.rowHeight = ROW_HEIGHT;
 	
+	// Setup search bar
+	self.searchBar.tintColor = [UIColor	colorWithRed:156.0/255.0 green:157.0/255.0 blue:156.0/255.0 alpha:1.0];	
+	self.searchBar.autocorrectionType = UITextAutocorrectionTypeNo; // Don't get in the way of user typing.
+	self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone; // Don't capitalize each word.
+	self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"All", @"Friend", @"Fact", nil];
+	self.searchBar.delegate = self; // Become delegate to detect changes in scope.
+	
+	// Setup tableview search result controller
+	self.searchDisplayController.searchResultsTableView.rowHeight = ROW_HEIGHT;
+	self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor darkGrayColor];
+	self.searchDisplayController.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	
+	NSError *error;
+	if (![[self searchFetchedResultsController] performFetch:&error]) {
+		// Handle the error...
+	}
+	
 	// Reload tableview when this notifiation fire
 	[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableview:) name:ShouldReloadFriendsController object:nil];
+}
+
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView
+{
+	// Setup tableview search result controller
+	self.searchDisplayController.searchResultsTableView.rowHeight = ROW_HEIGHT;
+	self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor darkGrayColor];
+	self.searchDisplayController.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+
+#pragma mark -
+#pragma mark Content Filtering
+
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+	/*
+	 Update the filtered array based on the search text and scope.
+	 */
+	
+	/*
+	 Set up the fetched results controller.
+	 */
+	// Create the fetch request for the entity.
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	// Edit the entity name as appropriate.
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Person" inManagedObjectContext:self.appDelegate.managedObjectContext];
+	[fetchRequest setEntity:entity];
+	
+	// Filter by group name
+	if ([scope isEqualToString:@"All"]) {
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(city contains[cd] %@) OR (country contains[cd] %@) OR (first_name contains[cd] %@) OR (last_name contains[cd] %@) OR (middle_names contains[cd] %@) OR (post_code contains[cd] %@) OR (state contains[cd] %@) OR (street contains[cd] %@) OR (fact.fact contains[cd] %@) OR (fact.fact_type.name contains[cd] %@)", searchText, searchText, searchText, searchText, searchText, searchText, searchText, searchText, searchText, searchText, searchText]; 
+		[fetchRequest setPredicate:predicate]; 
+		self.searchPredicate = predicate;
+	} else if ([scope isEqualToString:@"Friend"]) {
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(city contains[cd] %@) OR (country contains[cd] %@) OR (first_name contains[cd] %@) OR (last_name contains[cd] %@) OR (middle_names contains[cd] %@) OR (post_code contains[cd] %@) OR (state contains[cd] %@) OR (street contains[cd] %@)", searchText, searchText, searchText, searchText, searchText, searchText, searchText, searchText, searchText]; 
+		[fetchRequest setPredicate:predicate]; 
+		self.searchPredicate = predicate;
+	} else if ([scope isEqualToString:@"Fact"]) {
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(fact.fact contains[cd] %@) OR (fact.fact_type.name contains[cd] %@)", searchText, searchText]; 
+		[fetchRequest setPredicate:predicate]; 
+		self.searchPredicate = predicate;
+	} else if ([scope isEqualToString:@"Keyword"]) {
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY fact.keyword.name contains[cd] %@", searchText]; 
+		[fetchRequest setPredicate:predicate]; 
+		self.searchPredicate = predicate;
+	}
+	
+	// Edit the sort key as appropriate.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"first_name" ascending:YES];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	
+	// Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+	NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.appDelegate.managedObjectContext sectionNameKeyPath:nil cacheName:@"Root"];
+    aFetchedResultsController.delegate = self;
+	self.searchFetchedResultsController = aFetchedResultsController;
+	
+	[aFetchedResultsController release];
+	[fetchRequest release];
+	[sortDescriptor release];
+	[sortDescriptors release];
+	
+	NSError *error;
+	if (![[self searchFetchedResultsController] performFetch:&error]) {
+		// Handle the error...
+	}
+}
+
+
+#pragma mark -
+#pragma mark UISearchDisplayController Delegate Methods
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString scope:
+	 [[self.searchBar scopeButtonTitles] objectAtIndex:[self.searchBar selectedScopeButtonIndex]]];
+    
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
+}
+
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
+{
+    [self filterContentForSearchText:[self.searchBar text] scope:
+	 [[self.searchBar scopeButtonTitles] objectAtIndex:searchOption]];
+    
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
 }
 
 - (void)reloadTableview:(id)sender
@@ -93,6 +205,22 @@
 
 #pragma mark Table view methods
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [[searchFetchedResultsController sections] count];
+    }
+    return [[fetchedResultsController sections] count];
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	if (tableView == self.searchDisplayController.searchResultsTableView) {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[searchFetchedResultsController sections] objectAtIndex:section];
+		return [sectionInfo numberOfObjects];
+    }
+	id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
+}
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -106,8 +234,13 @@
     }
     
     // Set up the cell...
-	// Set up the cell...
-	Person *person = (Person *)[fetchedResultsController objectAtIndexPath:indexPath];
+	Person *person = nil;
+	if (tableView == self.searchDisplayController.searchResultsTableView) {
+       person = (Person *)[searchFetchedResultsController objectAtIndexPath:indexPath];
+    } else {
+		person = (Person *)[fetchedResultsController objectAtIndexPath:indexPath];
+	}
+	
 	
 	cell.cellView.title = person.fullName;
 	cell.cellView.subtitle = person.partialAddress;
@@ -126,7 +259,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	Person *person = (Person *)[fetchedResultsController objectAtIndexPath:indexPath];
+	Person *person = nil;
+	if (tableView == self.searchDisplayController.searchResultsTableView) {
+		person = (Person *)[searchFetchedResultsController objectAtIndexPath:indexPath];
+    } else {
+		person = (Person *)[fetchedResultsController objectAtIndexPath:indexPath];
+	}
 	
 	FriendDetailsController *controller = [[FriendDetailsController alloc] initWithNibName:@"FriendDetailsController" bundle:nil];
 	controller.person = person;
@@ -175,6 +313,48 @@
 	
 	return fetchedResultsController;
 } 
+
+- (NSFetchedResultsController *)searchFetchedResultsController {
+    
+	if (searchFetchedResultsController != nil) {
+        return searchFetchedResultsController;
+    }
+    
+    /*
+	 Set up the fetched results controller.
+	 */
+	// Create the fetch request for the entity.
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	// Edit the entity name as appropriate.
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Person" inManagedObjectContext:self.appDelegate.managedObjectContext];
+	[fetchRequest setEntity:entity];
+	
+	// Filter by group name
+	// Only if group is not All
+	if (![self.group.name isEqualToString:@"All"]) {
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"group = %@", self.group]; 
+		[fetchRequest setPredicate:predicate]; 
+	}
+	
+	// Edit the sort key as appropriate.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"first_name" ascending:YES];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	
+	// Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+	NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.appDelegate.managedObjectContext sectionNameKeyPath:nil cacheName:@"Root"];
+    aFetchedResultsController.delegate = self;
+	self.searchFetchedResultsController = aFetchedResultsController;
+	
+	[aFetchedResultsController release];
+	[fetchRequest release];
+	[sortDescriptor release];
+	[sortDescriptors release];
+	
+	return searchFetchedResultsController;
+}
 
 #pragma mark -
 #pragma mark People Picker
@@ -339,6 +519,10 @@
 
 - (void)dealloc {
 	[[NSNotificationCenter defaultCenter]removeObserver:self];
+	
+	[searchFetchedResultsController release];
+	[_searchPredicate release];
+	[_searchBar release];
 	[_reverseOperationQueue release];
 	[_group release];
 	
