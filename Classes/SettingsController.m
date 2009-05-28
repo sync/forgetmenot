@@ -28,6 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	self.tableView.sectionHeaderHeight = 15.0;
+	
 	// Color of the navigation bar
 	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:120.0/255.0 green:120.0/255.0 blue:120.0/255.0 alpha:1.0];
 	
@@ -36,9 +38,9 @@
 	[self.view addSubview:self.navigationController.view];
 	
 	NSArray *sectionOne = [NSArray arrayWithObjects:@"Fact Types", @"Your Infos", @"Something Here", nil];
-	NSArray *sectionTwo = [NSArray arrayWithObjects:@"Online Credentials", @"Online Mode", nil];
+//	NSArray *sectionTwo = [NSArray arrayWithObjects:@"Online Credentials", @"Online Mode", nil];
 	
-	self.content = [NSArray arrayWithObjects:sectionOne, sectionTwo, nil];
+	self.content = [NSArray arrayWithObjects:sectionOne, nil];
 	
 	[self setupNavigationBar];
 }
