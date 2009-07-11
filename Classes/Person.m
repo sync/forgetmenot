@@ -33,10 +33,6 @@
 @dynamic fact;
 @dynamic group;
 
-@synthesize fullName;
-@synthesize fullAddress;
-@synthesize partialAddress;
-
 #pragma mark -
 #pragma mark Retrieve a person from it's id
 

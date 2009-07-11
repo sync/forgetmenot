@@ -1301,6 +1301,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Anthony Mittaz";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1309,6 +1310,7 @@
 				INFOPLIST_FILE = "ForgetMeNot-Info.plist";
 				OTHER_CFLAGS = "-DDEBUG";
 				PRODUCT_NAME = ForgetMeNot;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DA88118C-5381-482F-ACBC-14E801408F35";
 			};
 			name = Debug;
 		};
@@ -1402,7 +1404,7 @@
 				INFOPLIST_FILE = "ForgetMeNot-Info.plist";
 				OTHER_CFLAGS = "-DDEBUG";
 				PRODUCT_NAME = ForgetMeNot;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5CE69233-D670-4E12-AF0F-D67CDA7B262F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3A7D27E4-E5FE-4698-874B-068DD13B3F9F";
 			};
 			name = "Debug Anthony Mittaz";
 		};

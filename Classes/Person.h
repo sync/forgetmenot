@@ -35,9 +35,9 @@
 @property (retain) NSSet* fact;
 @property (retain) Group * group;
 
-@property (retain, readonly) NSString *fullName;
-@property (retain, readonly) NSString *fullAddress;
-@property (retain, readonly) NSString *partialAddress;
+@property (nonatomic, readonly) NSString *fullName;
+@property (nonatomic, readonly) NSString *fullAddress;
+@property (nonatomic, readonly) NSString *partialAddress;
 
 + (Person *)personWithID:(NSString *)person_id forContext:(NSManagedObjectContext *)context;
 + (Person *)personWithRecordID:(NSNumber *)recordID forContext:(NSManagedObjectContext *)context;

@@ -46,6 +46,9 @@
 	// Table View row height
 	self.tableView.rowHeight = BLACK_ROW_HEIGHT;
 	
+	// Set the deceleration rate to fast
+	self.scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
+	
 	self.personView.title = self.person.fullName;
 	self.personView.subtitle = self.person.partialAddress;
 	NSString *imageURL = [self.appDelegate applicationDocumentsDirectory];
